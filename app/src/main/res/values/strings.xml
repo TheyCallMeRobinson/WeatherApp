@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="drawer_favorite_place_btn">Favorite place</string>
+    <string name="drawer_about_btn">About</string>
 </resources>
