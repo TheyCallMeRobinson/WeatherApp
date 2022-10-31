@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="shape_standard_radius">35dp</dimen>
+    <dimen name="button_size">50dp</dimen>
+    <dimen name="margin_top">20dp</dimen>
+    <dimen name="margin_horizontal">40dp</dimen>
+    <dimen name="margin_bottom">20dp</dimen>
+    <dimen name="activity_main_motion_start_margin">40dp</dimen>
+    <dimen name="activity_main_motion_end_margin">40dp</dimen>
+    <dimen name="toolbar_margin">20dp</dimen>
+</resources>

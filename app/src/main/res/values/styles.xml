@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Text">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.BigTemperature">
+        <item name="android:fontFamily">@font/geliat_extralight</item>
+        <item name="android:maxLength">5</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">30pt</item>
+    </style>
+
+    <style name="Text.BigLocationName">
+        <item name="android:textSize">12pt</item>
+    </style>
+
+    <style name="Text.SmallInfo">
+    </style>
+</resources>
