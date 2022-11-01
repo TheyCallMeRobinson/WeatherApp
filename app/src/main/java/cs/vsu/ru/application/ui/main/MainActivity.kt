@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.WeatherApplication
 import cs.vsu.ru.application.databinding.ActivityMainBinding
@@ -24,14 +23,12 @@ class MainActivity : AppCompatActivity() {
         setViews()
 
 
-        binding.contentMainInc.activityMainHeader.toolbarBurger.setOnClickListener {
-            binding.root.openDrawer(GravityCompat.START)
-        }
+//        binding.contentMainInc.activityMainHeader.toolbarBurger.setOnClickListener {
+//            binding.root.openDrawer(GravityCompat.START)
+//        }
 
-        binding.contentMainInc.activityMainHeader.mainLocationNameTv.text = "Воронеж"
-        binding.contentMainInc.activityMainHeader.mainTemperatureTodayTv.text = "6 / 2"
-
-        binding.root.background = AppCompatResources.getDrawable(applicationContext, R.drawable.background_daytime)
+        binding.mainBackgroundImg.setBackgroundResource(R.drawable.background_daytime)
+        binding.mainBackgroundImg.setAltImageResource(R.color.black)
     }
 
     private fun setViews() {

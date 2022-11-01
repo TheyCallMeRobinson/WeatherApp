@@ -7,5 +7,7 @@
     <dimen name="margin_bottom">20dp</dimen>
     <dimen name="activity_main_motion_start_margin">40dp</dimen>
     <dimen name="activity_main_motion_end_margin">40dp</dimen>
-    <dimen name="toolbar_margin">20dp</dimen>
+    <dimen name="toolbar_top_margin">75dp</dimen>
+    <dimen name="toolbar_start_margin">20dp</dimen>
+    <dimen name="main_body_list_expanded_top_margin">65dp</dimen>
 </resources>

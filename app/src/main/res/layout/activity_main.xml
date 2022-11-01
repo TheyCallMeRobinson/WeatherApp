@@ -1,33 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
+<androidx.constraintlayout.motion.widget.MotionLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_header"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".ui.main.MainActivity"
-    tools:openDrawer="start"
-    tools:paddingTop="0dp">
+    app:layoutDescription="@xml/header_animation">
 
-    <include
-        android:id="@+id/content_main_inc"
-        layout="@layout/content_main"
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/main_background_img"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
         android:fitsSystemWindows="false"
-        android:background="@color/transparent20">
-        <include
-            android:id="@+id/drawer_layout_inc"
-            layout="@layout/drawer_layout"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"/>
-    </com.google.android.material.navigation.NavigationView>
+        tools:src="@drawable/background_daytime"
+        app:altSrc="@color/black" />
 
-</androidx.drawerlayout.widget.DrawerLayout>
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/toolbar_burger"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/toolbar_start_margin"
+        android:layout_marginTop="@dimen/toolbar_top_margin"
+        android:background="@drawable/ic_menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/main_temperature_now_tv"
+        style="@style/Text.BigTemperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="6°" />
+
+    <TextView
+        android:id="@+id/main_location_toolbar_name_tv"
+        style="@style/Text.ToolbarLocationName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/toolbar_start_margin"
+        android:text="Воронеж"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_burger"
+        app:layout_constraintStart_toEndOf="@id/toolbar_burger"
+        app:layout_constraintTop_toTopOf="@id/toolbar_burger" />
+
+    <TextView
+        android:id="@+id/main_location_name_tv"
+        style="@style/Text.BigLocationName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/main_temperature_now_tv"
+        app:layout_constraintTop_toBottomOf="@id/main_temperature_now_tv"
+        android:text="Воронеж" />
+
+    <TextView
+        android:id="@+id/main_temperature_today_tv"
+        style="@style/Text.SmallInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="6° / 2°" />
+
+    <TextClock
+        android:id="@+id/main_daytime_tv"
+        style="@style/Text.SmallInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:format24Hour="EE, hh:mm"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/main_temperature_today_tv"
+        app:layout_constraintTop_toBottomOf="@+id/main_temperature_today_tv"
+        tools:text="чт, 14:25" />
+
+    <TextView
+        android:id="@+id/main_feels_like_temperature_tv"
+        style="@style/Text.SmallInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="2dp"
+        app:layout_constraintStart_toEndOf="@+id/main_temperature_today_tv"
+        app:layout_constraintTop_toTopOf="@+id/main_temperature_today_tv"
+        android:text="Ощущается как 2°" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/main_body_feed_list"
+        android:layout_height="0dp"
+        android:layout_width="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@color/purple_200" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@color/teal_200" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.motion.widget.MotionLayout>

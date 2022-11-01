@@ -9,13 +9,20 @@
         <item name="android:fontFamily">@font/geliat_extralight</item>
         <item name="android:maxLength">5</item>
         <item name="android:maxLines">1</item>
-        <item name="android:textSize">30pt</item>
+        <item name="android:textSize">32pt</item>
     </style>
 
     <style name="Text.BigLocationName">
-        <item name="android:textSize">12pt</item>
+        <item name="android:textSize">15pt</item>
+    </style>
+
+    <style name="Text.ToolbarLocationName">
+        <item name="android:textSize">10pt</item>
     </style>
 
     <style name="Text.SmallInfo">
+        <item name="android:paddingStart">2dp</item>
+        <item name="android:paddingEnd">2dp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

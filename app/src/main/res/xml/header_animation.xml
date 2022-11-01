@@ -4,10 +4,11 @@
 
     <Transition
         motion:constraintSetEnd="@id/collapsed"
-        motion:constraintSetStart="@id/expanded">
+        motion:constraintSetStart="@id/expanded"
+        motion:duration="500">
         <OnSwipe
             motion:dragDirection="dragUp"
-            motion:touchAnchorId="@+id/scroll_view"
+            motion:touchAnchorId="@id/main_body_feed_list"
             motion:touchAnchorSide="top" />
 
         <KeyFrameSet>
@@ -31,7 +32,7 @@
             <KeyAttribute
                 motion:motionTarget="@id/main_feels_like_temperature_tv"
                 motion:framePosition="0"
-                android:translationX="4dp">
+                android:translationX="0dp">
                 <CustomAttribute
                     motion:attributeName="alpha"
                     motion:customFloatValue="1.0" />
@@ -53,39 +54,50 @@
             android:id="@id/main_temperature_today_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="40dp"
             android:layout_marginStart="@dimen/activity_main_motion_start_margin"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toBottomOf="@id/main_location_name_tv" />
 
         <Constraint
-            android:id="@id/main_header">
-            <CustomAttribute
-                motion:attributeName="background"
-                motion:customColorValue="#D81B60"/>
-        </Constraint>
-
-        <Constraint
             android:id="@id/main_temperature_now_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="25dp"
             android:layout_marginStart="40dp"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toBottomOf="@+id/toolbar_burger" />
 
         <Constraint
-            android:id="@id/main_location_toolbar_name_tv">
+            android:id="@id/main_location_toolbar_name_tv"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            motion:layout_constraintTop_toTopOf="@id/toolbar_burger"
+            motion:layout_constraintBottom_toBottomOf="@+id/toolbar_burger"
+            motion:layout_constraintStart_toEndOf="@id/toolbar_burger"
+            android:layout_marginStart="@dimen/toolbar_start_margin">
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="0.0"/>
         </Constraint>
+
         <Constraint
-            android:layout_height="match_parent"
+            android:id="@id/main_body_feed_list"
+            android:layout_height="0dp"
             android:layout_width="match_parent"
-            motion:layout_constraintTop_toBottomOf="@+id/main_daytime_tv"
-            android:id="@+id/scroll_view"
-            motion:layout_constraintBottom_toBottomOf="parent" />
+            android:layout_marginTop="@dimen/main_body_list_expanded_top_margin"
+            android:layout_marginStart="@dimen/margin_horizontal"
+            android:layout_marginEnd="@dimen/margin_horizontal"
+            android:layout_marginBottom="47dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/main_daytime_tv" />
+
+        <Constraint
+            android:id="@id/main_background_img">
+            <CustomAttribute
+                motion:attributeName="crossfade"
+                motion:customFloatValue="0" />
+        </Constraint>
 
     </ConstraintSet>
 
@@ -116,10 +128,21 @@
             motion:layout_constraintTop_toBottomOf="@+id/toolbar_burger"/>
 
         <Constraint
-            android:id="@id/main_header">
+            android:id="@id/main_body_feed_list"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="@dimen/margin_horizontal"
+            android:layout_marginEnd="@dimen/margin_horizontal"
+            android:layout_marginBottom="47dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/main_daytime_tv" />
+
+        <Constraint
+            android:id="@id/main_background_img">
             <CustomAttribute
-                motion:attributeName="background"
-                motion:customColorValue="#9999FF" />
+                motion:attributeName="crossfade"
+                motion:customFloatValue="1" />
         </Constraint>
 
     </ConstraintSet>

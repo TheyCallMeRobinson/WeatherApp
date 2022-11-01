@@ -8,8 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="background_daytime_start">#B3B4FD</color>
-    <color name="background_daytime_end">#91B0FC</color>
+    <color name="background_daytime_start">#8BA3DF</color>
+    <color name="background_daytime_end">#5C79B3</color>
 
     <color name="background_nighttime_start">#3C3D6E</color>
     <color name="background_nighttime_end">#253560</color>
