@@ -3,10 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_header"
+    android:id="@+id/main_motion_header"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/header_animation">
+    app:layoutDescription="@xml/activity_main_animation"
+    app:motionDebug="SHOW_ALL">
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/main_background_img"
@@ -14,98 +15,99 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="false"
         app:altSrc="@color/black"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"
         tools:src="@drawable/background_daytime" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/toolbar_burger"
-        android:layout_width="25dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/toolbar_start_margin"
-        android:layout_marginTop="@dimen/toolbar_top_margin"
-        android:background="@drawable/ic_menu"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include layout="@layout/activity_main_header" />
+    <include layout="@layout/activity_main_scrollable" />
 
-    <TextView
-        android:id="@+id/main_temperature_now_tv"
-        style="@style/Text.BigTemperature"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="6°" />
+    <!--    <androidx.appcompat.widget.AppCompatImageButton-->
+<!--        android:id="@+id/toolbar_burger"-->
+<!--        android:layout_width="25dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="@dimen/toolbar_start_margin"-->
+<!--        android:layout_marginTop="@dimen/toolbar_top_margin"-->
+<!--        android:background="@drawable/ic_menu"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <TextView
-        android:id="@+id/main_location_toolbar_name_tv"
-        style="@style/Text.ToolbarLocationName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/toolbar_start_margin"
-        android:text="Воронеж"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar_burger"
-        app:layout_constraintStart_toEndOf="@id/toolbar_burger"
-        app:layout_constraintTop_toTopOf="@id/toolbar_burger" />
+<!--    <TextView-->
+<!--        android:id="@+id/main_temperature_now_tv"-->
+<!--        style="@style/Text.BigTemperature"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="6°" />-->
 
-    <TextView
-        android:id="@+id/main_location_name_tv"
-        style="@style/Text.BigLocationName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/main_temperature_now_tv"
-        app:layout_constraintTop_toBottomOf="@id/main_temperature_now_tv"
-        android:text="Воронеж" />
+<!--    <TextView-->
+<!--        android:id="@+id/main_location_toolbar_name_tv"-->
+<!--        style="@style/Text.ToolbarLocationName"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="@dimen/toolbar_start_margin"-->
+<!--        android:text="Воронеж"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/toolbar_burger"-->
+<!--        app:layout_constraintStart_toEndOf="@id/toolbar_burger"-->
+<!--        app:layout_constraintTop_toTopOf="@id/toolbar_burger" />-->
 
-    <TextView
-        android:id="@+id/main_temperature_today_tv"
-        style="@style/Text.SmallInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="6° / 2°" />
+<!--    <TextView-->
+<!--        android:id="@+id/main_location_name_tv"-->
+<!--        style="@style/Text.BigLocationName"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintStart_toStartOf="@id/main_temperature_now_tv"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/main_temperature_now_tv"-->
+<!--        android:text="Воронеж" />-->
 
-    <TextClock
-        android:id="@+id/main_daytime_tv"
-        style="@style/Text.SmallInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:format24Hour="EE, hh:mm"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/main_temperature_today_tv"
-        app:layout_constraintTop_toBottomOf="@+id/main_temperature_today_tv"
-        tools:text="чт, 14:25" />
+<!--    <TextView-->
+<!--        android:id="@+id/main_temperature_today_tv"-->
+<!--        style="@style/Text.SmallInfo"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="6° / 2°" />-->
 
-    <TextView
-        android:id="@+id/main_feels_like_temperature_tv"
-        style="@style/Text.SmallInfo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="2dp"
-        app:layout_constraintStart_toEndOf="@+id/main_temperature_today_tv"
-        app:layout_constraintTop_toTopOf="@+id/main_temperature_today_tv"
-        android:text="Ощущается как 2°" />
+<!--    <TextClock-->
+<!--        android:id="@+id/main_daytime_tv"-->
+<!--        style="@style/Text.SmallInfo"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:format24Hour="EE, hh:mm"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/main_temperature_today_tv"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/main_temperature_today_tv"-->
+<!--        tools:text="чт, 14:25" />-->
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/main_body_feed_list"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
+<!--    <TextView-->
+<!--        android:id="@+id/main_feels_like_temperature_tv"-->
+<!--        style="@style/Text.SmallInfo"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:paddingHorizontal="2dp"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/main_temperature_today_tv"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/main_temperature_today_tv"-->
+<!--        android:text="Ощущается как 2°" />-->
 
-        <LinearLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:orientation="vertical">
+<!--    <androidx.core.widget.NestedScrollView-->
+<!--        android:id="@+id/main_body_feed_list"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp">-->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="@color/purple_700"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="@color/teal_200"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="@color/purple_200"/>
-        </LinearLayout>
+<!--        <LinearLayout-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:orientation="vertical">-->
 
-    </androidx.core.widget.NestedScrollView>
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="300dp"-->
+<!--                android:background="@color/purple_700"/>-->
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="300dp"-->
+<!--                android:background="@color/teal_200"/>-->
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="300dp"-->
+<!--                android:background="@color/purple_200"/>-->
+<!--        </LinearLayout>-->
+
+<!--    </androidx.core.widget.NestedScrollView>-->
 </androidx.constraintlayout.motion.widget.MotionLayout>

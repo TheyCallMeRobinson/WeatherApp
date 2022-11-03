@@ -3,6 +3,7 @@ package cs.vsu.ru.application.ui.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.constraintlayout.motion.widget.MotionScene
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import cs.vsu.ru.application.R
@@ -19,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         setContentView(binding.root)
-
         setViews()
 
 

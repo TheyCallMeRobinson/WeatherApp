@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+<MotionScene
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
         motion:constraintSetEnd="@id/collapsed"
         motion:constraintSetStart="@id/expanded"
-        motion:duration="500">
-        <OnSwipe
-            motion:dragDirection="dragUp"
-            motion:touchAnchorId="@id/main_body_feed_list"
-            motion:touchAnchorSide="top" />
+        motion:duration="1500">
 
         <KeyFrameSet>
 <!--        Main location tv becomes transparent on 30s frame-->
@@ -22,7 +19,7 @@
             </KeyAttribute>
             <KeyAttribute
                 motion:motionTarget="@id/main_location_name_tv"
-                motion:framePosition="30">
+                motion:framePosition="50">
                 <CustomAttribute
                     motion:attributeName="alpha"
                     motion:customFloatValue="0" />
@@ -39,7 +36,7 @@
             </KeyAttribute>
             <KeyAttribute
                 motion:motionTarget="@id/main_feels_like_temperature_tv"
-                motion:framePosition="30"
+                motion:framePosition="50"
                 android:translationX="40dp">
                 <CustomAttribute
                     motion:attributeName="alpha"
@@ -48,18 +45,6 @@
 
         </KeyFrameSet>
     </Transition>
-
-    <Transition
-        motion:constraintSetStart="@id/closeDrawer"
-        motion:constraintSetEnd="@id/openDrawer">
-
-        <OnSwipe
-            motion:dragDirection="dragRight" />
-        <OnClick
-            motion:clickAction="transitionToEnd"
-            motion:targetId="@id/toolbar_burger"/>
-    </Transition>
-
 
     <ConstraintSet android:id="@+id/expanded">
         <Constraint
@@ -93,24 +78,6 @@
                 motion:customFloatValue="0.0"/>
         </Constraint>
 
-        <Constraint
-            android:id="@id/main_body_feed_list"
-            android:layout_height="0dp"
-            android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/main_body_list_expanded_top_margin"
-            android:layout_marginStart="@dimen/margin_horizontal"
-            android:layout_marginEnd="@dimen/margin_horizontal"
-            android:layout_marginBottom="47dp"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/main_daytime_tv" />
-
-        <Constraint
-            android:id="@id/main_background_img">
-            <CustomAttribute
-                motion:attributeName="crossfade"
-                motion:customFloatValue="0" />
-        </Constraint>
-
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/collapsed">
@@ -139,30 +106,6 @@
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toBottomOf="@+id/toolbar_burger"/>
 
-        <Constraint
-            android:id="@id/main_body_feed_list"
-            android:layout_height="0dp"
-            android:layout_width="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="@dimen/margin_horizontal"
-            android:layout_marginEnd="@dimen/margin_horizontal"
-            android:layout_marginBottom="47dp"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/main_daytime_tv" />
-
-        <Constraint
-            android:id="@id/main_background_img">
-            <CustomAttribute
-                motion:attributeName="crossfade"
-                motion:customFloatValue="1" />
-        </Constraint>
-
-    </ConstraintSet>
-
-    <ConstraintSet android:id="@+id/closeDrawer">
-    </ConstraintSet>
-
-    <ConstraintSet android:id="@+id/openDrawer">
     </ConstraintSet>
 
 </MotionScene>
