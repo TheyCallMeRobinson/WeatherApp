@@ -1,27 +1,33 @@
 package cs.vsu.ru.application
 
 import android.os.Bundle
+import android.view.View
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
+import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
 import cs.vsu.ru.application.databinding.ActivityMainBinding
-import cs.vsu.ru.application.ui.main.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-//    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        //viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+        val actionBarDrawerToggle = object : ActionBarDrawerToggle(this, binding.root, R.string.drawer_open, R.string.drawer_close) {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+                binding.mainFragmentContentContainer.translationX = binding.mainFragmentDrawerContainer.width * slideOffset
+                super.onDrawerSlide(drawerView, slideOffset)
+            }
+        }
+
+        binding.root.addDrawerListener(actionBarDrawerToggle)
+        actionBarDrawerToggle.syncState()
+
         setContentView(binding.root)
         setViews()
 
-
-//        binding.contentMainInc.activityMainHeader.toolbarBurger.setOnClickListener {
-//            binding.root.openDrawer(GravityCompat.START)
-//        }
 //
 //        binding.mainBackgroundImg.setBackgroundResource(R.drawable.background_daytime)
 //        binding.mainBackgroundImg.setAltImageResource(R.color.black)

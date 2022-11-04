@@ -6,8 +6,7 @@
     android:id="@+id/main_motion_header"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:layoutDescription="@xml/header_animation"
-    app:motionDebug="SHOW_ALL">
+    app:layoutDescription="@xml/main_content_header_animation">
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/toolbar_burger"

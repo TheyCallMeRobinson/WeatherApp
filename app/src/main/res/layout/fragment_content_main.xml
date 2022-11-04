@@ -6,8 +6,8 @@
     android:id="@+id/main_motion_header"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/activity_main_animation"
-    app:motionDebug="SHOW_ALL">
+    app:layoutDescription="@xml/main_content_animation"
+    android:fitsSystemWindows="false">
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/main_background_img"

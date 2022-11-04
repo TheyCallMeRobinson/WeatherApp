@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import cs.vsu.ru.application.R
@@ -21,7 +23,6 @@ class MainFragment : Fragment() {
     ): View? {
         binding = FragmentContentMainBinding.inflate(inflater)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
         connectFragmentToViewModel()
 
         return binding.root
