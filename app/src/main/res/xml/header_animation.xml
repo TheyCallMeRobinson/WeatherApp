@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
@@ -9,35 +8,35 @@
         motion:duration="1500">
 
         <KeyFrameSet>
-<!--        Main location tv becomes transparent on 30s frame-->
+            <!--        Main location tv becomes transparent on 30s frame-->
             <KeyAttribute
-                motion:motionTarget="@id/main_location_name_tv"
-                motion:framePosition="0">
+                motion:framePosition="0"
+                motion:motionTarget="@id/main_location_name_tv">
                 <CustomAttribute
                     motion:attributeName="alpha"
                     motion:customFloatValue="1.0" />
             </KeyAttribute>
             <KeyAttribute
-                motion:motionTarget="@id/main_location_name_tv"
-                motion:framePosition="50">
+                motion:framePosition="30"
+                motion:motionTarget="@id/main_location_name_tv">
                 <CustomAttribute
                     motion:attributeName="alpha"
                     motion:customFloatValue="0" />
             </KeyAttribute>
 
-<!--        Feels like tv becomes transparent on 30s frame-->
+            <!--        Feels like tv becomes transparent on 30s frame-->
             <KeyAttribute
-                motion:motionTarget="@id/main_feels_like_temperature_tv"
+                android:translationX="0dp"
                 motion:framePosition="0"
-                android:translationX="0dp">
+                motion:motionTarget="@id/main_feels_like_temperature_tv">
                 <CustomAttribute
                     motion:attributeName="alpha"
                     motion:customFloatValue="1.0" />
             </KeyAttribute>
             <KeyAttribute
-                motion:motionTarget="@id/main_feels_like_temperature_tv"
-                motion:framePosition="50"
-                android:translationX="40dp">
+                android:translationX="40dp"
+                motion:framePosition="30"
+                motion:motionTarget="@id/main_feels_like_temperature_tv">
                 <CustomAttribute
                     motion:attributeName="alpha"
                     motion:customFloatValue="0" />
@@ -51,8 +50,8 @@
             android:id="@id/main_temperature_today_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:layout_marginStart="@dimen/activity_main_motion_start_margin"
+            android:layout_marginTop="40dp"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toBottomOf="@id/main_location_name_tv" />
 
@@ -60,22 +59,22 @@
             android:id="@id/main_temperature_now_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
             android:layout_marginStart="40dp"
+            android:layout_marginTop="25dp"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toBottomOf="@+id/toolbar_burger" />
 
         <Constraint
             android:id="@id/main_location_toolbar_name_tv"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            motion:layout_constraintTop_toTopOf="@id/toolbar_burger"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/toolbar_start_margin"
             motion:layout_constraintBottom_toBottomOf="@+id/toolbar_burger"
             motion:layout_constraintStart_toEndOf="@id/toolbar_burger"
-            android:layout_marginStart="@dimen/toolbar_start_margin">
+            motion:layout_constraintTop_toTopOf="@id/toolbar_burger">
             <CustomAttribute
                 motion:attributeName="alpha"
-                motion:customFloatValue="0.0"/>
+                motion:customFloatValue="0.0" />
         </Constraint>
 
     </ConstraintSet>
@@ -85,26 +84,25 @@
             android:id="@id/main_temperature_today_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="28dp"
             motion:layout_constraintStart_toEndOf="@+id/main_temperature_now_tv"
             motion:layout_constraintTop_toTopOf="@+id/main_temperature_now_tv" />
 
-        <Constraint
-            android:id="@id/main_location_toolbar_name_tv">
+        <Constraint android:id="@id/main_location_toolbar_name_tv">
             <CustomAttribute
                 motion:attributeName="alpha"
-                motion:customFloatValue="1.0"/>
+                motion:customFloatValue="1.0" />
         </Constraint>
 
         <Constraint
             android:id="@id/main_temperature_now_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginStart="35dp"
+            android:layout_marginTop="15dp"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/toolbar_burger"/>
+            motion:layout_constraintTop_toBottomOf="@+id/toolbar_burger" />
 
     </ConstraintSet>
 

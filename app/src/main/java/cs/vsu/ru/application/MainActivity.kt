@@ -1,24 +1,20 @@
-package cs.vsu.ru.application.ui.main
+package cs.vsu.ru.application
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.constraintlayout.motion.widget.MotionScene
-import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
-import cs.vsu.ru.application.R
-import cs.vsu.ru.application.WeatherApplication
 import cs.vsu.ru.application.databinding.ActivityMainBinding
+import cs.vsu.ru.application.ui.main.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
+//    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        //viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         setContentView(binding.root)
         setViews()
 
@@ -26,9 +22,9 @@ class MainActivity : AppCompatActivity() {
 //        binding.contentMainInc.activityMainHeader.toolbarBurger.setOnClickListener {
 //            binding.root.openDrawer(GravityCompat.START)
 //        }
-
-        binding.mainBackgroundImg.setBackgroundResource(R.drawable.background_daytime)
-        binding.mainBackgroundImg.setAltImageResource(R.color.black)
+//
+//        binding.mainBackgroundImg.setBackgroundResource(R.drawable.background_daytime)
+//        binding.mainBackgroundImg.setAltImageResource(R.color.black)
     }
 
     private fun setViews() {

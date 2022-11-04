@@ -3,6 +3,7 @@ package cs.vsu.ru.application.ui.main
 
 import android.graphics.drawable.Drawable
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.WeatherApplication
@@ -16,20 +17,21 @@ class MainViewModel : ViewModel() {
     private var temperatureHighest: Int = 0
     private var temperatureLowest: Int = 0
     private var temperatureFeelsLike: Int = 0
-    private var background: Drawable? = null
-    private var backgroundTint: Drawable? = null
 
-
-    private fun getBackground() {
-        val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-        background = if (currentHour in 8..18) {
-            AppCompatResources.getDrawable(WeatherApplication.applicationContext, R.drawable.background_daytime)
-        } else {
-            AppCompatResources.getDrawable(WeatherApplication.applicationContext, R.drawable.background_nighttime)
-        }
+    val backgroundResource = MutableLiveData<Int>().apply {
+        value = getBackground()
     }
 
-    private fun getBackgroundTint() {
 
+    private fun getBackground(): Int? {
+        val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        val background = if (currentHour in 8..18) {
+//            AppCompatResources.getDrawable(WeatherApplication.applicationContext, R.drawable.background_daytime)
+            R.drawable.background_daytime
+        } else {
+//            AppCompatResources.getDrawable(WeatherApplication.applicationContext, R.drawable.background_nighttime)
+            R.drawable.background_nighttime
+        }
+        return background
     }
 }
