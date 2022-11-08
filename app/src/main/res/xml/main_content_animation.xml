@@ -16,7 +16,7 @@
 
     <ConstraintSet android:id="@+id/expand_header">
         <Constraint
-            android:id="@id/main_motion_header"
+            android:id="@id/fragment_content_main_header"
             android:layout_width="match_parent"
             android:layout_height="350dp"
             motion:layout_constraintTop_toTopOf="parent" />
@@ -28,11 +28,10 @@
             android:layout_marginTop="@dimen/main_body_list_expanded_top_margin"
             android:layout_marginStart="@dimen/margin_horizontal"
             android:layout_marginEnd="@dimen/margin_horizontal"
-            android:layout_marginBottom="47dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/main_motion_header" />
+            motion:layout_constraintTop_toBottomOf="@id/fragment_content_main_header" />
 
         <Constraint
             android:id="@id/main_background_img">
@@ -44,7 +43,7 @@
 
     <ConstraintSet android:id="@+id/collapse_header">
         <Constraint
-            android:id="@id/main_motion_header"
+            android:id="@id/fragment_content_main_header"
             android:layout_width="match_parent"
             android:layout_height="230dp"
             motion:layout_constraintTop_toTopOf="parent"
@@ -56,11 +55,10 @@
             android:layout_width="match_parent"
             android:layout_marginStart="@dimen/margin_horizontal"
             android:layout_marginEnd="@dimen/margin_horizontal"
-            android:layout_marginBottom="47dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/main_motion_header" />
+            motion:layout_constraintTop_toBottomOf="@id/fragment_content_main_header" />
 
         <Constraint
             android:id="@id/main_background_img">

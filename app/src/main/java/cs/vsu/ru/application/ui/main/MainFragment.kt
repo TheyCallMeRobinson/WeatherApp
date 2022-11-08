@@ -1,9 +1,12 @@
 package cs.vsu.ru.application.ui.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -24,6 +27,13 @@ class MainFragment : Fragment() {
         binding = FragmentContentMainBinding.inflate(inflater)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         connectFragmentToViewModel()
+
+        binding.mainToolbarBurger.setOnClickListener {
+            activity?.findViewById<DrawerLayout>(R.id.activity_main_layout)?.openDrawer(GravityCompat.START)
+        }
+
+        val textView: TextView? = activity?.findViewById<TextView>(R.id.main_temperature_now_tv)
+        textView?.text = "65"
 
         return binding.root
     }
