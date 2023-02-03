@@ -34,7 +34,11 @@
             motion:layout_constraintTop_toBottomOf="@id/fragment_content_main_header" />
 
         <Constraint
-            android:id="@id/main_background_img">
+            android:id="@id/main_background_img"
+            motion:layout_editor_absoluteY="0dp"
+            android:layout_height="match_parent"
+            motion:layout_editor_absoluteX="0dp"
+            android:layout_width="match_parent">
             <CustomAttribute
                 motion:attributeName="crossfade"
                 motion:customFloatValue="0" />

@@ -1,12 +1,8 @@
 package cs.vsu.ru.application.ui.main
 
-
-import android.graphics.drawable.Drawable
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cs.vsu.ru.application.R
-import cs.vsu.ru.application.WeatherApplication
 import java.util.*
 
 class MainViewModel : ViewModel() {
@@ -18,10 +14,9 @@ class MainViewModel : ViewModel() {
     private var temperatureLowest: Int = 0
     private var temperatureFeelsLike: Int = 0
 
-    val backgroundResource = MutableLiveData<Int>().apply {
+    public val backgroundResource = MutableLiveData<Int>().apply {
         value = getBackground()
     }
-
 
     private fun getBackground(): Int? {
         val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)

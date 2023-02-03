@@ -1,14 +1,12 @@
-package cs.vsu.ru.application
+package cs.vsu.ru.application.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.MotionScene
+import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.ActivityMainBinding
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,7 +18,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val actionBarDrawerToggle = object : ActionBarDrawerToggle(this, binding.root, R.string.drawer_open, R.string.drawer_close) {
+        val actionBarDrawerToggle = object : ActionBarDrawerToggle(this, binding.root,
+            R.string.drawer_open,
+            R.string.drawer_close
+        ) {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
                 binding.mainFragmentContentContainer.translationX = binding.mainFragmentDrawerContainer.width * slideOffset
                 super.onDrawerSlide(drawerView, slideOffset)
