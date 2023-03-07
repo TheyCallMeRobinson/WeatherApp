@@ -10,7 +10,7 @@ interface WeatherService {
     suspend fun getForecast(
         @Query("lat") latitude: Double?,
         @Query("lon") longitude: Double?,
-        @Query(value = "exclude", encoded = true) exclude: String? = "",
+        @Query(value = "exclude", encoded = true) exclude: String? = "current,minutely,alerts",
         @Query("appid") key: String,
         @Query("units") units: String? = "metric",
         @Query("lang") language: String? = "ru"
