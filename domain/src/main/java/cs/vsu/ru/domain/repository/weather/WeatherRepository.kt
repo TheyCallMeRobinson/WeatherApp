@@ -5,5 +5,5 @@ import cs.vsu.ru.domain.model.weather.Weather
 
 interface WeatherRepository {
 
-    fun getWeather(location: Location): Weather
+    suspend fun getWeather(location: Location): Weather
 }

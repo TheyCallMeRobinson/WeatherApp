@@ -7,14 +7,9 @@ import cs.vsu.ru.environment.WeatherServiceProvider
 
 class WeatherRepositoryImpl(private val serviceProvider: WeatherServiceProvider) : WeatherRepository {
 
-    override fun getWeather(location: Location): Weather {
+    override suspend fun getWeather(location: Location): Weather {
         val service = serviceProvider.weatherService
-
-        service.getForecast(
-            latitude = location.latitude,
-            longitude = location.longitude,
-            key = serviceProvider.openWeatherApiKey,
-        )
-        TODO("Not yet implemented")
+        TODO("Make coroutine call")
+        //return Weather()
     }
 }
