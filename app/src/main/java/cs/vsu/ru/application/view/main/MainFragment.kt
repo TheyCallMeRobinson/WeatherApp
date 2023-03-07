@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.FragmentContentMainBinding
+import cs.vsu.ru.application.viewmodel.MainViewModel
 
 class MainFragment : Fragment() {
 

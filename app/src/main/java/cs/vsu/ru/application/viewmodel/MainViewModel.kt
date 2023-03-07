@@ -1,4 +1,4 @@
-package cs.vsu.ru.application.view.main
+package cs.vsu.ru.application.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
