@@ -4,9 +4,9 @@ import cs.vsu.ru.domain.model.location.Location
 import cs.vsu.ru.domain.model.weather.Weather
 import cs.vsu.ru.domain.repository.weather.WeatherRepository
 
-class GetWeatherDataUseCase(val repository: WeatherRepository) {
+class GetWeatherDataUseCase(val weatherRepository: WeatherRepository) {
 
     suspend fun execute(location: Location): Weather {
-        return repository.getWeather(location)
+        return weatherRepository.getWeather(location)
     }
 }
