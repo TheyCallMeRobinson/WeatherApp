@@ -13,7 +13,6 @@ data class DailyWeatherResponse(
     val temperature: Temperature,
 
     val weather: WeatherDetailsElement
-
 ) {
 
     data class Temperature(
