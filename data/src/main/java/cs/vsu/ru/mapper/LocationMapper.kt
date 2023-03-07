@@ -1,7 +1,7 @@
 package cs.vsu.ru.mapper
 
 import cs.vsu.ru.domain.model.location.Location
-import cs.vsu.ru.model.LocationEntity
+import cs.vsu.ru.model.location.LocationEntity
 
 class LocationMapper {
 

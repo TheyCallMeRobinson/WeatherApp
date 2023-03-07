@@ -1,4 +1,4 @@
-package cs.vsu.ru.model
+package cs.vsu.ru.model.location
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
