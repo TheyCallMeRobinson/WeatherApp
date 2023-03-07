@@ -7,9 +7,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 // This is an open source api key, it is safe to leave it here exposed like this
 val openWeatherApiKey = "f914d926992e450dee0e46cd2a46caaf"
-val openWeatherApiVersion = "3.0"
+const val openWeatherApiVersion = "3.0"
 
-class ServiceProvider {
+class WeatherServiceProvider {
 
     private val baseUrl = "https://api.openweathermap.org/data/$openWeatherApiVersion/onecall"
 
