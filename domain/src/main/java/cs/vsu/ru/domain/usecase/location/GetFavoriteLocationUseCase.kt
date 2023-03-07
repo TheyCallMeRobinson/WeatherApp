@@ -6,6 +6,6 @@ import cs.vsu.ru.domain.repository.location.LocationRepository
 class GetFavoriteLocationUseCase(private val locationRepository: LocationRepository) {
 
     fun execute(): Location {
-        return locationRepository.getFavoriteLocation()
+        return locationRepository.getFavoriteLocation() ?: Location()
     }
 }

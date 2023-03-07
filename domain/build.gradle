@@ -7,3 +7,7 @@ java {
     sourceCompatibility = JavaVersion.VERSION_1_7
     targetCompatibility = JavaVersion.VERSION_1_7
 }
+
+dependencies {
+    testImplementation("org.mockito:mockito-core:2.19.0")
+}

@@ -6,6 +6,11 @@ import cs.vsu.ru.domain.repository.location.LocationRepository
 class SetFavoriteLocationUseCase(private val locationRepository: LocationRepository) {
 
     fun execute(location: Location): Boolean {
-        return locationRepository.setFavoriteLocation(location)
+        if (locationRepository.getLocation(location.name) != null) {
+            return false
+        }
+
+        locationRepository.setFavoriteLocation(location)
+        return true
     }
 }

@@ -2,13 +2,12 @@ package cs.vsu.ru.mapper
 
 import cs.vsu.ru.domain.model.location.Location
 import cs.vsu.ru.model.LocationEntity
-import java.io.IOException
 
 class LocationMapper {
 
     fun domainToData(fromDomain: Location?): LocationEntity {
         if (fromDomain?.name == null) {
-            TODO("Must throw custom exception")
+            TODO("throw custom exception")
         }
 
         return LocationEntity(
@@ -21,7 +20,7 @@ class LocationMapper {
 
     fun dataToDomain(fromData: LocationEntity?): Location {
         if (fromData?.name == null) {
-            TODO("Must throw custom exception")
+            TODO("throw custom exception")
         }
 
         return Location(

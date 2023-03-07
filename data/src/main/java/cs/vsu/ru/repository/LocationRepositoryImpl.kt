@@ -11,9 +11,9 @@ private const val KEY_FAVORITE_LOCATION = "favoriteLocation"
 private const val KEY_CURRENT_LOCATION = "currentLocation"
 private const val DEFAULT_LOCATION = "Moscow"
 
-class LocationRepositoryImpl(
+open class LocationRepositoryImpl(
     private val locationDao: LocationDao,
-    private val context: Context) : LocationRepository {
+    context: Context) : LocationRepository {
 
     private val locationMapper = LocationMapper()
     private val sharedPreferences =
@@ -30,12 +30,10 @@ class LocationRepositoryImpl(
     }
 
     override fun getFavoriteLocation(): Location {
-        // TODO: if favorite location is not presented - return default location
         return getLocation(sharedPreferences.getString(KEY_FAVORITE_LOCATION, DEFAULT_LOCATION)!!)
     }
 
     override fun getCurrentLocation(): Location {
-        // TODO: if current location is not presented - return default location
         return getLocation(sharedPreferences.getString(KEY_CURRENT_LOCATION, DEFAULT_LOCATION)!!)
     }
 
@@ -48,11 +46,25 @@ class LocationRepositoryImpl(
     }
 
     override fun setFavoriteLocation(location: Location): Boolean {
-        return setLocationIntoSharedPreferences(KEY_FAVORITE_LOCATION, location.name)
+        if (locationDao.getByName(KEY_FAVORITE_LOCATION) == null) {
+            return false
+        }
+        sharedPreferences.edit().putString(KEY_FAVORITE_LOCATION, location.name).apply()
+        return true
+        // return setLocationIntoSharedPreferences(KEY_FAVORITE_LOCATION, location.name)
     }
 
     override fun setCurrentLocation(location: Location): Boolean {
-        return setLocationIntoSharedPreferences(KEY_CURRENT_LOCATION, location.name)
+        if (locationDao.getByName(KEY_CURRENT_LOCATION) == null) {
+            return false
+        }
+        sharedPreferences.edit().putString(KEY_CURRENT_LOCATION, location.name).apply()
+        return true
+        // return setLocationIntoSharedPreferences(KEY_CURRENT_LOCATION, location.name)
+    }
+
+    override fun removeSavedLocation(locationName: String) {
+        locationDao.deleteByName(locationName)
     }
 
     private fun setLocationIntoSharedPreferences(key: String, value: String): Boolean {
@@ -63,8 +75,4 @@ class LocationRepositoryImpl(
         return true
     }
 
-    override fun removeSavedLocation(locationName: String) {
-        // TODO: if removing current, favorite or last saved location add default location
-        locationDao.deleteByName(locationName)
-    }
 }

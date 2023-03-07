@@ -5,7 +5,7 @@ import cs.vsu.ru.domain.repository.location.LocationRepository
 
 class GetSavedLocationsUseCase(private val locationRepository: LocationRepository) {
 
-    fun execute(name: String): List<Location> {
+    fun execute(): List<Location> {
         return locationRepository.getSavedLocations()
     }
 }
