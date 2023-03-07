@@ -1,4 +1,4 @@
-package cs.vsu.ru.application.ui.drawer
+package cs.vsu.ru.application.view.drawer
 
 import androidx.lifecycle.ViewModel
 

@@ -1,4 +1,4 @@
-package cs.vsu.ru.application.ui
+package cs.vsu.ru.application.view
 
 import android.os.Bundle
 import android.view.View

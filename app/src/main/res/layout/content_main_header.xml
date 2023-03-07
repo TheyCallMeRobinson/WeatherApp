@@ -6,7 +6,7 @@
     android:id="@+id/fragment_content_main_header"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ui.MainActivity"
+    tools:context=".view.MainActivity"
     app:layoutDescription="@xml/main_content_header_animation">
 
     <androidx.appcompat.widget.AppCompatImageButton

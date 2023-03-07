@@ -8,11 +8,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="false"
-    tools:context=".ui.MainActivity">
+    tools:context=".view.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/main_fragment_content_container"
-        android:name="cs.vsu.ru.application.ui.main.MainFragment"
+        android:name="cs.vsu.ru.application.view.main.MainFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginEnd="0dp"
@@ -28,7 +28,7 @@
         android:background="@color/transparent60">
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/main_fragment_drawer_container"
-            android:name="cs.vsu.ru.application.ui.drawer.DrawerFragment"
+            android:name="cs.vsu.ru.application.view.drawer.DrawerFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout="@layout/fragment_drawer"/>
