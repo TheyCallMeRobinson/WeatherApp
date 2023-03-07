@@ -5,25 +5,23 @@ import com.google.gson.annotations.SerializedName
 data class DailyWeatherResponse(
 
     @SerializedName(value = "dt")
-    private val date: Int,
+    val date: Int,
 
-    private val humidity: Float,
+    val humidity: Float,
 
     @SerializedName(value = "temp")
-    private val temperature: Temperature,
+    val temperature: Temperature,
 
-    private val weather: WeatherDetailsElement
+    val weather: WeatherDetailsElement
 
 ) {
 
     data class Temperature(
 
         @SerializedName(value = "min")
-        private val minTemperature: Float,
+        val minTemperature: Float,
 
         @SerializedName(value = "max")
-        private val maxTemperature: Float
-
+        val maxTemperature: Float
     )
-
 }

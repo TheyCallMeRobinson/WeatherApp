@@ -5,13 +5,12 @@ import com.google.gson.annotations.SerializedName
 data class HourlyWeatherResponse(
 
     @SerializedName(value = "dt")
-    private val time: Int,
+    val time: Int,
 
     @SerializedName(value = "temp")
-    private val temperature: Float,
+    val temperature: Float,
 
-    private val humidity: Float,
+    val humidity: Float,
 
-    private val weather: WeatherDetailsElement
-
+    val weather: WeatherDetailsElement
 )

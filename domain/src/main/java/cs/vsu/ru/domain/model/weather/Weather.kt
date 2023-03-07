@@ -2,8 +2,8 @@ package cs.vsu.ru.domain.model.weather
 
 data class Weather(
 
-    private val currentWeather: CurrentWeather,
-    private val dailyWeather: List<DailyWeather>,
-    private val hourlyWeather: List<HourlyWeather>,
-    private val alerts: List<AlertWeather>
+    val currentWeather: CurrentWeather,
+    val dailyWeather: List<DailyWeather>,
+    val hourlyWeather: List<HourlyWeather>,
+    val alerts: List<AlertWeather>
 )

@@ -5,21 +5,19 @@ import com.google.gson.annotations.SerializedName
 data class CurrentWeatherResponse(
 
     @SerializedName(value = "temp")
-    private val temperature: Float,
+    val temperature: Float,
 
     @SerializedName(value = "feels_like")
-    private val feelsLike: Float,
+    val feelsLike: Float,
 
-    private val sunrise: Int,
-
-    private val sunset: Int,
+    val sunrise: Int,
+    val sunset: Int,
 
     @SerializedName(value = "uvi")
-    private val uvIndex: Float,
+    val uvIndex: Float,
 
-    private val humidity: Float,
+    val humidity: Float,
 
     @SerializedName(value = "wind_speed")
-    private val windSpeed: Float
-
+    val windSpeed: Float
 )
