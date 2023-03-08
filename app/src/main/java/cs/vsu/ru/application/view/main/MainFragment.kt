@@ -1,18 +1,21 @@
 package cs.vsu.ru.application.view.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.FragmentContentMainBinding
 import cs.vsu.ru.application.viewmodel.MainViewModel
+import cs.vsu.ru.environment.Status
 
 class MainFragment : Fragment() {
 
@@ -25,7 +28,8 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentContentMainBinding.inflate(inflater)
-//        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+        setupObservers()
         connectFragmentToViewModel()
 
         binding.mainToolbarBurger.setOnClickListener {
@@ -43,5 +47,24 @@ class MainFragment : Fragment() {
             binding.mainBackgroundImg.setBackgroundResource(it)
         }
         binding.mainBackgroundImg.setAltImageResource(R.color.black)
+    }
+
+    private fun setupObservers() {
+        viewModel.getWeatherData().observe(requireActivity(), Observer {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        Log.i("Main Fragment", "Success")
+                        Toast.makeText(context, "Success", Toast.LENGTH_LONG).show()
+                    }
+                    Status.ERROR -> {
+                        Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+                    }
+                    Status.LOADING -> {
+                        Toast.makeText(context, "Loading", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        })
     }
 }

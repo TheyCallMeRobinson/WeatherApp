@@ -1,7 +1,6 @@
 package cs.vsu.ru.application.di
 
-import android.arch.persistence.room.Room
-import cs.vsu.ru.application.WeatherApplication
+import androidx.room.Room
 import cs.vsu.ru.database.AppDatabase
 import cs.vsu.ru.domain.repository.location.LocationRepository
 import cs.vsu.ru.domain.repository.weather.WeatherRepository
