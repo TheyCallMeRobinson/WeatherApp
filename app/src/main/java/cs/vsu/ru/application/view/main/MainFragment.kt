@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.FragmentContentMainBinding
@@ -16,7 +17,7 @@ import cs.vsu.ru.application.viewmodel.MainViewModel
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentContentMainBinding
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by viewModels<MainViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,7 +25,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentContentMainBinding.inflate(inflater)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+//        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         connectFragmentToViewModel()
 
         binding.mainToolbarBurger.setOnClickListener {

@@ -3,9 +3,14 @@ package cs.vsu.ru.application.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cs.vsu.ru.application.R
+import cs.vsu.ru.domain.usecase.location.GetCurrentLocationUseCase
+import cs.vsu.ru.domain.usecase.weather.GetWeatherDataUseCase
 import java.util.*
 
-class MainViewModel : ViewModel() {
+class MainViewModel(
+    private val getCurrentLocationUseCase: GetCurrentLocationUseCase,
+    private val getWeatherDataUseCase: GetWeatherDataUseCase
+) : ViewModel() {
 
     private lateinit var locationName: String
     private lateinit var today: String
