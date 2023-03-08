@@ -11,7 +11,7 @@ interface LocationDao {
     @Query("SELECT * FROM locations")
     fun getAll(): List<LocationEntity>?
 
-    @Query("SELECT SINGLE(*) FROM locations where name = :name")
+    @Query("SELECT * FROM locations where name = :name")
     fun getByName(name: String): LocationEntity?
 
     @Query("DELETE FROM locations WHERE name = :name")

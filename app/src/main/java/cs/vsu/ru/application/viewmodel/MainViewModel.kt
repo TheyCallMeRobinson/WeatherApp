@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import cs.vsu.ru.application.R
+import cs.vsu.ru.domain.model.location.Location
 import cs.vsu.ru.domain.usecase.location.GetCurrentLocationUseCase
 import cs.vsu.ru.domain.usecase.weather.GetWeatherDataUseCase
 import cs.vsu.ru.environment.Resource
@@ -22,7 +23,7 @@ class MainViewModel(
     private var temperatureLowest: Int = 0
     private var temperatureFeelsLike: Int = 0
 
-    public val backgroundResource = MutableLiveData<Int>().apply {
+    val backgroundResource = MutableLiveData<Int>().apply {
         value = getBackground()
     }
 

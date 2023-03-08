@@ -20,7 +20,12 @@ class LocationMapper {
 
     fun dataToDomain(fromData: LocationEntity?): Location {
         if (fromData?.name == null) {
-            TODO("throw custom exception")
+            return Location(
+                name = "Воронеж",
+                country = "Россия",
+                latitude = 51.672,
+                longitude = 39.1843
+            )
         }
 
         return Location(

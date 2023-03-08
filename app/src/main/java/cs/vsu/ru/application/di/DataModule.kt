@@ -1,7 +1,9 @@
 package cs.vsu.ru.application.di
 
 import androidx.room.Room
+import cs.vsu.ru.application.WeatherApplication
 import cs.vsu.ru.database.AppDatabase
+import cs.vsu.ru.database.dao.LocationDao
 import cs.vsu.ru.domain.repository.location.LocationRepository
 import cs.vsu.ru.domain.repository.weather.WeatherRepository
 import cs.vsu.ru.environment.WeatherServiceProvider
@@ -18,13 +20,17 @@ val dataModule = module {
         Room.databaseBuilder(
             androidApplication().applicationContext,
             AppDatabase::class.java,
-            "database-name"
+            "weather-app-database"
         ).build()
+    }
+
+    single<LocationDao> {
+        get<AppDatabase>().locationDao()
     }
 
     single<LocationRepository> {
         LocationRepositoryImpl(
-            locationDao = get<AppDatabase>().locationDao(),
+            locationDao = get(),
             context = androidContext()
         )
     }

@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionScene
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.ActivityMainBinding
+import cs.vsu.ru.application.viewmodel.MainViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 

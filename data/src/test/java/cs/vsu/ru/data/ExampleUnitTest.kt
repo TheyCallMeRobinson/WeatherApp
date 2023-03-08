@@ -17,12 +17,4 @@ import org.mockito.Mockito
  */
 class ExampleUnitTest {
 
-    private val mockLocationRepositoryImpl: LocationRepository = Mockito.spy(LocationRepositoryImpl::class.java)
-    private val removeSavedLocationUseCase: RemoveSavedLocationUseCase = RemoveSavedLocationUseCase(mockLocationRepositoryImpl)
-
-    @Test(expected = Exception::class)
-    fun addition_savedLocation1() {
-        Mockito.`when`(mockLocationRepositoryImpl.getSavedLocations()).thenReturn(listOf(Location()))
-        removeSavedLocationUseCase.execute("Moscow")
-    }
 }

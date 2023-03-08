@@ -10,8 +10,8 @@ import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.FragmentContentMainBinding
 import cs.vsu.ru.application.viewmodel.MainViewModel
@@ -20,7 +20,7 @@ import cs.vsu.ru.environment.Status
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentContentMainBinding
-    private val viewModel: MainViewModel by viewModels<MainViewModel>()
+    private val viewModel by viewModel<MainViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

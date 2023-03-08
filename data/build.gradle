@@ -1,15 +1,18 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id "org.jetbrains.kotlin.kapt"
+//    id 'kotlin-android'
+//    id 'kotlin-kapt'
 }
 
 android {
     namespace 'cs.vsu.ru.data'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         minSdk 21
-        targetSdk 32
+        targetSdk 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -32,10 +35,13 @@ android {
 
 dependencies {
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation "android.arch.persistence.room:runtime:1.1.1"
-    implementation 'com.google.code.gson:gson:2.10.1'
-    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
 
+    // room
+    implementation 'androidx.room:room-runtime:2.5.0'
+    implementation 'androidx.room:room-ktx:2.5.0'
+    kapt 'androidx.room:room-compiler:2.5.0'
+
+    // retrofit
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.google.code.gson:gson:2.8.6'
