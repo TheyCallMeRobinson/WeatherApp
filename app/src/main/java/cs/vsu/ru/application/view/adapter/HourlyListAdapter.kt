@@ -27,7 +27,7 @@ class HourlyListAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val listElement = hourlyList[position]
 
-        val dateFormat = DateFormat.format("HH:mm", Date((listElement.time + timezoneOffset) * 1000L))
+        val dateFormat = DateFormat.format("HH:mm", Date((listElement.time) * 1000L))
         holder.hour.text = dateFormat.toString()
         holder.temperature.text = TemperatureModel(listElement.temperature).toString()
         holder.humidity.text = HumidityModel(listElement.humidity).toString()
