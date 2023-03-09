@@ -34,9 +34,6 @@ class MainActivity : AppCompatActivity() {
         actionBarDrawerToggle.syncState()
 
         setViews()
-
-//        binding.mainBackgroundImg.setBackgroundResource(R.drawable.background_daytime)
-//        binding.mainBackgroundImg.setAltImageResource(R.color.black)
     }
 
     private fun setViews() {

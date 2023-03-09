@@ -4,17 +4,15 @@
     android:id="@+id/main_body_list"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/margin_horizontal"
-    android:layout_marginEnd="@dimen/margin_horizontal">
+    android:layout_marginHorizontal="@dimen/margin_horizontal">
 
     <LinearLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:orientation="vertical">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:background="@color/purple_700"/>
+        <include
+            android:id="@id/hourly_temperature_list_container"
+            layout="@layout/hourly_temperature_list"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="300dp"

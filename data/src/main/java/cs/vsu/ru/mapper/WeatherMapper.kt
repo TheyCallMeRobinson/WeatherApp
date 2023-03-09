@@ -7,6 +7,7 @@ class WeatherMapper {
 
     fun toDto(entity: Weather): WeatherFullResponse {
         return WeatherFullResponse(
+            timezoneOffset = entity.timezoneOffset,
             current = CurrentWeatherResponse(
                 temperature = entity.currentWeather.temperature,
                 feelsLike = entity.currentWeather.feelsLike,
@@ -56,6 +57,7 @@ class WeatherMapper {
 
     fun toEntity(dto: WeatherFullResponse): Weather {
         return Weather(
+            timezoneOffset = dto.timezoneOffset,
             currentWeather = CurrentWeather(
                 temperature = dto.current.temperature,
                 feelsLike = dto.current.feelsLike,

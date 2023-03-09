@@ -1,26 +1,25 @@
 package cs.vsu.ru.application.view.main
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
-import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.recyclerview.widget.LinearLayoutManager
 import cs.vsu.ru.application.R
+import cs.vsu.ru.application.databinding.ContentMainBodyListBinding
 import cs.vsu.ru.application.databinding.ContentMainHeaderBinding
 import cs.vsu.ru.application.databinding.FragmentContentMainBinding
 import cs.vsu.ru.application.model.TemperatureModel
+import cs.vsu.ru.application.view.adapter.HourlyListAdapter
 import cs.vsu.ru.application.viewmodel.MainViewModel
 import cs.vsu.ru.domain.model.weather.Weather
 import cs.vsu.ru.environment.Status
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class MainFragment : Fragment() {
 
@@ -41,9 +40,6 @@ class MainFragment : Fragment() {
             activity?.findViewById<DrawerLayout>(R.id.activity_main_layout)?.openDrawer(GravityCompat.START)
         }
 
-//        val textView: TextView? = activity?.findViewById<TextView>(R.id.main_temperature_now_tv)
-//        textView?.text = "65"
-
         return binding.root
     }
 
@@ -60,6 +56,7 @@ class MainFragment : Fragment() {
                 when (resource.status) {
                     Status.SUCCESS -> {
                         setMainHeaderValues(binding.fragmentContentMainHeader, resource.data)
+                        setMainBodyListValues(binding.mainBodyList, resource.data)
                         Toast.makeText(context, "Success", Toast.LENGTH_LONG).show()
                     }
                     Status.ERROR -> {
@@ -92,5 +89,15 @@ class MainFragment : Fragment() {
         }
         val temperatureFeelsLikeText = "Ощущается как $temperatureFeelsLike"
         layout.mainFeelsLikeTemperatureTv.text = temperatureFeelsLikeText
+    }
+
+    private fun setMainBodyListValues(layout: ContentMainBodyListBinding, weather: Weather?) {
+        val hourlyListAdapter = weather?.hourlyWeather?.let { HourlyListAdapter(it, weather.timezoneOffset) }
+        val hourlyList = layout.hourlyTemperatureListContainer.hourlyTemperatureList
+        val linearLayoutManager = LinearLayoutManager(context)
+        linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        hourlyList.layoutManager = linearLayoutManager
+        hourlyList.adapter = hourlyListAdapter
+        hourlyList.setHasFixedSize(true)
     }
 }
