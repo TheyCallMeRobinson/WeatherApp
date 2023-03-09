@@ -16,13 +16,6 @@ class MainViewModel(
     private val getWeatherDataUseCase: GetWeatherDataUseCase
 ) : ViewModel() {
 
-    private lateinit var locationName: String
-    private lateinit var today: String
-    private var temperatureNow: Int = 0
-    private var temperatureHighest: Int = 0
-    private var temperatureLowest: Int = 0
-    private var temperatureFeelsLike: Int = 0
-
     val backgroundResource = MutableLiveData<Int>().apply {
         value = getBackground()
     }
@@ -30,10 +23,8 @@ class MainViewModel(
     private fun getBackground(): Int? {
         val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         val background = if (currentHour in 8..18) {
-//            AppCompatResources.getDrawable(WeatherApplication.applicationContext, R.drawable.background_daytime)
             R.drawable.background_daytime
         } else {
-//            AppCompatResources.getDrawable(WeatherApplication.applicationContext, R.drawable.background_nighttime)
             R.drawable.background_nighttime
         }
         return background
