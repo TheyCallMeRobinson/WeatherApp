@@ -20,11 +20,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/main_temperature_now_tv"
+        android:id="@id/main_temperature_now_tv"
         style="@style/Text.BigTemperature"
+        android:minWidth="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="6°" />
+        android:text="" />
 
     <TextView
         android:id="@+id/main_location_toolbar_name_tv"
@@ -51,14 +52,14 @@
         style="@style/Text.SmallInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="6° / 2°" />
+        android:text="" />
 
     <TextClock
         android:id="@+id/main_daytime_tv"
         style="@style/Text.SmallInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:format12Hour="EE, hh:mm"
+        android:format12Hour="EEEE, hh:mm"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/main_temperature_today_tv"
         app:layout_constraintTop_toBottomOf="@+id/main_temperature_today_tv"
@@ -72,6 +73,6 @@
         android:paddingHorizontal="2dp"
         app:layout_constraintStart_toEndOf="@+id/main_temperature_today_tv"
         app:layout_constraintTop_toTopOf="@+id/main_temperature_today_tv"
-        android:text="Ощущается как 2°" />
+        android:text="" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

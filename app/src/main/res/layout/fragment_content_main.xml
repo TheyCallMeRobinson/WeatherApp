@@ -16,8 +16,13 @@
         app:altSrc="@color/black"
         tools:src="@drawable/background_daytime" />
 
-    <include layout="@layout/content_main_header" />
-    <include layout="@layout/content_main_body_list" />
+    <include
+        android:id="@id/fragment_content_main_header"
+        layout="@layout/content_main_header"  />
+
+    <include
+        android:id="@id/main_body_list"
+        layout="@layout/content_main_body_list"/>
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/main_toolbar_burger"
