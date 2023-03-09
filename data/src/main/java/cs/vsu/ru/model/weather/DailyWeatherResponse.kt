@@ -12,7 +12,7 @@ data class DailyWeatherResponse(
     @SerializedName(value = "temp")
     val temperature: Temperature,
 
-    val weather: WeatherDetailsElement
+    val weather: List<WeatherDetailsElement>
 ) {
 
     data class Temperature(

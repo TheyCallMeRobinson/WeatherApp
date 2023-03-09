@@ -12,5 +12,5 @@ data class HourlyWeatherResponse(
 
     val humidity: Float,
 
-    val weather: WeatherDetailsElement
+    val weather: List<WeatherDetailsElement>
 )

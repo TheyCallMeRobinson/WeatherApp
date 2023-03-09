@@ -24,9 +24,11 @@ class WeatherMapper {
                         minTemperature = it.temperature.minTemperature,
                         maxTemperature = it.temperature.maxTemperature
                     ),
-                    weather = WeatherDetailsElement(
-                        id = it.weather.id,
-                        icon = it.weather.icon
+                    weather = listOf(
+                        WeatherDetailsElement(
+                            id = it.weather.id,
+                            icon = it.weather.icon
+                        )
                     )
                 )
             },
@@ -35,13 +37,15 @@ class WeatherMapper {
                     time = it.time,
                     temperature = it.temperature,
                     humidity = it.humidity,
-                    weather = WeatherDetailsElement(
-                        id = it.weather.id,
-                        icon = it.weather.icon
+                    weather = listOf(
+                        WeatherDetailsElement(
+                            id = it.weather.id,
+                            icon = it.weather.icon
+                        )
                     )
                 )
             },
-            alerts = entity.alerts.map {
+            alerts = entity.alerts?.map {
                 AlertsResponse(
                     event = it.event,
                     description = it.description
@@ -70,8 +74,8 @@ class WeatherMapper {
                         maxTemperature = it.temperature.maxTemperature
                     ),
                     weather = DetailsWeather(
-                        id = it.weather.id,
-                        icon = it.weather.icon
+                        id = it.weather[0].id,
+                        icon = it.weather[0].icon
                     )
                 )
             },
@@ -81,12 +85,12 @@ class WeatherMapper {
                     temperature = it.temperature,
                     humidity = it.humidity,
                     weather = DetailsWeather(
-                        id = it.weather.id,
-                        icon = it.weather.icon
+                        id = it.weather[0].id,
+                        icon = it.weather[0].icon
                     )
                 )
             },
-            alerts = dto.alerts.map {
+            alerts = dto.alerts?.map {
                 AlertWeather(
                     event = it.event,
                     description = it.description

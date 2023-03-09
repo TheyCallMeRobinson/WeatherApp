@@ -10,8 +10,8 @@ const val openWeatherApiVersion = "3.0"
 object WeatherServiceProvider {
 
     // This is an open source api key, it is safe to leave it here exposed like this
-    val openWeatherApiKey = "f914d926992e450dee0e46cd2a46caaf"
-    private val baseUrl = "https://api.openweathermap.org/data/$openWeatherApiVersion/onecall/"
+    const val openWeatherApiKey = "f914d926992e450dee0e46cd2a46caaf"
+    private const val baseUrl = "https://api.openweathermap.org/data/$openWeatherApiVersion/"
 
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
@@ -19,5 +19,5 @@ object WeatherServiceProvider {
         .client(OkHttpClient.Builder().build())
         .build()
 
-    val weatherService = retrofit.create(WeatherService::class.java)
+    val weatherService: WeatherService = retrofit.create(WeatherService::class.java)
 }
