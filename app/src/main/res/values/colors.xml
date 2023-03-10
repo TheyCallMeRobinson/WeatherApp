@@ -14,7 +14,10 @@
     <color name="background_nighttime_start">#3C3D6E</color>
     <color name="background_nighttime_end">#253560</color>
 
+    <color name="transparent60_white">#99FFFFFF</color>
     <color name="transparent60">#99AAAAAA</color>
+    <color name="transparent40">#66FFFFFF</color>
+    <color name="transparent20_white">#33FFFFFF</color>
     <color name="transparent20">#33808080</color>
     <color name="transparent0">#00FFFFFF</color>
 </resources>

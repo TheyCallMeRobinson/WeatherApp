@@ -7,23 +7,33 @@
     android:layout_marginHorizontal="@dimen/margin_horizontal">
 
     <LinearLayout
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
+
         <include
             android:id="@id/hourly_temperature_list_container"
-            layout="@layout/hourly_temperature_list"/>
+            layout="@layout/hourly_temperature_list" />
+
         <include
-             android:id="@id/daily_weather_list_container"
+            android:id="@id/daily_weather_list_container"
             layout="@layout/daily_weather_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            tools:layout_height="200dp"/>
+            tools:layout_height="200dp" />
+
+        <include
+            android:id="@id/sunrise_sunset_holder_container"
+            layout="@layout/sunrise_sunset_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:background="@color/purple_200"/>
+            android:background="@color/purple_200" />
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
