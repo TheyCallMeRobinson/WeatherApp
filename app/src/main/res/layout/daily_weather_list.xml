@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/hourly_temperature_list_container"
+    android:id="@+id/daily_weather_list_container"
     android:background="@drawable/shape_round_background"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/hourly_temperature_list"
+    <TableLayout
+        android:id="@+id/daily_weather_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="20dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:paddingVertical="20dp"
+        android:paddingHorizontal="@dimen/margin_horizontal"
+        android:layout_marginHorizontal="@dimen/margin_horizontal" />
 
 </FrameLayout>

@@ -16,6 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread"
         tools:text="14:00" />
 
     <ImageView
@@ -36,33 +37,22 @@
         android:layout_marginBottom="10dp"
         android:textColor="@color/white"
         android:textSize="10pt"
-        app:layout_constraintBottom_toTopOf="@+id/item_humidity"
+        app:layout_constraintBottom_toTopOf="@+id/humidity_holder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_weather_icon"
         tools:text="3°" />
 
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/ic_water_drop"
-        app:layout_constraintBottom_toBottomOf="@+id/item_humidity"
-        app:layout_constraintEnd_toStartOf="@+id/item_humidity"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/item_humidity"
-        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/item_humidity"
+    <include
+        android:id="@id/humidity_holder"
+        layout="@layout/humidity_holder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="9dp"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_temperature"
-        tools:text="10%" />
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_temperature" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
