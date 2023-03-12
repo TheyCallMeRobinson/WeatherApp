@@ -12,7 +12,7 @@ import cs.vsu.ru.application.model.HourlyWeather
 
 class HourlyListAdapter(
     private val hourlyList: List<HourlyWeather>,
-    private val iconList: List<Bitmap>? = null,
+    private val iconList: List<Bitmap>,
 ) : RecyclerView.Adapter<HourlyListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,12 +26,11 @@ class HourlyListAdapter(
         val listElement = hourlyList[position]
 
         holder.hour.text = listElement.time
-        holder.icon.setImageBitmap(iconList?.get(position))
+        holder.icon.setImageBitmap(iconList[position])
         holder.temperature.text = listElement.temperature
         holder.humidity.text = listElement.humidity
     }
 
-    // api provides 48 hours of forecast, but the app needs only first 24
     override fun getItemCount(): Int = hourlyList.size
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

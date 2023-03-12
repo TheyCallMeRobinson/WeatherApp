@@ -75,7 +75,7 @@ class WeatherMapper {
                     )
                 )
             },
-            hourlyWeather = dto.hourly.map {
+            hourlyWeather = dto.hourly.subList(0, dto.hourly.size / 2).map {
                 HourlyWeather(
                     time = it.time,
                     temperature = it.temperature,

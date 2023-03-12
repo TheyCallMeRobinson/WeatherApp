@@ -49,7 +49,6 @@ class MainFragment : Fragment() {
             binding.mainBackgroundImg.setBackgroundResource(it)
         }
         binding.mainBackgroundImg.setAltImageResource(R.color.black)
-
     }
 
     private fun setupObservers() {
@@ -73,6 +72,8 @@ class MainFragment : Fragment() {
     }
 
     private fun setMainHeaderValues(layout: ContentMainHeaderBinding, weather: WeatherDataModel?) {
+        layout.mainLocationNameTv.text = weather?.currentWeather?.location
+        layout.mainLocationToolbarNameTv.text = weather?.currentWeather?.location
         layout.mainTemperatureNowTv.text = weather?.currentWeather?.currentTemperature
         layout.mainTemperatureTodayTv.text = weather?.currentWeather?.dayNightTemperature
         layout.mainFeelsLikeTemperatureTv.text = weather?.currentWeather?.feelsLikeTemperature
@@ -104,6 +105,7 @@ class MainFragment : Fragment() {
             val tableRowViewBinding = ItemDailyWeatherBinding.inflate(layoutInflater)
 
             tableRowViewBinding.dayOfWeek.text = item.dayOfWeek
+            tableRowViewBinding.itemWeatherIcon.setImageBitmap(item.icon)
             tableRowViewBinding.humidityHolder.itemHumidity.text = item.humidity
             tableRowViewBinding.itemDayTemperature.text = item.dayTemperature
             tableRowViewBinding.itemNightTemperature.text = item.nightTemperature
