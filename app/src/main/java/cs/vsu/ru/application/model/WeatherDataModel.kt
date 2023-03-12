@@ -5,7 +5,8 @@ import android.graphics.Bitmap
 data class WeatherDataModel(
     val currentWeather: CurrentWeather,
     val hourlyWeather: List<HourlyWeather>,
-    val dailyWeather: List<DailyWeather>
+    val dailyWeather: List<DailyWeather>,
+    val apiCallTime: String
 )
 
 data class CurrentWeather(
@@ -16,6 +17,9 @@ data class CurrentWeather(
     val feelsLikeTemperature: String,
     val sunset: String,
     val sunrise: String,
+    val uvIndex: String,
+    val humidity: String,
+    val windSpeed: String,
 )
 
 data class HourlyWeather(

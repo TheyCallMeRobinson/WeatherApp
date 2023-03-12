@@ -85,6 +85,8 @@ class MainFragment : Fragment() {
         setHourlyTemperatureList(layout, weather)
         setDailyWeatherList(weather?.dailyWeather!!)
         setSunsetSunriseTime(layout, weather.currentWeather)
+        setAdditionalWeatherData(layout, weather.currentWeather)
+        setApiRefreshTime(layout, weather.apiCallTime)
     }
 
     private fun setHourlyTemperatureList(layout: ContentMainBodyListBinding, weather: WeatherDataModel?) {
@@ -120,5 +122,15 @@ class MainFragment : Fragment() {
     private fun setSunsetSunriseTime(layout: ContentMainBodyListBinding, currentWeather: CurrentWeather) {
         layout.sunriseSunsetHolderContainer.sunriseTimeTv.text = currentWeather.sunrise
         layout.sunriseSunsetHolderContainer.sunsetTimeTv.text = currentWeather.sunset
+    }
+
+    private fun setAdditionalWeatherData(layout: ContentMainBodyListBinding, currentWeather: CurrentWeather) {
+        layout.additionalWeatherInfoHolderContainer.uvIndexValueTv.text = currentWeather.uvIndex
+        layout.additionalWeatherInfoHolderContainer.humidityValueTv.text = currentWeather.humidity
+        layout.additionalWeatherInfoHolderContainer.windValueTv.text = currentWeather.windSpeed
+    }
+
+    private fun setApiRefreshTime(layout: ContentMainBodyListBinding, apiCallTime: String) {
+        layout.weatherApiDataHolder.weatherApiRefreshTimeTv.text = apiCallTime
     }
 }

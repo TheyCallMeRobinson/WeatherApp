@@ -6,6 +6,7 @@ import cs.vsu.ru.application.model.*
 import cs.vsu.ru.domain.model.location.Location
 import cs.vsu.ru.domain.model.weather.Weather
 import java.util.*
+import kotlin.math.ceil
 
 class WeatherMapper {
 
@@ -14,7 +15,8 @@ class WeatherMapper {
         location: Location,
         currentWeatherIcon: Bitmap,
         hourlyWeatherIcons: List<Bitmap>,
-        dailyWeatherIcons: List<Bitmap>
+        dailyWeatherIcons: List<Bitmap>,
+        apiCallTime: Long
     ): WeatherDataModel {
 
         val hourlyWeatherList = mutableListOf<HourlyWeather>()
@@ -35,7 +37,8 @@ class WeatherMapper {
             dailyWeatherList.add(
                 DailyWeather(
                     dayOfWeek = if (i == 0) "Сегодня" else
-                        DateFormat.format("EEEE", Date(entity.dailyWeather[i].date * 1000L)).toString(),
+                        DateFormat.format("EEEE", Date(entity.dailyWeather[i].date * 1000L))
+                            .toString(),
                     humidity = HumidityModel(entity.dailyWeather[i].humidity).toString(),
                     icon = dailyWeatherIcons[i],
                     dayTemperature = TemperatureModel(entity.dailyWeather[i].temperature.maxTemperature).toString(),
@@ -43,7 +46,6 @@ class WeatherMapper {
                 )
             )
         }
-
 
         return WeatherDataModel(
             currentWeather = CurrentWeather(
@@ -54,11 +56,17 @@ class WeatherMapper {
                     "${TemperatureModel(entity.dailyWeather[0].temperature.maxTemperature)}",
                 location = location.name,
                 feelsLikeTemperature = "Ощущается как ${TemperatureModel(entity.currentWeather.feelsLike)}",
-                sunset = DateFormat.format("HH:mm", Date(entity.currentWeather.sunset * 1000L)).toString(),
-                sunrise = DateFormat.format("HH:mm", Date(entity.currentWeather.sunrise * 1000L)).toString(),
+                sunset = DateFormat.format("HH:mm", Date(entity.currentWeather.sunset * 1000L))
+                    .toString(),
+                sunrise = DateFormat.format("HH:mm", Date(entity.currentWeather.sunrise * 1000L))
+                    .toString(),
+                uvIndex = ceil(entity.currentWeather.uvIndex).toInt().toString(),
+                humidity = HumidityModel(entity.currentWeather.humidity).toString(),
+                windSpeed = "${ceil(entity.currentWeather.windSpeed).toInt()} км/ч"
             ),
             hourlyWeather = hourlyWeatherList,
             dailyWeather = dailyWeatherList,
+            apiCallTime = "${DateFormat.format("dd.MM, HH:mm", Date(apiCallTime))} Обновл.",
         )
     }
 }

@@ -30,10 +30,20 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp" />
 
-        <View
+        <include
+            android:id="@id/additional_weather_info_holder_container"
+            layout="@layout/additional_weather_info_holder"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:background="@color/purple_200" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"/>
+
+        <include
+            android:id="@id/weather_api_data_holder"
+            layout="@layout/weather_api_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="50dp"/>
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

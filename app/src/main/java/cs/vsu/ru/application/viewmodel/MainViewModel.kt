@@ -13,6 +13,7 @@ import cs.vsu.ru.domain.usecase.weather.GetWeatherDataUseCase
 import cs.vsu.ru.domain.usecase.weather.GetWeatherIconUseCase
 import cs.vsu.ru.environment.Resource
 import kotlinx.coroutines.Dispatchers
+import java.sql.Time
 import java.util.*
 
 class MainViewModel(
@@ -56,6 +57,7 @@ class MainViewModel(
                 byteArrayToBitmap(currentWeatherIcon),
                 byteArrayListToBitmap(hourlyWeatherIcons),
                 byteArrayListToBitmap(dailyWeatherIcons),
+                Date().time
             )
 
             emit(Resource.success(data = weatherDataToDisplay))
