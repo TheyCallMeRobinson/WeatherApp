@@ -12,6 +12,7 @@ class WeatherMapper {
     fun fromEntity(
         entity: Weather,
         location: Location,
+        currentWeatherIcon: Bitmap,
         hourlyWeatherIcons: List<Bitmap>,
         dailyWeatherIcons: List<Bitmap>
     ): WeatherDataModel {
@@ -33,8 +34,8 @@ class WeatherMapper {
         for (i in dailyWeatherIcons.indices) {
             dailyWeatherList.add(
                 DailyWeather(
-                    dayOfWeek = DateFormat.format("EEEE", Date(entity.dailyWeather[i].date * 1000L))
-                        .toString(),
+                    dayOfWeek = if (i == 0) "Сегодня" else
+                        DateFormat.format("EEEE", Date(entity.dailyWeather[i].date * 1000L)).toString(),
                     humidity = HumidityModel(entity.dailyWeather[i].humidity).toString(),
                     icon = dailyWeatherIcons[i],
                     dayTemperature = TemperatureModel(entity.dailyWeather[i].temperature.maxTemperature).toString(),
@@ -47,6 +48,7 @@ class WeatherMapper {
         return WeatherDataModel(
             currentWeather = CurrentWeather(
                 currentTemperature = TemperatureModel(entity.currentWeather.temperature).toString(),
+                icon = currentWeatherIcon,
                 dayNightTemperature =
                     "${TemperatureModel(entity.dailyWeather[0].temperature.minTemperature)} / " +
                     "${TemperatureModel(entity.dailyWeather[0].temperature.maxTemperature)}",

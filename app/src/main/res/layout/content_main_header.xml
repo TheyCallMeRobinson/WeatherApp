@@ -81,6 +81,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/ic_sunny" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

@@ -10,6 +10,7 @@ data class WeatherDataModel(
 
 data class CurrentWeather(
     val location: String,
+    val icon: Bitmap,
     val currentTemperature: String,
     val dayNightTemperature: String,
     val feelsLikeTemperature: String,

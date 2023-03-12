@@ -19,5 +19,7 @@ data class CurrentWeatherResponse(
     val humidity: Float,
 
     @SerializedName(value = "wind_speed")
-    val windSpeed: Float
+    val windSpeed: Float,
+
+    val weather: List<WeatherDetailsElement>
 )

@@ -9,4 +9,5 @@ data class CurrentWeather(
     val uvIndex: Float,
     val humidity: Float,
     val windSpeed: Float,
+    val detailsWeather: DetailsWeather
 )

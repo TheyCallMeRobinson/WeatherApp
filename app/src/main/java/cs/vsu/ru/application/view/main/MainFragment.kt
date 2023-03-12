@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TableRow
 import android.widget.Toast
 import androidx.core.view.GravityCompat
+import androidx.core.view.get
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -73,6 +74,7 @@ class MainFragment : Fragment() {
 
     private fun setMainHeaderValues(layout: ContentMainHeaderBinding, weather: WeatherDataModel?) {
         layout.mainLocationNameTv.text = weather?.currentWeather?.location
+        layout.currentWeatherIcon.setImageBitmap(weather?.currentWeather?.icon)
         layout.mainLocationToolbarNameTv.text = weather?.currentWeather?.location
         layout.mainTemperatureNowTv.text = weather?.currentWeather?.currentTemperature
         layout.mainTemperatureTodayTv.text = weather?.currentWeather?.dayNightTemperature
@@ -118,6 +120,5 @@ class MainFragment : Fragment() {
     private fun setSunsetSunriseTime(layout: ContentMainBodyListBinding, currentWeather: CurrentWeather) {
         layout.sunriseSunsetHolderContainer.sunriseTimeTv.text = currentWeather.sunrise
         layout.sunriseSunsetHolderContainer.sunsetTimeTv.text = currentWeather.sunset
-
     }
 }

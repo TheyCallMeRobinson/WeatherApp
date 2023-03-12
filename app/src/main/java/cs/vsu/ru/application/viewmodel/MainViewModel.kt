@@ -43,6 +43,8 @@ class MainViewModel(
 
             val weatherData = getWeatherDataUseCase.execute(location)
 
+            val currentWeatherIcon =
+                getWeatherIcon(weatherData.currentWeather.detailsWeather.icon)
             val hourlyWeatherIcons =
                 getWeatherIconList(weatherData.hourlyWeather.map { it.weather.icon })
             val dailyWeatherIcons =
@@ -51,8 +53,9 @@ class MainViewModel(
             val weatherDataToDisplay = weatherMapper.fromEntity(
                 weatherData,
                 location,
-                byteArrayToBitmap(hourlyWeatherIcons),
-                byteArrayToBitmap(dailyWeatherIcons),
+                byteArrayToBitmap(currentWeatherIcon),
+                byteArrayListToBitmap(hourlyWeatherIcons),
+                byteArrayListToBitmap(dailyWeatherIcons),
             )
 
             emit(Resource.success(data = weatherDataToDisplay))
@@ -74,8 +77,11 @@ class MainViewModel(
         return iconList
     }
 
-    private fun byteArrayToBitmap(byteArrayList: List<ByteArray>): List<Bitmap> =
+    private fun byteArrayListToBitmap(byteArrayList: List<ByteArray>): List<Bitmap> =
         byteArrayList.map {
-            BitmapFactory.decodeByteArray(it, 0, it.size)
+            byteArrayToBitmap(it)
         }
+
+    private fun byteArrayToBitmap(byteArray: ByteArray): Bitmap =
+        BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
 }

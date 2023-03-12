@@ -15,7 +15,13 @@ class WeatherMapper {
                 sunset = entity.currentWeather.sunset,
                 uvIndex = entity.currentWeather.uvIndex,
                 humidity = entity.currentWeather.humidity,
-                windSpeed = entity.currentWeather.windSpeed
+                windSpeed = entity.currentWeather.windSpeed,
+                weather = listOf(
+                    WeatherDetailsElement(
+                        id = entity.currentWeather.detailsWeather.id,
+                        icon = entity.currentWeather.detailsWeather.icon
+                    )
+                )
             ),
             daily = entity.dailyWeather.map {
                 DailyWeatherResponse(
@@ -59,7 +65,11 @@ class WeatherMapper {
                 sunset = dto.current.sunset,
                 uvIndex = dto.current.uvIndex,
                 humidity = dto.current.humidity,
-                windSpeed = dto.current.windSpeed
+                windSpeed = dto.current.windSpeed,
+                detailsWeather = DetailsWeather(
+                    id = dto.current.weather[0].id,
+                    icon = dto.current.weather[0].icon
+                ),
             ),
             dailyWeather = dto.daily.map {
                 DailyWeather(
