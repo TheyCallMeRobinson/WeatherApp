@@ -2,6 +2,7 @@ package cs.vsu.ru.application.di
 
 import cs.vsu.ru.domain.usecase.location.*
 import cs.vsu.ru.domain.usecase.weather.GetWeatherDataUseCase
+import cs.vsu.ru.domain.usecase.weather.GetWeatherIconUseCase
 import org.koin.dsl.module
 
 val domainModule = module {
@@ -36,5 +37,9 @@ val domainModule = module {
 
     factory<SaveLocationUseCase> {
         SaveLocationUseCase(locationRepository = get())
+    }
+
+    factory<GetWeatherIconUseCase> {
+        GetWeatherIconUseCase(weatherRepository = get())
     }
 }

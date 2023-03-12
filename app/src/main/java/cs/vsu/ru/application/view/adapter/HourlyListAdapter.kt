@@ -1,20 +1,18 @@
 package cs.vsu.ru.application.view.adapter
 
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cs.vsu.ru.application.R
-import cs.vsu.ru.domain.model.weather.HourlyWeather
-import java.util.Date
-import android.text.format.DateFormat
-import cs.vsu.ru.application.model.HumidityModel
-import cs.vsu.ru.application.model.TemperatureModel
+import android.widget.ImageView
+import cs.vsu.ru.application.model.HourlyWeather
 
 class HourlyListAdapter(
     private val hourlyList: List<HourlyWeather>,
-    private val timezoneOffset: Int
+    private val iconList: List<Bitmap>? = null,
 ) : RecyclerView.Adapter<HourlyListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,22 +25,24 @@ class HourlyListAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val listElement = hourlyList[position]
 
-        val dateFormat = DateFormat.format("HH:mm", Date((listElement.time) * 1000L))
-        holder.hour.text = dateFormat.toString()
-        holder.temperature.text = TemperatureModel(listElement.temperature).toString()
-        holder.humidity.text = HumidityModel(listElement.humidity).toString()
+        holder.hour.text = listElement.time
+        holder.icon.setImageBitmap(iconList?.get(position))
+        holder.temperature.text = listElement.temperature
+        holder.humidity.text = listElement.humidity
     }
 
     // api provides 48 hours of forecast, but the app needs only first 24
-    override fun getItemCount(): Int = hourlyList.size / 2
+    override fun getItemCount(): Int = hourlyList.size
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val hour: TextView
+        val icon: ImageView
         val temperature: TextView
         val humidity: TextView
 
         init {
             hour = view.findViewById(R.id.item_hour)
+            icon = view.findViewById(R.id.item_weather_icon)
             temperature = view.findViewById(R.id.item_temperature)
             humidity = view.findViewById(R.id.item_humidity)
         }

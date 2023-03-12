@@ -1,13 +1,9 @@
 package cs.vsu.ru.application
 
 import android.app.Application
-import android.util.Log
-import androidx.room.Database
-import androidx.room.Room
 import cs.vsu.ru.application.di.appModule
 import cs.vsu.ru.application.di.dataModule
 import cs.vsu.ru.application.di.domainModule
-import cs.vsu.ru.database.AppDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.fragment.koin.fragmentFactory

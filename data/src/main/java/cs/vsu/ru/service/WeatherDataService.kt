@@ -4,7 +4,7 @@ import cs.vsu.ru.model.weather.WeatherFullResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface WeatherService {
+interface WeatherDataService {
 
     @GET("onecall")
     suspend fun getForecast(

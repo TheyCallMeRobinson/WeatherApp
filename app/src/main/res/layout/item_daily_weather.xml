@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/day_of_week"
-        android:layout_width="150dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:text="понедельник"
         android:textColor="@color/white"

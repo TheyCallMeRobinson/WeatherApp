@@ -45,12 +45,6 @@ class WeatherMapper {
                         )
                     )
                 )
-            },
-            alerts = entity.alerts?.map {
-                AlertsResponse(
-                    event = it.event,
-                    description = it.description
-                )
             }
         )
     }
@@ -90,12 +84,6 @@ class WeatherMapper {
                         id = it.weather[0].id,
                         icon = it.weather[0].icon
                     )
-                )
-            },
-            alerts = dto.alerts?.map {
-                AlertWeather(
-                    event = it.event,
-                    description = it.description
                 )
             }
         )

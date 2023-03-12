@@ -75,4 +75,12 @@
         app:layout_constraintTop_toTopOf="@+id/main_temperature_today_tv"
         android:text="" />
 
+    <ImageView
+        android:id="@+id/current_weather_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
 </androidx.constraintlayout.motion.widget.MotionLayout>
