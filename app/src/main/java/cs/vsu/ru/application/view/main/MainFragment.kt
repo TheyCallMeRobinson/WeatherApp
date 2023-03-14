@@ -53,7 +53,7 @@ class MainFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.getWeatherData().observe(requireActivity()) {
+        viewModel.weatherDataToDisplay.observe(viewLifecycleOwner) {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {

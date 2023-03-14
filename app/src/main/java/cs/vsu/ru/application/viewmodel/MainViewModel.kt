@@ -3,11 +3,10 @@ package cs.vsu.ru.application.viewmodel
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.mapper.WeatherMapper
+import cs.vsu.ru.application.model.WeatherDataModel
 import cs.vsu.ru.domain.usecase.location.GetCurrentLocationUseCase
 import cs.vsu.ru.domain.usecase.weather.GetWeatherDataUseCase
 import cs.vsu.ru.domain.usecase.weather.GetWeatherIconUseCase
@@ -27,6 +26,8 @@ class MainViewModel(
         value = getBackground()
     }
 
+    val weatherDataToDisplay: LiveData<Resource<WeatherDataModel>> = getWeatherData()
+
     private fun getBackground(): Int {
         val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         val background = if (currentHour in 8..18) {
@@ -37,7 +38,7 @@ class MainViewModel(
         return background
     }
 
-    fun getWeatherData() = liveData(Dispatchers.IO) {
+    private fun getWeatherData() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
             val location = getCurrentLocationUseCase.execute()
