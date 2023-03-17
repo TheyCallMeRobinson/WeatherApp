@@ -29,7 +29,7 @@ class DrawerViewModel(
     fun getSavedLocations() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            Resource.success(data = getSavedLocationsUseCase.execute())
+            emit(Resource.success(data = getSavedLocationsUseCase.execute()))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = "Не удалось загрузить избранное местоположение"))
         }

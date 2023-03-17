@@ -11,6 +11,7 @@ import androidx.core.view.get
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.ContentMainBodyListBinding
 import cs.vsu.ru.application.databinding.ContentMainHeaderBinding
@@ -93,7 +94,7 @@ class MainFragment : Fragment() {
         val hourlyListAdapter = weather?.hourlyWeather?.let {
             HourlyListAdapter(it, weather.hourlyWeather.map {it.icon})
         }
-        val hourlyList = layout.hourlyTemperatureListContainer.hourlyTemperatureList
+        val hourlyList: RecyclerView = layout.hourlyTemperatureListContainer.hourlyTemperatureList
         val linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         hourlyList.layoutManager = linearLayoutManager
