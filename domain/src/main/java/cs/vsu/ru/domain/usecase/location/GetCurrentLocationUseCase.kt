@@ -5,7 +5,7 @@ import cs.vsu.ru.domain.repository.location.LocationRepository
 
 class GetCurrentLocationUseCase(private val locationRepository: LocationRepository) {
 
-    fun execute(): Location {
+    suspend fun execute(): Location {
         return locationRepository.getCurrentLocation() ?: Location()
     }
 }

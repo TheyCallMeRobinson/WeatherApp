@@ -9,10 +9,10 @@ import cs.vsu.ru.model.location.LocationEntity
 interface LocationDao {
 
     @Query("SELECT * FROM locations")
-    fun getAll(): List<LocationEntity>?
+    suspend fun getAll(): List<LocationEntity>?
 
     @Query("SELECT * FROM locations where name = :name")
-    fun getByName(name: String): LocationEntity?
+    suspend fun getByName(name: String): LocationEntity?
 
     @Query("DELETE FROM locations WHERE name = :name")
     fun deleteByName(name: String)
