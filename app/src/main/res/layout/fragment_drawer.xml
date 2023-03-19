@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_bottom"
         android:layout_marginHorizontal="@dimen/margin_horizontal"
-        android:text="@string/drawer_about_btn"
+        android:text="@string/about_application"
         android:drawableStart="@drawable/ic_info"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

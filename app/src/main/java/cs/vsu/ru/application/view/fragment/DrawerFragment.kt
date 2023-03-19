@@ -31,6 +31,10 @@ class DrawerFragment : Fragment() {
             Navigation.createNavigateOnClickListener(R.id.action_drawerFragment_to_addNewLocation)
         )
 
+        binding.drawerAboutBtn.setOnClickListener (
+            Navigation.createNavigateOnClickListener(R.id.action_drawerFragment_to_aboutFragment)
+        )
+
         setUpObservers()
 
         return binding.root

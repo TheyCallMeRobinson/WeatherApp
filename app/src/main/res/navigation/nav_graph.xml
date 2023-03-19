@@ -13,14 +13,19 @@
         <action
             android:id="@+id/action_drawerFragment_to_addNewLocation"
             app:destination="@id/addNewLocation" />
+        <action
+            android:id="@+id/action_drawerFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNewLocation"
         android:name="cs.vsu.ru.application.view.fragment.AddNewLocationFragment"
         android:label="AddNewLocation"
         tools:layout="@layout/fragment_add_new_location">
-        <action
-            android:id="@+id/action_addNewLocation_to_drawerFragment"
-            app:destination="@id/drawerFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="cs.vsu.ru.application.view.fragment.AboutFragment"
+        android:label="AboutFragment"
+        tools:layout="@layout/about_application" />
 </navigation>
