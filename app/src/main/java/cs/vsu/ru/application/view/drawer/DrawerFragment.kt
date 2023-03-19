@@ -6,11 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.FragmentDrawerBinding
 import cs.vsu.ru.application.view.adapter.HourlyListAdapter
 import cs.vsu.ru.application.view.adapter.SavedLocationsListAdapter
+import cs.vsu.ru.application.view.add_location.AddNewLocationFragment
 import cs.vsu.ru.application.viewmodel.DrawerViewModel
 import cs.vsu.ru.domain.model.location.Location
 import cs.vsu.ru.environment.Resource
@@ -28,6 +33,13 @@ class DrawerFragment : Fragment() {
     ): View? {
         binding = FragmentDrawerBinding.inflate(inflater)
 
+        binding.drawerAddNewLocationBtn.setOnClickListener (
+            Navigation.createNavigateOnClickListener(R.id.action_drawerFragment_to_addNewLocation)
+        )
+
+//        binding.drawerAddNewLocationBtn.setOnClickListener {
+//            val navController = childFragmentManager.findFragmentById(R.id.main_fragment_content_container)
+//        }
         setUpObservers()
 
         return binding.root

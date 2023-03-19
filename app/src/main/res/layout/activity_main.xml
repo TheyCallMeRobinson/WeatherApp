@@ -28,9 +28,11 @@
         android:background="@color/transparent60">
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/main_fragment_drawer_container"
-            android:name="cs.vsu.ru.application.view.drawer.DrawerFragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_graph"
             tools:layout="@layout/fragment_drawer"/>
     </com.google.android.material.navigation.NavigationView>
 

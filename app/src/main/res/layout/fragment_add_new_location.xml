@@ -26,8 +26,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/fragment_add_new_location_et"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fragment_add_new_location_et"
-        app:layout_constraintTop_toTopOf="@+id/fragment_add_new_location_et"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="@+id/fragment_add_new_location_et" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_new_locations_list"

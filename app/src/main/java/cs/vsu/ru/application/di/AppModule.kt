@@ -32,6 +32,8 @@ val appModule = module {
     }
 
     viewModel<AddNewLocationViewModel> {
-        AddNewLocationViewModel()
+        AddNewLocationViewModel(
+            findLocationsByNameUseCase = get()
+        )
     }
 }

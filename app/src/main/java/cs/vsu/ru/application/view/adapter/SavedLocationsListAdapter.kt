@@ -14,7 +14,7 @@ class SavedLocationsListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.item_saved_locations_list, parent, false
+            R.layout.item_saved_location, parent, false
         )
 
         return ViewHolder(view)

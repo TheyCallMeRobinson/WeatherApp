@@ -19,7 +19,7 @@
 
     <include
         android:id="@+id/drawer_favorite_place"
-        layout="@layout/item_saved_locations_list"
+        layout="@layout/item_saved_location"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_top"
@@ -55,10 +55,10 @@
         android:background="@color/transparent60"
         android:layout_marginHorizontal="@dimen/margin_horizontal"
         android:layout_marginBottom="@dimen/margin_bottom"
-        app:layout_constraintBottom_toTopOf="@id/drawer_add_saved_location_btn"/>
+        app:layout_constraintBottom_toTopOf="@id/drawer_add_new_location_btn"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/drawer_add_saved_location_btn"
+        android:id="@+id/drawer_add_new_location_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"

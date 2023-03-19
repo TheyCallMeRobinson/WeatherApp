@@ -42,4 +42,8 @@ val domainModule = module {
     factory<GetWeatherIconUseCase> {
         GetWeatherIconUseCase(weatherRepository = get())
     }
+
+    factory<FindLocationsByNameUseCase> {
+        FindLocationsByNameUseCase(locationRepository = get())
+    }
 }
