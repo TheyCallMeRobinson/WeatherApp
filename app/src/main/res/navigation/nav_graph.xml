@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/drawerFragment">
+
+    <fragment
+        android:id="@+id/drawerFragment"
+        android:name="cs.vsu.ru.application.view.drawer.DrawerFragment"
+        android:label="DrawerFragment" >
+        <action
+            android:id="@+id/action_drawerFragment_to_addNewLocation"
+            app:destination="@id/addNewLocation" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewLocation"
+        android:name="cs.vsu.ru.application.view.add_location.AddNewLocation"
+        android:label="AddNewLocation" />
+</navigation>

@@ -1,6 +1,7 @@
 package cs.vsu.ru.application.di
 
 import cs.vsu.ru.application.mapper.WeatherMapper
+import cs.vsu.ru.application.viewmodel.AddNewLocationViewModel
 import cs.vsu.ru.application.viewmodel.DrawerViewModel
 import cs.vsu.ru.application.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -28,5 +29,9 @@ val appModule = module {
             setFavoriteLocationUseCase = get(),
             removeSavedLocationUseCase = get()
         )
+    }
+
+    viewModel<AddNewLocationViewModel> {
+        AddNewLocationViewModel()
     }
 }

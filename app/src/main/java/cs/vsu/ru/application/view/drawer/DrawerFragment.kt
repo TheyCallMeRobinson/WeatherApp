@@ -38,7 +38,6 @@ class DrawerFragment : Fragment() {
             it?.let {
                 when (it.status) {
                     Status.SUCCESS -> {
-                        binding.drawerFavoritePlace.itemLocationName.text = it.data?.name
                         setFavoriteLocation(it.data!!)
                         Toast.makeText(context, "Success", Toast.LENGTH_LONG).show()
                     }
