@@ -1,4 +1,4 @@
-package cs.vsu.ru.application.view.add_location
+package cs.vsu.ru.application.view.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

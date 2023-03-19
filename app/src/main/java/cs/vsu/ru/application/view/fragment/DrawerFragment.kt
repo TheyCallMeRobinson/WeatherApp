@@ -1,4 +1,4 @@
-package cs.vsu.ru.application.view.drawer
+package cs.vsu.ru.application.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

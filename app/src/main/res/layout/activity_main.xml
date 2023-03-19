@@ -8,11 +8,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="false"
-    tools:context=".view.main.MainActivity">
+    tools:context=".view.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/main_fragment_content_container"
-        android:name="cs.vsu.ru.application.view.main.MainFragment"
+        android:name="cs.vsu.ru.application.view.fragment.MainFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginEnd="0dp"
