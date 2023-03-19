@@ -19,7 +19,7 @@
 
     <include
         android:id="@+id/drawer_favorite_place"
-        layout="@layout/item_saved_location"
+        layout="@layout/item_favorite_location"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_top"

@@ -82,7 +82,7 @@ open class LocationRepositoryImpl(
         val addresses = geocoder.getFromLocationName(locationName, 10) // TODO: maxResults should be getting from app settings
         val locations = addresses?.map {
             Location(
-                name = locationName,
+                name = it.locality,
                 country = it.countryName,
                 latitude = it.latitude,
                 longitude = it.longitude

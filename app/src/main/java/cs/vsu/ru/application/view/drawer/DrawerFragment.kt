@@ -6,19 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.FragmentDrawerBinding
-import cs.vsu.ru.application.view.adapter.HourlyListAdapter
 import cs.vsu.ru.application.view.adapter.SavedLocationsListAdapter
-import cs.vsu.ru.application.view.add_location.AddNewLocationFragment
 import cs.vsu.ru.application.viewmodel.DrawerViewModel
 import cs.vsu.ru.domain.model.location.Location
-import cs.vsu.ru.environment.Resource
 import cs.vsu.ru.environment.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -37,9 +31,6 @@ class DrawerFragment : Fragment() {
             Navigation.createNavigateOnClickListener(R.id.action_drawerFragment_to_addNewLocation)
         )
 
-//        binding.drawerAddNewLocationBtn.setOnClickListener {
-//            val navController = childFragmentManager.findFragmentById(R.id.main_fragment_content_container)
-//        }
         setUpObservers()
 
         return binding.root
@@ -89,10 +80,10 @@ class DrawerFragment : Fragment() {
     private fun setSavedLocationsList(savedLocationsList: List<Location>) {
         val savedLocationsListAdapter = SavedLocationsListAdapter(savedLocationsList)
         val linearLayoutManager = LinearLayoutManager(context)
-        val savedLocationsList = binding.drawerFavoriteLocationsList
-        linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        savedLocationsList.layoutManager = linearLayoutManager
-        savedLocationsList.adapter = savedLocationsListAdapter
-        savedLocationsList.setHasFixedSize(true)
+        val savedLocations = binding.drawerFavoriteLocationsList
+        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+        savedLocations.layoutManager = linearLayoutManager
+        savedLocations.adapter = savedLocationsListAdapter
+        savedLocations.setHasFixedSize(true)
     }
 }

@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.Navigation
-import cs.vsu.ru.application.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import cs.vsu.ru.application.databinding.FragmentAddNewLocationBinding
+import cs.vsu.ru.application.view.adapter.NewLocationsListAdapter
 import cs.vsu.ru.application.viewmodel.AddNewLocationViewModel
 import cs.vsu.ru.domain.model.location.Location
 import cs.vsu.ru.environment.Status
@@ -25,12 +25,8 @@ class AddNewLocationFragment : Fragment() {
     ): View? {
         binding = FragmentAddNewLocationBinding.inflate(inflater, container, false)
 
-        binding.fragmentAddNewLocationEt.setText("kek")
-
-
         binding.fragmentFindLocationsBtn.setOnClickListener {
             getLocationsByName(binding.fragmentAddNewLocationEt.text.toString())
-//            getLocationName(binding.fragmentAddNewLocationEt.text.toString())
         }
 
         return binding.root
@@ -55,12 +51,16 @@ class AddNewLocationFragment : Fragment() {
         }
     }
 
-    private fun getLocationName(locationName: String) {
-        Toast.makeText(context, locationName, Toast.LENGTH_LONG).show()
-    }
-
     private fun setLocations(locations: List<Location>?) {
-
+        val newLocationsListAdapter = NewLocationsListAdapter(locations) {
+            viewModel.saveLocation(it)
+        }
+        val linearLayoutManager = LinearLayoutManager(context)
+        val newLocationsList = binding.fragmentNewLocationsList
+        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+        newLocationsList.layoutManager = linearLayoutManager
+        newLocationsList.adapter = newLocationsListAdapter
+        newLocationsList.setHasFixedSize(true)
     }
 
 }

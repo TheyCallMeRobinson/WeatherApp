@@ -18,5 +18,9 @@
         android:id="@+id/addNewLocation"
         android:name="cs.vsu.ru.application.view.add_location.AddNewLocationFragment"
         android:label="AddNewLocation"
-        tools:layout="@layout/fragment_add_new_location"/>
+        tools:layout="@layout/fragment_add_new_location">
+        <action
+            android:id="@+id/action_addNewLocation_to_drawerFragment"
+            app:destination="@id/drawerFragment" />
+    </fragment>
 </navigation>

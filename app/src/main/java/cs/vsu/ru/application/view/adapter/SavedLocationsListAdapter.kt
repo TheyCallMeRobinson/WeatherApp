@@ -3,6 +3,7 @@ package cs.vsu.ru.application.view.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cs.vsu.ru.application.R
@@ -30,10 +31,14 @@ class SavedLocationsListAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val locationName: TextView
         val countryName: TextView
+        val setToFavorite: ImageView
+        val removeFromList: ImageView
 
         init {
             locationName = view.findViewById(R.id.item_location_name)
             countryName = view.findViewById(R.id.item_country_name)
+            setToFavorite = view.findViewById(R.id.item_add_to_favorite)
+            removeFromList = view.findViewById(R.id.item_remove_from_list)
         }
     }
 }
