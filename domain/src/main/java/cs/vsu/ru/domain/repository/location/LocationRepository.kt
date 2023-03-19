@@ -11,4 +11,5 @@ interface LocationRepository {
     suspend fun setFavoriteLocation(location: Location): Boolean
     suspend fun setCurrentLocation(location: Location): Boolean
     suspend fun removeSavedLocation(locationName: String)
+    suspend fun findLocationsByName(locationName: String): List<Location>?
 }

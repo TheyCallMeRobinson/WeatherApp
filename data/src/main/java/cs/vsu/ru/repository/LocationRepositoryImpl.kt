@@ -1,6 +1,7 @@
 package cs.vsu.ru.repository
 
 import android.content.Context
+import android.location.Geocoder
 import cs.vsu.ru.database.dao.LocationDao
 import cs.vsu.ru.domain.model.location.Location
 import cs.vsu.ru.domain.repository.location.LocationRepository
@@ -11,9 +12,10 @@ private const val KEY_FAVORITE_LOCATION = "favoriteLocation"
 private const val KEY_CURRENT_LOCATION = "currentLocation"
 private const val DEFAULT_LOCATION = "Moscow"
 
+@Suppress("DEPRECATION")
 open class LocationRepositoryImpl(
     private val locationDao: LocationDao,
-    context: Context) : LocationRepository {
+    private val context: Context) : LocationRepository {
 
     private val locationMapper = LocationMapper()
     private val sharedPreferences =
@@ -75,4 +77,18 @@ open class LocationRepositoryImpl(
         return true
     }
 
+    override suspend fun findLocationsByName(locationName: String): List<Location>? {
+        val geocoder = Geocoder(context)
+        val addresses = geocoder.getFromLocationName(locationName, 10) // TODO: maxResults should be getting from app settings
+        val locations = addresses?.map {
+            Location(
+                name = locationName,
+                country = it.countryName,
+                latitude = it.latitude,
+                longitude = it.longitude
+            )
+        }
+
+        return locations
+    }
 }
