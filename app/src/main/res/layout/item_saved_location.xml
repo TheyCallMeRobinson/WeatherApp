@@ -1,30 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_saved_location_holder"
     android:layout_width="match_parent"
-    android:layout_height="70dp">
+    android:layout_height="70dp"
+    app:layoutDescription="@xml/drawer_saved_locations_animation"
+    tools:showPaths="true">
+
+    <ImageView
+        android:id="@+id/item_to_favorite_background"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:background="@color/yellow_to_favorite"/>
+
+    <ImageView
+        android:id="@+id/item_to_favorite_star"
+        android:layout_height="40dp"
+        android:layout_width="40dp"
+        android:src="@drawable/ic_non_favorite_white"/>
+
+    <ImageView
+        android:id="@+id/item_to_remove_background"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:background="@color/red_to_remove"/>
+
+    <ImageView
+        android:id="@+id/item_to_remove_trashcan"
+        android:layout_height="40dp"
+        android:layout_width="40dp"
+        android:src="@drawable/ic_delete_white"/>
 
     <ImageView
         android:id="@+id/item_add_to_favorite"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="@dimen/margin_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_non_favorite" />
+        android:src="@drawable/ic_non_favorite" />
 
     <TextView
         android:id="@+id/item_location_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_horizontal"
-        android:layout_marginTop="10dp"
         android:textSize="10pt"
-        tools:text="Воронеж"
-        app:layout_constraintStart_toEndOf="@+id/item_add_to_favorite"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:text="Воронеж" />
 
     <TextView
         android:id="@+id/item_country_name"
@@ -32,9 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:textSize="6pt"
-        tools:text="Россия"
-        app:layout_constraintStart_toStartOf="@+id/item_location_name"
-        app:layout_constraintTop_toBottomOf="@+id/item_location_name" />
+        tools:text="Россия" />
 
     <ImageView
         android:id="@+id/item_remove_from_list"
@@ -47,4 +65,4 @@
         app:srcCompat="@drawable/ic_delete" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

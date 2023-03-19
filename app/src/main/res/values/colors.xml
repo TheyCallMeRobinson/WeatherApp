@@ -20,4 +20,8 @@
     <color name="transparent20_white">#33FFFFFF</color>
     <color name="transparent20">#33808080</color>
     <color name="transparent0">#00FFFFFF</color>
+
+    <color name="red_to_remove">#CDFD4A4A</color>
+    <color name="yellow_to_favorite">#FFEC50</color>
+
 </resources>
