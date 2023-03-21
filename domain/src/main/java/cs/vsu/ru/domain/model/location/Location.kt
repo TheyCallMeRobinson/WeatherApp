@@ -1,15 +1,14 @@
 package cs.vsu.ru.domain.model.location
 
-private const val DEFAULT_LOCATION_NAME = "Moscow"
+private const val DEFAULT_LOCATION_NAME = "Воронеж"
+private const val DEFAULT_LOCATION_COUNTRY = "Россия"
+private const val DEFAULT_LOCATION_LATITUDE = 51.672
+private const val DEFAULT_LOCATION_LONGITUDE = 39.1843
 
 data class Location(
 
     val name: String = DEFAULT_LOCATION_NAME,
-
-    val country: String? = null,
-
-    val latitude: Double? = null,
-
-    val longitude: Double? = null
-
+    val country: String? = DEFAULT_LOCATION_COUNTRY,
+    val latitude: Double? = DEFAULT_LOCATION_LATITUDE,
+    val longitude: Double? = DEFAULT_LOCATION_LONGITUDE
 )

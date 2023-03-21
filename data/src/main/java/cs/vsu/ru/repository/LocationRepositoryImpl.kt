@@ -12,6 +12,9 @@ private const val KEY_FAVORITE_LOCATION = "favoriteLocation"
 private const val KEY_CURRENT_LOCATION = "currentLocation"
 private const val DEFAULT_LOCATION = "Moscow"
 
+// Suppression should stay here as API 33 deprecates Geocoder.getFromLocationName and
+// suggests to use newer method instead
+// But this method does not supported by API < 33, that makes backward compatibility impossible
 @Suppress("DEPRECATION")
 open class LocationRepositoryImpl(
     private val locationDao: LocationDao,
@@ -48,12 +51,8 @@ open class LocationRepositoryImpl(
     }
 
     override suspend fun setFavoriteLocation(location: Location): Boolean {
-        if (locationDao.getByName(KEY_FAVORITE_LOCATION) == null) {
-            return false
-        }
         sharedPreferences.edit().putString(KEY_FAVORITE_LOCATION, location.name).apply()
         return true
-        // return setLocationIntoSharedPreferences(KEY_FAVORITE_LOCATION, location.name)
     }
 
     override suspend fun setCurrentLocation(location: Location): Boolean {
@@ -62,19 +61,10 @@ open class LocationRepositoryImpl(
         }
         sharedPreferences.edit().putString(KEY_CURRENT_LOCATION, location.name).apply()
         return true
-        // return setLocationIntoSharedPreferences(KEY_CURRENT_LOCATION, location.name)
     }
 
     override suspend fun removeSavedLocation(locationName: String) {
         locationDao.deleteByName(locationName)
-    }
-
-    private suspend fun setLocationIntoSharedPreferences(key: String, value: String): Boolean {
-        if (locationDao.getByName(value) == null) {
-            return false
-        }
-        sharedPreferences.edit().putString(key, value).apply()
-        return true
     }
 
     override suspend fun findLocationsByName(locationName: String): List<Location>? {

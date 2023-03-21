@@ -29,8 +29,6 @@ class NewLocationsListAdapter(
         holder.countryName.text = newLocations?.get(position)?.country
         holder.longitude.text = "%.4f".format(newLocations?.get(position)?.longitude)
         holder.latitude.text = "%.4f".format(newLocations?.get(position)?.latitude)
-
-
     }
 
     override fun getItemCount(): Int = newLocations?.size ?: 0

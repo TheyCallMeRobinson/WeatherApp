@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <Transition
-        motion:constraintSetEnd="@id/to_favorite"
         motion:constraintSetStart="@id/start"
+        motion:constraintSetEnd="@id/to_favorite2"
         motion:duration="500">
 
         <OnClick
@@ -13,8 +13,8 @@
     </Transition>
 
     <Transition
-        motion:constraintSetEnd="@id/to_remove"
         motion:constraintSetStart="@id/start"
+        motion:constraintSetEnd="@id/to_remove"
         motion:duration="500">
 
         <OnClick
@@ -101,7 +101,7 @@
     </ConstraintSet>
 
     <ConstraintSet
-        android:id="@+id/to_favorite">
+        android:id="@+id/to_favorite1">
 
         <Constraint
             android:id="@id/item_to_favorite_background"
@@ -120,6 +120,87 @@
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintStart_toStartOf="@id/item_to_favorite_background"/>
+
+        <Constraint
+            android:id="@+id/item_to_remove_background"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            motion:layout_constraintStart_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent" />
+
+        <Constraint
+            android:id="@+id/item_to_remove_trashcan"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:layout_marginHorizontal="@dimen/margin_horizontal"
+            android:src="@drawable/ic_delete_white"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="@id/item_to_remove_background"/>
+
+        <Constraint
+            android:id="@id/item_add_to_favorite"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_horizontal"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@id/item_location_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="10pt"
+            tools:text="Воронеж"
+            motion:layout_constraintStart_toEndOf="@+id/item_to_favorite_background"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@id/item_country_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="6pt"
+            tools:text="Россия"
+            motion:layout_constraintStart_toStartOf="@+id/item_location_name"
+            motion:layout_constraintTop_toBottomOf="@+id/item_location_name"/>
+
+        <Constraint
+            android:id="@+id/item_remove_from_list"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="@dimen/margin_horizontal"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/to_favorite2">
+
+        <Constraint
+            android:id="@id/item_to_favorite_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent" />
+
+        <Constraint
+            android:id="@+id/item_to_favorite_star"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:layout_marginStart="@dimen/margin_horizontal"
+            android:src="@drawable/ic_non_favorite_white"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"/>
 
         <Constraint
             android:id="@+id/item_to_remove_background"
@@ -179,6 +260,7 @@
             motion:layout_constraintTop_toTopOf="parent" />
     </ConstraintSet>
 
+
     <ConstraintSet
         android:id="@+id/to_remove">
 
@@ -202,7 +284,7 @@
 
         <Constraint
             android:id="@id/item_to_remove_background"
-            android:layout_width="70dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
@@ -212,11 +294,11 @@
             android:id="@+id/item_to_remove_trashcan"
             android:layout_height="40dp"
             android:layout_width="40dp"
-            android:layout_marginEnd="@dimen/margin_horizontal"
             android:src="@drawable/ic_delete_white"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintEnd_toEndOf="@id/item_to_remove_background"/>
+            motion:layout_constraintEnd_toEndOf="@id/item_to_remove_background"
+            motion:layout_constraintStart_toStartOf="@id/item_to_remove_background"/>
 
         <Constraint
             android:id="@id/item_add_to_favorite"
@@ -235,7 +317,7 @@
             android:layout_marginTop="10dp"
             android:textSize="10pt"
             tools:text="Воронеж"
-            motion:layout_constraintStart_toEndOf="@+id/item_to_favorite_background"
+            motion:layout_constraintEnd_toStartOf="@+id/item_to_favorite_background"
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint

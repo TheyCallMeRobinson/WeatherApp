@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.FragmentDrawerBinding
+import cs.vsu.ru.application.motion.SavedLocationsTransitionListener
 import cs.vsu.ru.application.view.adapter.SavedLocationsListAdapter
 import cs.vsu.ru.application.viewmodel.DrawerViewModel
 import cs.vsu.ru.domain.model.location.Location
@@ -17,6 +19,8 @@ import cs.vsu.ru.environment.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DrawerFragment : Fragment() {
+
+    private val savedLocationsTransitionListener = SavedLocationsTransitionListener()
     private lateinit var binding: FragmentDrawerBinding
     private val viewModel by viewModel<DrawerViewModel>()
 
@@ -27,11 +31,11 @@ class DrawerFragment : Fragment() {
     ): View? {
         binding = FragmentDrawerBinding.inflate(inflater)
 
-        binding.drawerAddNewLocationBtn.setOnClickListener (
+        binding.drawerAddNewLocationBtn.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_drawerFragment_to_addNewLocation)
         )
 
-        binding.drawerAboutBtn.setOnClickListener (
+        binding.drawerAboutBtn.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_drawerFragment_to_aboutFragment)
         )
 
@@ -82,7 +86,18 @@ class DrawerFragment : Fragment() {
     }
 
     private fun setSavedLocationsList(savedLocationsList: List<Location>) {
-        val savedLocationsListAdapter = SavedLocationsListAdapter(savedLocationsList)
+
+        val savedLocationsListAdapter = SavedLocationsListAdapter(
+            savedLocationsList.toMutableList(), {
+                viewModel.setFavoriteLocation(it)
+                Toast.makeText(context, "Location set as favorite", Toast.LENGTH_LONG).show()
+            }, {
+//                viewModel.removeSavedLocation(it)
+                Toast.makeText(context, "Location removed from list", Toast.LENGTH_LONG).show()
+            }, {
+                it.setTransitionListener(savedLocationsTransitionListener)
+            }
+        )
         val linearLayoutManager = LinearLayoutManager(context)
         val savedLocations = binding.drawerFavoriteLocationsList
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
