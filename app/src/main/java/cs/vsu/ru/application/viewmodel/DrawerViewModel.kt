@@ -1,10 +1,7 @@
 package cs.vsu.ru.application.viewmodel
 
 import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import cs.vsu.ru.domain.model.location.Location
 import cs.vsu.ru.domain.usecase.location.GetFavoriteLocationUseCase
 import cs.vsu.ru.domain.usecase.location.GetSavedLocationsUseCase
@@ -24,6 +21,19 @@ class DrawerViewModel(
 
     private val scope = CoroutineScope(Dispatchers.IO)
 
+    private val favoriteLocation = MutableLiveData<Location>()
+    val favoriteLocationLiveData: LiveData<Location> = favoriteLocation
+
+    private val savedLocations = MutableLiveData<List<Location>>()
+    val savedLocationsLiveData: LiveData<List<Location>> = savedLocations
+
+    init {
+        viewModelScope.launch {
+            val result = getFavoriteLocationUseCase.execute()
+            favoriteLocation.value = result
+        }
+    }
+
     fun getFavoriteLocation() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
@@ -38,14 +48,17 @@ class DrawerViewModel(
         try {
             emit(Resource.success(data = getSavedLocationsUseCase.execute()))
         } catch (exception: Exception) {
-            emit(
-                Resource.error(data = null, message = "Не удалось загрузить сохраненные местоположения")
-            )
+            emit(Resource.error(data = null, message = "Не удалось загрузить сохраненные местоположения"))
         }
     }
 
-    fun setFavoriteLocation(location: Location) = scope.launch {
-        setFavoriteLocationUseCase.execute(location)
+    fun setFavoriteLocation(location: Location): Location? {
+        val previousFavoriteLocation = favoriteLocation.value
+        viewModelScope.launch {
+            setFavoriteLocationUseCase.execute(location)
+            favoriteLocation.value = getFavoriteLocationUseCase.execute()
+        }
+        return previousFavoriteLocation
     }
 
     fun removeSavedLocation(location: Location) = scope.launch {
@@ -55,6 +68,4 @@ class DrawerViewModel(
             Log.e("Drawer", exception.message!!)
         }
     }
-
-
 }

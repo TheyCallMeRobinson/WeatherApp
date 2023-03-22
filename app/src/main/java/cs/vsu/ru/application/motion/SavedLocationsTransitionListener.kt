@@ -2,10 +2,11 @@ package cs.vsu.ru.application.motion
 
 import androidx.constraintlayout.motion.widget.MotionLayout
 
-class SavedLocationsTransitionListener : MotionLayout.TransitionListener {
+class SavedLocationsTransitionListener(
+    val onCompleteListener: () -> Unit
+) : MotionLayout.TransitionListener {
 
-    override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {
-    }
+    override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {}
 
     override fun onTransitionChange(
         motionLayout: MotionLayout?,
@@ -19,8 +20,9 @@ class SavedLocationsTransitionListener : MotionLayout.TransitionListener {
             it.animate()
                 .alpha(0f)
                 .setDuration(250)
-                .scaleY(0f)
-                .translationY(-motionLayout.height / 2f)
+//                .scaleY(0f)
+//                .translationY(-motionLayout.height / 2f)
+                .withEndAction(onCompleteListener)
         }
     }
 
@@ -29,6 +31,5 @@ class SavedLocationsTransitionListener : MotionLayout.TransitionListener {
         triggerId: Int,
         positive: Boolean,
         progress: Float
-    ) {
-    }
+    ) {}
 }
