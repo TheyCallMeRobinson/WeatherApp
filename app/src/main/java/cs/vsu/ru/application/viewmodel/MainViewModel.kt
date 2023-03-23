@@ -57,7 +57,6 @@ class MainViewModel(
         }
         Log.e("Main view model", "New location ${location.name} set complete")
         refreshData()
-
     }
 
     private fun getWeatherData() = liveData(Dispatchers.IO) {

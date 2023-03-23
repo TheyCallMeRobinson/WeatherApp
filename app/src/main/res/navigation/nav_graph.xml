@@ -16,9 +16,7 @@
             app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_drawerFragment_to_aboutFragment"
-            app:destination="@id/aboutFragment"
-            app:popUpTo="@id/drawerFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/aboutFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNewLocation"
@@ -35,5 +33,11 @@
         android:id="@+id/aboutFragment"
         android:name="cs.vsu.ru.application.view.fragment.AboutFragment"
         android:label="AboutFragment"
-        tools:layout="@layout/about_application" />
+        tools:layout="@layout/about_application" >
+        <action
+            android:id="@+id/action_aboutFragment_to_drawerFragment"
+            app:destination="@id/drawerFragment"
+            app:popUpTo="@id/drawerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

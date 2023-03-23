@@ -24,8 +24,7 @@
         style="@style/Text.BigTemperature"
         android:minWidth="40dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/main_location_toolbar_name_tv"
@@ -44,8 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/main_temperature_now_tv"
-        app:layout_constraintTop_toBottomOf="@id/main_temperature_now_tv"
-        android:text="Воронеж" />
+        app:layout_constraintTop_toBottomOf="@id/main_temperature_now_tv" />
 
     <TextView
         android:id="@+id/main_temperature_today_tv"
