@@ -24,14 +24,15 @@ class DrawerViewModel(
     private val favoriteLocation = MutableLiveData<Location>()
     val favoriteLocationLiveData: LiveData<Location> = favoriteLocation
 
-    private val savedLocations = MutableLiveData<List<Location>>()
-    val savedLocationsLiveData: LiveData<List<Location>> = savedLocations
+    private val savedLocations = MutableLiveData<Resource<List<Location>>>()
+    val savedLocationsLiveData: LiveData<Resource<List<Location>>> = savedLocations
 
     init {
         viewModelScope.launch {
             val result = getFavoriteLocationUseCase.execute()
             favoriteLocation.value = result
         }
+        savedLocations.value = getSavedLocations().value
     }
 
     fun getFavoriteLocation() = liveData(Dispatchers.IO) {
@@ -58,12 +59,14 @@ class DrawerViewModel(
             setFavoriteLocationUseCase.execute(location)
             favoriteLocation.value = getFavoriteLocationUseCase.execute()
         }
+        savedLocations.value = getSavedLocations().value
         return previousFavoriteLocation
     }
 
     fun removeSavedLocation(location: Location) = scope.launch {
         try {
             removeSavedLocationUseCase.execute(location.name)
+            savedLocations.value = getSavedLocations().value
         } catch (exception: Exception) {
             Log.e("Drawer", exception.message!!)
         }

@@ -29,28 +29,26 @@ class SavedLocationsListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-
         holder.locationName.text = savedLocations[position].name
         holder.countryName.text = savedLocations[position].country
-        holder.setFavoriteListener = { position, _ ->
-            val previousFavoriteLocation = drawerViewModel.setFavoriteLocation(savedLocations[position])
+        holder.setFavoriteListener = { index, _ ->
+            val previousFavoriteLocation =
+                drawerViewModel.setFavoriteLocation(savedLocations[index])
             (holder.view as MotionLayout).setTransitionListener(
                 SavedLocationsTransitionListener {
                     previousFavoriteLocation?.let {
-                        Log.e("Set Favorite", "${previousFavoriteLocation.name} to ${savedLocations[position].name} position: $position")
-                        savedLocations[position] = it
-                        notifyItemChanged(position)
+                        savedLocations[index] = it
+                        notifyItemChanged(index)
                     }
                 }
             )
         }
-        holder.removeListener = { position, _ ->
-            drawerViewModel.removeSavedLocation(savedLocations[position])
+        holder.removeListener = { index, _ ->
+            drawerViewModel.removeSavedLocation(savedLocations[index])
             (holder.view as MotionLayout).setTransitionListener(
                 SavedLocationsTransitionListener {
-                    savedLocations.removeAt(position)
-                    notifyItemRemoved(position)
+                    savedLocations.removeAt(index)
+                    notifyItemRemoved(index)
                 }
             )
         }
@@ -62,7 +60,7 @@ class SavedLocationsListAdapter(
     class ViewHolder(
         val view: View,
 
-    ) : RecyclerView.ViewHolder(view) {
+        ) : RecyclerView.ViewHolder(view) {
 
         lateinit var setFavoriteListener: (Int, View) -> Unit
         lateinit var removeListener: (Int, View) -> Unit
@@ -79,14 +77,14 @@ class SavedLocationsListAdapter(
             removeFromList = view.findViewById(R.id.item_remove_from_list)
 
             setToFavorite.setOnTouchListener { _, event ->
-                if (event.action == MotionEvent.ACTION_UP) {
+                if (event.action == MotionEvent.ACTION_DOWN) {
                     setFavoriteListener(adapterPosition, view)
                 }
                 false
             }
 
             removeFromList.setOnTouchListener { _, event ->
-                if (event.action == MotionEvent.ACTION_UP) {
+                if (event.action == MotionEvent.ACTION_DOWN) {
                     removeListener(adapterPosition, view)
                 }
                 false

@@ -23,6 +23,8 @@ class SavedLocationsTransitionListener(
 //                .scaleY(0f)
 //                .translationY(-motionLayout.height / 2f)
                 .withEndAction(onCompleteListener)
+
+            it.transitionToStart()
         }
     }
 

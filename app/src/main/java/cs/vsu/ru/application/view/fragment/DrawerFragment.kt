@@ -52,10 +52,12 @@ class DrawerFragment : Fragment() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
+                        binding.drawerSavedLocationsSpinner.visibility = View.INVISIBLE
                         setSavedLocationsList(it.data!!)
                         Toast.makeText(context, "Success", Toast.LENGTH_LONG).show()
                     }
                     Status.LOADING -> {
+                        binding.drawerSavedLocationsSpinner.visibility = View.VISIBLE
                         Toast.makeText(context, "Loading", Toast.LENGTH_LONG).show()
                     }
                     Status.ERROR -> {
@@ -72,7 +74,6 @@ class DrawerFragment : Fragment() {
     }
 
     private fun setSavedLocationsList(savedLocationsList: List<Location>) {
-
         val savedLocationsListAdapter = SavedLocationsListAdapter(
             savedLocationsList.toMutableList(),
             viewModel
