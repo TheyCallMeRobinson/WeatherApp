@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +27,9 @@ class DrawerFragment : Fragment() {
     ): View? {
         binding = FragmentDrawerBinding.inflate(inflater)
 
+        setUpObservers()
+        viewModel.refreshData()
+
         binding.drawerAddNewLocationBtn.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_drawerFragment_to_addNewLocation)
         )
@@ -36,33 +38,33 @@ class DrawerFragment : Fragment() {
             Navigation.createNavigateOnClickListener(R.id.action_drawerFragment_to_aboutFragment)
         )
 
-        setUpObservers()
-
         return binding.root
     }
 
     private fun setUpObservers() {
         viewModel.favoriteLocationLiveData.observe(viewLifecycleOwner) {
-            it?.let {
-                setFavoriteLocation(it)
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        setFavoriteLocation(resource.data!!)
+                    }
+                    Status.LOADING -> {}
+                    Status.ERROR -> {}
+                }
             }
         }
 
-        viewModel.getSavedLocations().observe(viewLifecycleOwner) {
+        viewModel.savedLocationsLiveData.observe(viewLifecycleOwner) {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
                         binding.drawerSavedLocationsSpinner.visibility = View.INVISIBLE
                         setSavedLocationsList(it.data!!)
-                        Toast.makeText(context, "Success", Toast.LENGTH_LONG).show()
                     }
                     Status.LOADING -> {
                         binding.drawerSavedLocationsSpinner.visibility = View.VISIBLE
-                        Toast.makeText(context, "Loading", Toast.LENGTH_LONG).show()
                     }
-                    Status.ERROR -> {
-                        Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
-                    }
+                    Status.ERROR -> {}
                 }
             }
         }
@@ -75,7 +77,7 @@ class DrawerFragment : Fragment() {
 
     private fun setSavedLocationsList(savedLocationsList: List<Location>) {
         val savedLocationsListAdapter = SavedLocationsListAdapter(
-            savedLocationsList.toMutableList(),
+            savedLocationsList,
             viewModel
         )
         val linearLayoutManager = LinearLayoutManager(context)

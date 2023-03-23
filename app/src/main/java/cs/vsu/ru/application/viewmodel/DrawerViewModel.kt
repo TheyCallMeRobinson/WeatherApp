@@ -2,6 +2,7 @@ package cs.vsu.ru.application.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.*
+import cs.vsu.ru.application.motion.SavedLocationsTransitionListener
 import cs.vsu.ru.domain.model.location.Location
 import cs.vsu.ru.domain.usecase.location.GetFavoriteLocationUseCase
 import cs.vsu.ru.domain.usecase.location.GetSavedLocationsUseCase
@@ -11,6 +12,7 @@ import cs.vsu.ru.environment.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.core.component.getScopeId
 
 class DrawerViewModel(
     private val getSavedLocationsUseCase: GetSavedLocationsUseCase,
@@ -21,21 +23,22 @@ class DrawerViewModel(
 
     private val scope = CoroutineScope(Dispatchers.IO)
 
-    private val favoriteLocation = MutableLiveData<Location>()
-    val favoriteLocationLiveData: LiveData<Location> = favoriteLocation
+    private val favoriteLocation = MutableLiveData<Resource<Location>>()
+    val favoriteLocationLiveData: LiveData<Resource<Location>> = favoriteLocation
 
     private val savedLocations = MutableLiveData<Resource<List<Location>>>()
     val savedLocationsLiveData: LiveData<Resource<List<Location>>> = savedLocations
 
-    init {
-        viewModelScope.launch {
-            val result = getFavoriteLocationUseCase.execute()
-            favoriteLocation.value = result
+    fun refreshData() {
+        getSavedLocations().observeForever {
+            savedLocations.value = it
         }
-        savedLocations.value = getSavedLocations().value
+        getFavoriteLocation().observeForever {
+            favoriteLocation.value = it
+        }
     }
 
-    fun getFavoriteLocation() = liveData(Dispatchers.IO) {
+    private fun getFavoriteLocation() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = getFavoriteLocationUseCase.execute()))
@@ -44,7 +47,7 @@ class DrawerViewModel(
         }
     }
 
-    fun getSavedLocations() = liveData(Dispatchers.IO) {
+    private fun getSavedLocations() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = getSavedLocationsUseCase.execute()))
@@ -53,22 +56,31 @@ class DrawerViewModel(
         }
     }
 
-    fun setFavoriteLocation(location: Location): Location? {
-        val previousFavoriteLocation = favoriteLocation.value
-        viewModelScope.launch {
-            setFavoriteLocationUseCase.execute(location)
-            favoriteLocation.value = getFavoriteLocationUseCase.execute()
+    fun setFavoriteLocation(location: Location) {
+        scope.launch {
+            try {
+                setFavoriteLocationUseCase.execute(location)
+            } catch (exception: Exception) {
+                Log.e("Drawer set favorite", exception.message ?: "Exception")
+            }
         }
-        savedLocations.value = getSavedLocations().value
-        return previousFavoriteLocation
+        refreshData()
     }
 
-    fun removeSavedLocation(location: Location) = scope.launch {
-        try {
-            removeSavedLocationUseCase.execute(location.name)
-            savedLocations.value = getSavedLocations().value
-        } catch (exception: Exception) {
-            Log.e("Drawer", exception.message!!)
+    fun removeSavedLocation(location: Location) {
+        scope.launch {
+            try {
+                removeSavedLocationUseCase.execute(location.name)
+            } catch (exception: Exception) {
+                Log.e("Drawer remove saved", exception.message ?: "Exception")
+            }
         }
+        refreshData()
     }
+
+    fun onRemoveTransitionListener(location: Location): SavedLocationsTransitionListener =
+        SavedLocationsTransitionListener { removeSavedLocation(location) }
+
+    fun onFavoriteTransitionListener(location: Location): SavedLocationsTransitionListener =
+        SavedLocationsTransitionListener { setFavoriteLocation(location) }
 }

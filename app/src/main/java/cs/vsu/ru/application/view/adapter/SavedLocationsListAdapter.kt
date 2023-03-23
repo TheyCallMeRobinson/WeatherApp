@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.widget.ConstraintSet.Motion
 import androidx.recyclerview.widget.RecyclerView
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.motion.SavedLocationsTransitionListener
@@ -16,7 +17,7 @@ import cs.vsu.ru.application.viewmodel.DrawerViewModel
 import cs.vsu.ru.domain.model.location.Location
 
 class SavedLocationsListAdapter(
-    private var savedLocations: MutableList<Location>,
+    private var savedLocations: List<Location>,
     private val drawerViewModel: DrawerViewModel,
 ) : RecyclerView.Adapter<SavedLocationsListAdapter.ViewHolder>() {
 
@@ -32,24 +33,13 @@ class SavedLocationsListAdapter(
         holder.locationName.text = savedLocations[position].name
         holder.countryName.text = savedLocations[position].country
         holder.setFavoriteListener = { index, _ ->
-            val previousFavoriteLocation =
-                drawerViewModel.setFavoriteLocation(savedLocations[index])
             (holder.view as MotionLayout).setTransitionListener(
-                SavedLocationsTransitionListener {
-                    previousFavoriteLocation?.let {
-                        savedLocations[index] = it
-                        notifyItemChanged(index)
-                    }
-                }
+                SavedLocationsTransitionListener { drawerViewModel.setFavoriteLocation(savedLocations[index]) }
             )
         }
         holder.removeListener = { index, _ ->
-            drawerViewModel.removeSavedLocation(savedLocations[index])
             (holder.view as MotionLayout).setTransitionListener(
-                SavedLocationsTransitionListener {
-                    savedLocations.removeAt(index)
-                    notifyItemRemoved(index)
-                }
+                SavedLocationsTransitionListener { drawerViewModel.removeSavedLocation(savedLocations[index]) }
             )
         }
     }
@@ -58,31 +48,24 @@ class SavedLocationsListAdapter(
 
     @SuppressLint("ClickableViewAccessibility")
     class ViewHolder(
-        val view: View,
-
-        ) : RecyclerView.ViewHolder(view) {
+        val view: View
+    ) : RecyclerView.ViewHolder(view) {
 
         lateinit var setFavoriteListener: (Int, View) -> Unit
         lateinit var removeListener: (Int, View) -> Unit
 
-        val locationName: TextView
-        val countryName: TextView
-        val setToFavorite: ImageView
-        val removeFromList: ImageView
+        val locationName: TextView = view.findViewById(R.id.item_location_name)
+        val countryName: TextView = view.findViewById(R.id.item_country_name)
+        val setToFavorite: ImageView = view.findViewById(R.id.item_add_to_favorite)
+        val removeFromList: ImageView = view.findViewById(R.id.item_remove_from_list)
 
         init {
-            locationName = view.findViewById(R.id.item_location_name)
-            countryName = view.findViewById(R.id.item_country_name)
-            setToFavorite = view.findViewById(R.id.item_add_to_favorite)
-            removeFromList = view.findViewById(R.id.item_remove_from_list)
-
             setToFavorite.setOnTouchListener { _, event ->
                 if (event.action == MotionEvent.ACTION_DOWN) {
                     setFavoriteListener(adapterPosition, view)
                 }
                 false
             }
-
             removeFromList.setOnTouchListener { _, event ->
                 if (event.action == MotionEvent.ACTION_DOWN) {
                     removeListener(adapterPosition, view)

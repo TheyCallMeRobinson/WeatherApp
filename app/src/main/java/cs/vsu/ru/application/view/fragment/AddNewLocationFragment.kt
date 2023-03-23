@@ -36,16 +36,11 @@ class AddNewLocationFragment : Fragment() {
         viewModel.getLocationsByName(locationName).observe(viewLifecycleOwner) {
             it?.let {
                 when(it.status) {
-                    Status.LOADING -> {
-                        Toast.makeText(context, "Loading", Toast.LENGTH_LONG).show()
-                    }
+                    Status.LOADING -> {}
                     Status.SUCCESS -> {
                         setLocations(it.data)
-                        Toast.makeText(context, "Success", Toast.LENGTH_LONG).show()
                     }
-                    Status.ERROR -> {
-                        Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
-                    }
+                    Status.ERROR -> {}
                 }
             }
         }
