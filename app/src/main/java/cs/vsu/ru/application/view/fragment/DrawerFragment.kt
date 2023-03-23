@@ -11,6 +11,7 @@ import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.FragmentDrawerBinding
 import cs.vsu.ru.application.view.adapter.SavedLocationsListAdapter
 import cs.vsu.ru.application.viewmodel.DrawerViewModel
+import cs.vsu.ru.application.viewmodel.MainViewModel
 import cs.vsu.ru.domain.model.location.Location
 import cs.vsu.ru.environment.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,7 +19,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class DrawerFragment : Fragment() {
 
     private lateinit var binding: FragmentDrawerBinding
-    private val viewModel by viewModel<DrawerViewModel>()
+    private val drawerViewModel by viewModel<DrawerViewModel>()
+    private val mainViewModel by viewModel<MainViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,7 +30,7 @@ class DrawerFragment : Fragment() {
         binding = FragmentDrawerBinding.inflate(inflater)
 
         setUpObservers()
-        viewModel.refreshData()
+        drawerViewModel.refreshData()
 
         binding.drawerAddNewLocationBtn.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_drawerFragment_to_addNewLocation)
@@ -42,7 +44,7 @@ class DrawerFragment : Fragment() {
     }
 
     private fun setUpObservers() {
-        viewModel.favoriteLocationLiveData.observe(viewLifecycleOwner) {
+        drawerViewModel.favoriteLocationLiveData.observe(viewLifecycleOwner) {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
@@ -54,7 +56,7 @@ class DrawerFragment : Fragment() {
             }
         }
 
-        viewModel.savedLocationsLiveData.observe(viewLifecycleOwner) {
+        drawerViewModel.savedLocationsLiveData.observe(viewLifecycleOwner) {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
@@ -85,7 +87,8 @@ class DrawerFragment : Fragment() {
 
         val savedLocationsListAdapter = SavedLocationsListAdapter(
             savedLocationsList,
-            viewModel
+            mainViewModel,
+            drawerViewModel
         )
         val linearLayoutManager = LinearLayoutManager(context)
         val savedLocations = binding.drawerFavoriteLocationsList

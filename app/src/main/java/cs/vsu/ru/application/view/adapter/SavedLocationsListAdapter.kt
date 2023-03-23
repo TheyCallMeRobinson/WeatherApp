@@ -14,10 +14,12 @@ import androidx.recyclerview.widget.RecyclerView
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.motion.SavedLocationsTransitionListener
 import cs.vsu.ru.application.viewmodel.DrawerViewModel
+import cs.vsu.ru.application.viewmodel.MainViewModel
 import cs.vsu.ru.domain.model.location.Location
 
 class SavedLocationsListAdapter(
     private var savedLocations: List<Location>,
+    private val mainViewModel: MainViewModel,
     private val drawerViewModel: DrawerViewModel,
 ) : RecyclerView.Adapter<SavedLocationsListAdapter.ViewHolder>() {
 
@@ -32,14 +34,14 @@ class SavedLocationsListAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.locationName.text = savedLocations[position].name
         holder.countryName.text = savedLocations[position].country
-        holder.setFavoriteListener = { index, _ ->
+        holder.setFavoriteListener = { index ->
             (holder.view as MotionLayout).setTransitionListener(
                 SavedLocationsTransitionListener {
                     drawerViewModel.setFavoriteLocation(savedLocations[index])
                 }
             )
         }
-        holder.removeListener = { index, _ ->
+        holder.removeListener = { index ->
             (holder.view as MotionLayout).setTransitionListener(
                 SavedLocationsTransitionListener {
                     drawerViewModel.removeSavedLocation(savedLocations[index])
@@ -55,8 +57,8 @@ class SavedLocationsListAdapter(
         val view: View
     ) : RecyclerView.ViewHolder(view) {
 
-        lateinit var setFavoriteListener: (Int, View) -> Unit
-        lateinit var removeListener: (Int, View) -> Unit
+        lateinit var setFavoriteListener: (Int) -> Unit
+        lateinit var removeListener: (Int) -> Unit
 
         val locationName: TextView = view.findViewById(R.id.item_location_name)
         val countryName: TextView = view.findViewById(R.id.item_country_name)
@@ -66,13 +68,13 @@ class SavedLocationsListAdapter(
         init {
             setToFavorite.setOnTouchListener { _, event ->
                 if (event.action == MotionEvent.ACTION_DOWN) {
-                    setFavoriteListener(adapterPosition, view)
+                    setFavoriteListener(adapterPosition)
                 }
                 false
             }
             removeFromList.setOnTouchListener { _, event ->
                 if (event.action == MotionEvent.ACTION_DOWN) {
-                    removeListener(adapterPosition, view)
+                    removeListener(adapterPosition)
                 }
                 false
             }

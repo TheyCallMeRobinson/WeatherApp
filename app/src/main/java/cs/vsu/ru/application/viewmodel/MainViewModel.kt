@@ -2,31 +2,35 @@ package cs.vsu.ru.application.viewmodel
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.util.Log
 import androidx.lifecycle.*
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.mapper.WeatherMapper
 import cs.vsu.ru.application.model.WeatherDataModel
+import cs.vsu.ru.domain.model.location.Location
 import cs.vsu.ru.domain.usecase.location.GetCurrentLocationUseCase
+import cs.vsu.ru.domain.usecase.location.SetCurrentLocationUseCase
 import cs.vsu.ru.domain.usecase.weather.GetWeatherDataUseCase
 import cs.vsu.ru.domain.usecase.weather.GetWeatherIconUseCase
 import cs.vsu.ru.environment.Resource
 import kotlinx.coroutines.Dispatchers
-import java.sql.Time
+import kotlinx.coroutines.launch
 import java.util.*
 
 class MainViewModel(
     private val getCurrentLocationUseCase: GetCurrentLocationUseCase,
     private val getWeatherIconUseCase: GetWeatherIconUseCase,
     private val getWeatherDataUseCase: GetWeatherDataUseCase,
+    private val setCurrentLocationUseCase: SetCurrentLocationUseCase,
     private val weatherMapper: WeatherMapper,
 ) : ViewModel() {
 
-    val backgroundResource = MutableLiveData<Int>().apply {
+    private val backgroundResource = MutableLiveData<Int>().apply {
         value = getBackground()
     }
+    val backgroundResourceLiveData: LiveData<Int> = backgroundResource
 
-    val weatherDataToDisplay: LiveData<Resource<WeatherDataModel>> = getWeatherData()
+    private val weatherDataToDisplay = MutableLiveData<Resource<WeatherDataModel>>()
+    val weatherLiveData: LiveData<Resource<WeatherDataModel>> = weatherDataToDisplay
 
     private fun getBackground(): Int {
         val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
@@ -36,6 +40,19 @@ class MainViewModel(
             R.drawable.background_nighttime
         }
         return background
+    }
+
+    fun refreshData() {
+        getWeatherData().observeForever {
+            weatherDataToDisplay.value = it
+        }
+    }
+
+    fun setCurrentLocation(location: Location) {
+        viewModelScope.launch {
+            setCurrentLocationUseCase.execute(location)
+        }
+        refreshData()
     }
 
     private fun getWeatherData() = liveData(Dispatchers.IO) {
@@ -63,27 +80,18 @@ class MainViewModel(
 
             emit(Resource.success(data = weatherDataToDisplay))
         } catch (exception: Exception) {
-
-            Log.e("Error", exception.stackTraceToString())
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            emit(Resource.error(data = null, message = exception.message ?: "Ошибка подключения к сети"))
         }
     }
 
     private suspend fun getWeatherIcon(iconName: String) =
         getWeatherIconUseCase.execute(iconName)
 
-    private suspend fun getWeatherIconList(iconNames: List<String>): List<ByteArray> {
-        val iconList = mutableListOf<ByteArray>()
-        iconNames.forEach {
-            iconList.add(getWeatherIcon(it))
-        }
-        return iconList
-    }
+    private suspend fun getWeatherIconList(iconNames: List<String>): List<ByteArray> =
+        iconNames.map { getWeatherIcon(it) }
 
     private fun byteArrayListToBitmap(byteArrayList: List<ByteArray>): List<Bitmap> =
-        byteArrayList.map {
-            byteArrayToBitmap(it)
-        }
+        byteArrayList.map { byteArrayToBitmap(it) }
 
     private fun byteArrayToBitmap(byteArray: ByteArray): Bitmap =
         BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)

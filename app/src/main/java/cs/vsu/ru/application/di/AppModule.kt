@@ -18,6 +18,7 @@ val appModule = module {
             getCurrentLocationUseCase = get(),
             getWeatherDataUseCase = get(),
             getWeatherIconUseCase = get(),
+            setCurrentLocationUseCase = get(),
             weatherMapper = get(),
         )
     }

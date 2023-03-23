@@ -35,8 +35,8 @@ class MainFragment : Fragment() {
     ): View? {
         binding = FragmentContentMainBinding.inflate(inflater)
 
+        viewModel.refreshData()
         setupObservers()
-        connectFragmentToViewModel()
 
         binding.mainToolbarBurger.setOnClickListener {
             activity?.findViewById<DrawerLayout>(R.id.activity_main_layout)?.openDrawer(GravityCompat.START)
@@ -45,15 +45,12 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
-    private fun connectFragmentToViewModel() {
-        viewModel.backgroundResource.observe(viewLifecycleOwner) {
-            binding.mainBackgroundImg.setBackgroundResource(it)
-        }
-        binding.mainBackgroundImg.setAltImageResource(R.color.black)
-    }
-
     private fun setupObservers() {
-        viewModel.weatherDataToDisplay.observe(viewLifecycleOwner) {
+        viewModel.backgroundResourceLiveData.observe(viewLifecycleOwner) {
+            binding.mainBackgroundImg.setBackgroundResource(it)
+            binding.mainBackgroundImg.setAltImageResource(R.color.black)
+        }
+        viewModel.weatherLiveData.observe(viewLifecycleOwner) {
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
@@ -65,7 +62,7 @@ class MainFragment : Fragment() {
                         setMainBodyListValues(binding.mainBodyList, resource.data)
                     }
                     Status.ERROR -> {
-                        Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -90,8 +87,8 @@ class MainFragment : Fragment() {
     }
 
     private fun setHourlyTemperatureList(layout: ContentMainBodyListBinding, weather: WeatherDataModel?) {
-        val hourlyListAdapter = weather?.hourlyWeather?.let {
-            HourlyListAdapter(it, weather.hourlyWeather.map {it.icon})
+        val hourlyListAdapter = weather?.hourlyWeather?.let { hourlyWeatherList ->
+            HourlyListAdapter(hourlyWeatherList, weather.hourlyWeather.map {it.icon})
         }
         val hourlyList: RecyclerView = layout.hourlyTemperatureListContainer.hourlyTemperatureList
         val linearLayoutManager = LinearLayoutManager(context)

@@ -20,8 +20,8 @@ class SavedLocationsTransitionListener(
             it.animate()
                 .alpha(0f)
                 .setDuration(250)
-//                .scaleY(0f)
-//                .translationY(-motionLayout.height / 2f)
+                .scaleY(0f)
+                .translationY(-motionLayout.height / 2f)
                 .withEndAction(onCompleteAction)
             it.transitionToStart()
         }

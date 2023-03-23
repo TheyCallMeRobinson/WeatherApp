@@ -61,7 +61,7 @@ class DrawerViewModel(
             try {
                 setFavoriteLocationUseCase.execute(location)
             } catch (exception: Exception) {
-                Log.e("Drawer set favorite", exception.message ?: "Exception")
+                Log.e("Drawer fav location", exception.message ?: "Couldn't set location as favorite")
             }
         }
         refreshData()
@@ -72,7 +72,7 @@ class DrawerViewModel(
             try {
                 removeSavedLocationUseCase.execute(location.name)
             } catch (exception: Exception) {
-                Log.e("Drawer remove saved", exception.message ?: "Exception")
+                Log.e("Drawer remove location", exception.message ?: "Couldn't remove saved location")
             }
         }
         refreshData()

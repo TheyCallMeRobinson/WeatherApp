@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@color/black">
+    android:background="@color/black">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/drawer_settings_btn"
@@ -66,6 +66,7 @@
         android:layout_marginHorizontal="@dimen/margin_horizontal"
         android:text="@string/add_new_location"
         android:drawableStart="@drawable/ic_add_new"
+        android:backgroundTint="@color/teal_200"
         app:layout_constraintBottom_toTopOf="@id/drawer_about_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -78,6 +79,7 @@
         android:layout_marginHorizontal="@dimen/margin_horizontal"
         android:text="@string/about_application"
         android:drawableStart="@drawable/ic_info"
+        android:backgroundTint="@color/teal_200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
