@@ -28,7 +28,9 @@ class SavedLocationsListAdapter(
             R.layout.item_saved_location, parent, false
         )
 
-        return ViewHolder(view)
+        return ViewHolder(view) {
+            mainViewModel.setCurrentLocation(savedLocations[it])
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -54,7 +56,8 @@ class SavedLocationsListAdapter(
 
     @SuppressLint("ClickableViewAccessibility")
     class ViewHolder(
-        val view: View
+        val view: View,
+        val onViewClickListener: (Int) -> Unit
     ) : RecyclerView.ViewHolder(view) {
 
         lateinit var setFavoriteListener: (Int) -> Unit
@@ -77,6 +80,10 @@ class SavedLocationsListAdapter(
                     removeListener(adapterPosition)
                 }
                 false
+            }
+
+            view.setOnClickListener {
+                onViewClickListener(adapterPosition)
             }
         }
     }

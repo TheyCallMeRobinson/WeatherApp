@@ -5,7 +5,7 @@ import cs.vsu.ru.domain.repository.location.LocationRepository
 
 class SaveLocationUseCase(private val locationRepository: LocationRepository) {
 
-    suspend fun execute(location: Location): Boolean {
-        return locationRepository.saveLocation(location)
+    suspend fun execute(location: Location) {
+        locationRepository.saveLocation(location)
     }
 }

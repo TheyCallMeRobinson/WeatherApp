@@ -7,9 +7,9 @@ interface LocationRepository {
     suspend fun getLocation(name: String): Location?
     suspend fun getFavoriteLocation(): Location?
     suspend fun getCurrentLocation(): Location?
-    suspend fun saveLocation(location: Location): Boolean
-    suspend fun setFavoriteLocation(location: Location): Boolean
-    suspend fun setCurrentLocation(location: Location): Boolean
+    suspend fun saveLocation(location: Location)
+    suspend fun setFavoriteLocation(location: Location)
+    suspend fun setCurrentLocation(location: Location)
     suspend fun removeSavedLocation(locationName: String)
     suspend fun findLocationsByName(locationName: String): List<Location>?
 }

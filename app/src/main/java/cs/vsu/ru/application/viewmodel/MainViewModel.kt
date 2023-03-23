@@ -2,6 +2,7 @@ package cs.vsu.ru.application.viewmodel
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Log
 import androidx.lifecycle.*
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.mapper.WeatherMapper
@@ -35,6 +36,7 @@ class MainViewModel(
     fun refreshData() {
         getWeatherData().observeForever {
             weatherDataToDisplay.value = it
+            Log.e("Main view model", "Current location ${it.data?.currentWeather?.location}")
         }
     }
 
@@ -50,9 +52,12 @@ class MainViewModel(
 
     fun setCurrentLocation(location: Location) {
         viewModelScope.launch {
+            Log.e("Main view model", "New location ${location.name} set")
             setCurrentLocationUseCase.execute(location)
         }
+        Log.e("Main view model", "New location ${location.name} set complete")
         refreshData()
+
     }
 
     private fun getWeatherData() = liveData(Dispatchers.IO) {

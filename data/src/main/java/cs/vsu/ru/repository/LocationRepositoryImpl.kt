@@ -42,25 +42,19 @@ open class LocationRepositoryImpl(
         return getLocation(sharedPreferences.getString(KEY_CURRENT_LOCATION, DEFAULT_LOCATION)!!)
     }
 
-    override suspend fun saveLocation(location: Location): Boolean {
+    override suspend fun saveLocation(location: Location) {
         if (locationDao.getByName(location.name) != null) {
-            return false
+            return
         }
         locationDao.insert(locationMapper.domainToData(location))
-        return true
     }
 
-    override suspend fun setFavoriteLocation(location: Location): Boolean {
+    override suspend fun setFavoriteLocation(location: Location) {
         sharedPreferences.edit().putString(KEY_FAVORITE_LOCATION, location.name).apply()
-        return true
     }
 
-    override suspend fun setCurrentLocation(location: Location): Boolean {
-        if (locationDao.getByName(KEY_CURRENT_LOCATION) == null) {
-            return false
-        }
+    override suspend fun setCurrentLocation(location: Location) {
         sharedPreferences.edit().putString(KEY_CURRENT_LOCATION, location.name).apply()
-        return true
     }
 
     override suspend fun removeSavedLocation(locationName: String) {
