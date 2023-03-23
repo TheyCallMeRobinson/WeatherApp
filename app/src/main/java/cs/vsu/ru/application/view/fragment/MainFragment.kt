@@ -56,16 +56,16 @@ class MainFragment : Fragment() {
         viewModel.weatherDataToDisplay.observe(viewLifecycleOwner) {
             it?.let { resource ->
                 when (resource.status) {
+                    Status.LOADING -> {
+                        binding.fragmentContentMainProgressBar.visibility = View.VISIBLE
+                    }
                     Status.SUCCESS -> {
+                        binding.fragmentContentMainProgressBar.visibility = View.INVISIBLE
                         setMainHeaderValues(binding.fragmentContentMainHeader, resource.data)
                         setMainBodyListValues(binding.mainBodyList, resource.data)
-                        Toast.makeText(context, "Success", Toast.LENGTH_LONG).show()
                     }
                     Status.ERROR -> {
                         Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
-                    }
-                    Status.LOADING -> {
-                        Toast.makeText(context, "Loading", Toast.LENGTH_LONG).show()
                     }
                 }
             }

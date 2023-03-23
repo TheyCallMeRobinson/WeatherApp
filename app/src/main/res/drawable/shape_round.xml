@@ -3,6 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:tint="@drawable/shape_round_background">
 
-    <corners android:radius="@dimen/shape_standard_radius" />
+    <corners
+        android:topRightRadius="@dimen/shape_standard_radius"
+        android:bottomRightRadius="@dimen/shape_standard_radius"/>
 
 </shape>

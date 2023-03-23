@@ -34,12 +34,16 @@ class SavedLocationsListAdapter(
         holder.countryName.text = savedLocations[position].country
         holder.setFavoriteListener = { index, _ ->
             (holder.view as MotionLayout).setTransitionListener(
-                SavedLocationsTransitionListener { drawerViewModel.setFavoriteLocation(savedLocations[index]) }
+                SavedLocationsTransitionListener {
+                    drawerViewModel.setFavoriteLocation(savedLocations[index])
+                }
             )
         }
         holder.removeListener = { index, _ ->
             (holder.view as MotionLayout).setTransitionListener(
-                SavedLocationsTransitionListener { drawerViewModel.removeSavedLocation(savedLocations[index]) }
+                SavedLocationsTransitionListener {
+                    drawerViewModel.removeSavedLocation(savedLocations[index])
+                }
             )
         }
     }

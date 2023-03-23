@@ -7,4 +7,7 @@
     <string name="about_application">О приложении</string>
     <string name="about_application_main_text">Это приложение было разработано в качестве выпускной квалификационной работы бакалавра студентом 4 курса Воронежского Государственного университета Факультета Компьютерных Наук.\n\n Приложение показывает актуальную погоду, почасовой прогноз на 24 часа, а также дневной прогноз на следующие 7 дней. Также приложение позиционируется как помощник автомобилистам-путешественникам, которые хотят отправиться в другой город, и позволяет получить прогноз погоды на предстоящем маршруте.\n\n Используемые API: OpenWeather One Call API 3.0, Яндекс.Карты API\n\n Если вы обнаружили ошибку в приложении, пожалуйста, отправьте мне письмо с описанием проблемы по реквизитам, указанным внизу.\n\n С уважением, Павел Мишин.</string>
     <string name="contacts">GitHub: github.com/TheyCallMeRobinson\n Email: alettertopaulrobinson0099@gmail.com\n Telegram: @TheyCallMeRobinson</string>
+    <string name="latitude">Широта</string>
+    <string name="longitude">Долгота</string>
+    <string name="add_new_location">Добавить новое место</string>
 </resources>

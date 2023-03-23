@@ -58,11 +58,11 @@ class DrawerFragment : Fragment() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
-                        binding.drawerSavedLocationsSpinner.visibility = View.INVISIBLE
+                        binding.drawerSavedLocationsProgressBar.visibility = View.INVISIBLE
                         setSavedLocationsList(it.data!!)
                     }
                     Status.LOADING -> {
-                        binding.drawerSavedLocationsSpinner.visibility = View.VISIBLE
+                        binding.drawerSavedLocationsProgressBar.visibility = View.VISIBLE
                     }
                     Status.ERROR -> {}
                 }
@@ -76,6 +76,13 @@ class DrawerFragment : Fragment() {
     }
 
     private fun setSavedLocationsList(savedLocationsList: List<Location>) {
+        if (savedLocationsList.isEmpty()) {
+            binding.drawerNothingToShowTv.visibility = View.VISIBLE
+            return
+        }
+
+        binding.drawerNothingToShowTv.visibility = View.INVISIBLE
+
         val savedLocationsListAdapter = SavedLocationsListAdapter(
             savedLocationsList,
             viewModel

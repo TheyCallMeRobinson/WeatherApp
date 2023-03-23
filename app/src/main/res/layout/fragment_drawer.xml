@@ -9,9 +9,9 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/drawer_settings_btn"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/ic_settings"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,10 +52,11 @@
         android:id="@+id/bottom_divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/transparent60"
         android:layout_marginHorizontal="@dimen/margin_horizontal"
         android:layout_marginBottom="@dimen/margin_bottom"
-        app:layout_constraintBottom_toTopOf="@id/drawer_add_new_location_btn"/>
+        android:background="@color/transparent60"
+        app:layout_constraintBottom_toTopOf="@id/drawer_add_new_location_btn"
+        tools:layout_editor_absoluteX="15dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/drawer_add_new_location_btn"
@@ -63,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginHorizontal="@dimen/margin_horizontal"
-        android:text="Добавить новое место"
+        android:text="@string/add_new_location"
         android:drawableStart="@drawable/ic_add_new"
         app:layout_constraintBottom_toTopOf="@id/drawer_about_btn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,14 +82,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Spinner
-        android:id="@+id/drawer_saved_locations_spinner"
+    <ProgressBar
+        android:id="@+id/drawer_saved_locations_progress_bar"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:layout_constraintBottom_toBottomOf="@+id/drawer_favorite_locations_list"
-        app:layout_constraintEnd_toEndOf="@+id/drawer_favorite_locations_list"
-        app:layout_constraintStart_toStartOf="@+id/drawer_favorite_locations_list"
-        app:layout_constraintTop_toTopOf="@+id/drawer_favorite_locations_list" />
+        app:layout_constraintBottom_toTopOf="@+id/bottom_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_divider" />
+
+    <TextView
+        android:id="@+id/drawer_nothing_to_show_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:text="Список сохраненных местоположений пуст"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_divider"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
