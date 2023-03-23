@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.FragmentAddNewLocationBinding
 import cs.vsu.ru.application.view.adapter.NewLocationsListAdapter
 import cs.vsu.ru.application.viewmodel.AddNewLocationViewModel
@@ -49,6 +51,7 @@ class AddNewLocationFragment : Fragment() {
     private fun setLocations(locations: List<Location>?) {
         val newLocationsListAdapter = NewLocationsListAdapter(locations) {
             viewModel.saveLocation(it)
+            findNavController().navigate(R.id.action_addNewLocation_to_drawerFragment)
         }
         val linearLayoutManager = LinearLayoutManager(context)
         val newLocationsList = binding.fragmentNewLocationsList

@@ -32,6 +32,12 @@ class MainViewModel(
     private val weatherDataToDisplay = MutableLiveData<Resource<WeatherDataModel>>()
     val weatherLiveData: LiveData<Resource<WeatherDataModel>> = weatherDataToDisplay
 
+    fun refreshData() {
+        getWeatherData().observeForever {
+            weatherDataToDisplay.value = it
+        }
+    }
+
     private fun getBackground(): Int {
         val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         val background = if (currentHour in 8..18) {
@@ -40,12 +46,6 @@ class MainViewModel(
             R.drawable.background_nighttime
         }
         return background
-    }
-
-    fun refreshData() {
-        getWeatherData().observeForever {
-            weatherDataToDisplay.value = it
-        }
     }
 
     fun setCurrentLocation(location: Location) {
