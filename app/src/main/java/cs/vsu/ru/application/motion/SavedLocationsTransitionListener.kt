@@ -19,10 +19,13 @@ class SavedLocationsTransitionListener(
         motionLayout?.let {
             it.animate()
                 .alpha(0f)
-                .setDuration(250)
+                .setDuration(100)
                 .scaleY(0f)
                 .translationY(-motionLayout.height / 2f)
                 .withEndAction(onCompleteAction)
+
+        }
+        motionLayout?.let {
             it.transitionToStart()
         }
     }

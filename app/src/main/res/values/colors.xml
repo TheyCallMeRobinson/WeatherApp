@@ -7,6 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dark_blue">#0A0A23</color>
+    <color name="orange">#F38B2F</color>
+    <color name="light_lemon">#F7F181</color>
+    <color name="light_red">#B71C1C</color>
 
     <color name="background_daytime_start">#8BA3DF</color>
     <color name="background_daytime_end">#5C79B3</color>

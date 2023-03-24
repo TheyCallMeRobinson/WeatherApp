@@ -49,7 +49,7 @@ class MainFragment : Fragment() {
     private fun setupObservers() {
         viewModel.backgroundResourceLiveData.observe(viewLifecycleOwner) {
             binding.mainBackgroundImg.setBackgroundResource(it)
-            binding.mainBackgroundImg.setAltImageResource(R.color.black)
+            binding.mainBackgroundImg.setAltImageResource(R.color.dark_blue)
         }
         viewModel.weatherLiveData.observe(viewLifecycleOwner) {
             it?.let { resource ->
