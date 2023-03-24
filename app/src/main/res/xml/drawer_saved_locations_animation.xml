@@ -28,6 +28,7 @@
             android:id="@id/item_to_favorite_background"
             android:layout_width="70dp"
             android:layout_height="match_parent"
+            android:layout_marginEnd="1dp"
             motion:layout_constraintEnd_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintBottom_toBottomOf="parent" />

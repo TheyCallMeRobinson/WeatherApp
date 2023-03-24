@@ -13,4 +13,5 @@
     <string name="search">Найти</string>
     <string name="input_location_name">Введите местоположение</string>
     <string name="no_data_by_request_found">По запросу ничего не найдено</string>
+    <string name="saved_locations_list_is_empty">Список сохраненных местоположений пуст</string>
 </resources>

@@ -98,7 +98,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:visibility="invisible"
-        android:text="Список сохраненных местоположений пуст"
+        android:text="@string/saved_locations_list_is_empty"
         app:layout_constraintBottom_toTopOf="@+id/bottom_divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
