@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,13 +16,14 @@ import cs.vsu.ru.application.viewmodel.DrawerViewModel
 import cs.vsu.ru.application.viewmodel.MainViewModel
 import cs.vsu.ru.domain.model.location.Location
 import cs.vsu.ru.environment.Status
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DrawerFragment : Fragment() {
 
     private lateinit var binding: FragmentDrawerBinding
     private val drawerViewModel by viewModel<DrawerViewModel>()
-    private val mainViewModel by viewModel<MainViewModel>()
+    private val mainViewModel by activityViewModel<MainViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -75,6 +78,9 @@ class DrawerFragment : Fragment() {
     private fun setFavoriteLocation(favoriteLocation: Location) {
         binding.drawerFavoritePlace.itemLocationName.text = favoriteLocation.name
         binding.drawerFavoritePlace.itemCountryName.text = favoriteLocation.country
+        binding.drawerFavoritePlace.root.setOnClickListener {
+            setCurrentLocation(favoriteLocation)
+        }
     }
 
     private fun setSavedLocationsList(savedLocationsList: List<Location>) {
@@ -87,7 +93,9 @@ class DrawerFragment : Fragment() {
 
         val savedLocationsListAdapter = SavedLocationsListAdapter(
             savedLocationsList,
-            mainViewModel,
+            { location ->
+                setCurrentLocation(location)
+            },
             drawerViewModel
         )
         val linearLayoutManager = LinearLayoutManager(context)
@@ -96,5 +104,10 @@ class DrawerFragment : Fragment() {
         savedLocations.layoutManager = linearLayoutManager
         savedLocations.adapter = savedLocationsListAdapter
         savedLocations.setHasFixedSize(true)
+    }
+
+    private fun setCurrentLocation(location: Location) {
+        mainViewModel.setCurrentLocation(location)
+        activity?.findViewById<DrawerLayout>(R.id.activity_main_layout)?.closeDrawer(GravityCompat.START)
     }
 }

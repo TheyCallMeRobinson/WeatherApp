@@ -19,7 +19,7 @@ import cs.vsu.ru.domain.model.location.Location
 
 class SavedLocationsListAdapter(
     private var savedLocations: List<Location>,
-    private val mainViewModel: MainViewModel,
+    private val setCurrentLocationListener: (Location) -> Unit,
     private val drawerViewModel: DrawerViewModel,
 ) : RecyclerView.Adapter<SavedLocationsListAdapter.ViewHolder>() {
 
@@ -29,7 +29,7 @@ class SavedLocationsListAdapter(
         )
 
         return ViewHolder(view) {
-            mainViewModel.setCurrentLocation(savedLocations[it])
+            setCurrentLocationListener(savedLocations[it])
         }
     }
 
@@ -85,6 +85,7 @@ class SavedLocationsListAdapter(
             view.setOnClickListener {
                 onViewClickListener(adapterPosition)
             }
+            view.isClickable = true
         }
     }
 }

@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="70dp">
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp"
+    tools:background="@color/black">
 
     <TextView
         android:id="@+id/item_location_name"
@@ -17,13 +19,23 @@
         tools:text="Воронеж" />
 
     <TextView
-        android:id="@+id/item_country_name"
+        android:id="@+id/item_admin_area_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:textSize="6pt"
         app:layout_constraintStart_toStartOf="@+id/item_location_name"
         app:layout_constraintTop_toBottomOf="@+id/item_location_name"
+        tools:text="Воронежская область" />
+
+    <TextView
+        android:id="@+id/item_country_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textSize="6pt"
+        app:layout_constraintStart_toStartOf="@+id/item_admin_area_name"
+        app:layout_constraintTop_toBottomOf="@+id/item_admin_area_name"
         tools:text="Россия" />
 
     <TextView

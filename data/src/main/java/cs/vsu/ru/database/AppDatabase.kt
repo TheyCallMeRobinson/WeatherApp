@@ -9,7 +9,7 @@ import cs.vsu.ru.model.weather.WeatherIconEntity
 
 @Database(
     entities = [LocationEntity::class, WeatherIconEntity::class],
-    version = 2
+    version = 3
 )
 abstract class AppDatabase : RoomDatabase() {
 

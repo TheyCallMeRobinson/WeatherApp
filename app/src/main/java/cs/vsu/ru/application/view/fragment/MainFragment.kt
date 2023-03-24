@@ -20,13 +20,14 @@ import cs.vsu.ru.application.model.*
 import cs.vsu.ru.application.view.adapter.HourlyListAdapter
 import cs.vsu.ru.application.viewmodel.MainViewModel
 import cs.vsu.ru.environment.Status
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentContentMainBinding
-    private val viewModel by viewModel<MainViewModel>()
+    private val viewModel by activityViewModel<MainViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -100,6 +101,7 @@ class MainFragment : Fragment() {
 
     private fun setDailyWeatherList(dailyWeatherList: List<DailyWeather>) {
         val dailyWeatherTable = binding.mainBodyList.dailyWeatherListContainer.dailyWeatherList
+        dailyWeatherTable.removeAllViews()
 
         for (item in dailyWeatherList) {
             val tableRow = TableRow(context)

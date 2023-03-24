@@ -68,6 +68,7 @@ open class LocationRepositoryImpl(
             Location(
                 name = it.locality,
                 country = it.countryName,
+                adminArea = it.adminArea,
                 latitude = it.latitude,
                 longitude = it.longitude
             )

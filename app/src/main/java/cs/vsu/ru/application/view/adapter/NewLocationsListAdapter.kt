@@ -27,6 +27,7 @@ class NewLocationsListAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.locationName.text = newLocations?.get(position)?.name
         holder.countryName.text = newLocations?.get(position)?.country
+        holder.adminArea.text = newLocations?.get(position)?.adminArea
         holder.longitude.text = "%.4f".format(newLocations?.get(position)?.longitude)
         holder.latitude.text = "%.4f".format(newLocations?.get(position)?.latitude)
     }
@@ -36,12 +37,14 @@ class NewLocationsListAdapter(
     class ViewHolder(view: View, clickAtPosition: (Int) -> Unit) : RecyclerView.ViewHolder(view) {
         val locationName: TextView
         val countryName: TextView
+        val adminArea: TextView
         val longitude: TextView
         val latitude: TextView
 
         init {
             locationName = view.findViewById(R.id.item_location_name)
             countryName = view.findViewById(R.id.item_country_name)
+            adminArea = view.findViewById(R.id.item_admin_area_name)
             latitude = view.findViewById(R.id.item_latitude_value)
             longitude = view.findViewById(R.id.item_longitude_value)
 

@@ -14,6 +14,9 @@ data class LocationEntity(
     @ColumnInfo(name = "country")
     val country: String? = null,
 
+    @ColumnInfo(name = "area_region")
+    val adminArea: String? = null,
+
     @ColumnInfo(name = "latitude")
     val latitude: Double? = null,
 
