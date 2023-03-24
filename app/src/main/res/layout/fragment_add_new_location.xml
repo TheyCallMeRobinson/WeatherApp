@@ -4,31 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/dark_blue">
 
-    <EditText
-        android:id="@+id/fragment_add_new_location_et"
-        android:layout_width="0dp"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/fragment_back_btn"
+        android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="40dp"
-        android:inputType="textPersonName"
-        android:layout_marginHorizontal="@dimen/margin_horizontal"
-        android:background="@color/transparent60_white"
-        app:layout_constraintEnd_toStartOf="@id/fragment_find_locations_btn"
+        android:layout_marginTop="75dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/ic_arrow_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragment_add_new_location_input_holder"
+        style="@style/AddLocationTextInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_horizontal"
+        android:layout_marginTop="40dp"
+        android:hint="@string/input_location_name"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toStartOf="@id/fragment_find_locations_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_back_btn">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_add_new_location_input_et"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/fragment_find_locations_btn"
-        android:layout_width="120dp"
+        android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="@dimen/margin_horizontal"
-        android:text="@string/search"
-        android:drawableStart="@drawable/ic_search"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_add_new_location_et"
+        android:background="@drawable/ic_search"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_add_new_location_input_holder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fragment_add_new_location_et"
-        app:layout_constraintTop_toTopOf="@+id/fragment_add_new_location_et" />
+        app:layout_constraintStart_toEndOf="@+id/fragment_add_new_location_input_holder"
+        app:layout_constraintTop_toTopOf="@+id/fragment_add_new_location_input_holder" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_new_locations_list"
@@ -40,5 +57,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_add_new_location_et" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_new_location_input_holder" />
+
+    <TextView
+        android:id="@+id/fragment_list_is_empty_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_data_by_request_found"
+        android:textSize="8pt"
+        android:layout_marginTop="20dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_new_location_input_holder"
+        tools:visibility="visible"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,14 +21,20 @@ class AddNewLocationFragment : Fragment() {
     private lateinit var binding: FragmentAddNewLocationBinding
     private val viewModel by viewModel<AddNewLocationViewModel>()
 
+    private val wrongInputErrorText = "Это поле не может быть пустым"
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAddNewLocationBinding.inflate(inflater, container, false)
 
+        binding.fragmentBackBtn.setOnClickListener {
+            navigateBack()
+        }
+
         binding.fragmentFindLocationsBtn.setOnClickListener {
-            getLocationsByName(binding.fragmentAddNewLocationEt.text.toString())
+            getLocationsByName(binding.fragmentAddNewLocationInputEt.text.toString())
         }
 
         return binding.root
@@ -38,20 +44,32 @@ class AddNewLocationFragment : Fragment() {
         viewModel.getLocationsByName(locationName).observe(viewLifecycleOwner) {
             it?.let {
                 when(it.status) {
-                    Status.LOADING -> {}
+                    Status.LOADING -> {
+                        binding.fragmentAddNewLocationInputHolder.isErrorEnabled = false
+                    }
                     Status.SUCCESS -> {
                         setLocations(it.data)
                     }
-                    Status.ERROR -> {}
+                    Status.ERROR -> {
+                        binding.fragmentAddNewLocationInputHolder.isErrorEnabled = true
+                        binding.fragmentAddNewLocationInputHolder.error = wrongInputErrorText
+                    }
                 }
             }
         }
     }
 
     private fun setLocations(locations: List<Location>?) {
+        if (locations?.isEmpty() == true) {
+            binding.fragmentListIsEmptyTv.visibility = View.VISIBLE
+            return
+        }
+
+        binding.fragmentListIsEmptyTv.visibility = View.INVISIBLE
+
         val newLocationsListAdapter = NewLocationsListAdapter(locations) {
             viewModel.saveLocation(it)
-            findNavController().navigate(R.id.action_addNewLocation_to_drawerFragment)
+            navigateBack()
         }
         val linearLayoutManager = LinearLayoutManager(context)
         val newLocationsList = binding.fragmentNewLocationsList
@@ -59,6 +77,10 @@ class AddNewLocationFragment : Fragment() {
         newLocationsList.layoutManager = linearLayoutManager
         newLocationsList.adapter = newLocationsListAdapter
         newLocationsList.setHasFixedSize(true)
+    }
+
+    private fun navigateBack() {
+        findNavController().navigate(R.id.action_addNewLocation_to_drawerFragment)
     }
 
 }

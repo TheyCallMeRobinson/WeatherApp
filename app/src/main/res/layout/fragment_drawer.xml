@@ -11,7 +11,7 @@
         android:id="@+id/drawer_settings_btn"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="75dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/ic_settings"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,7 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_top"
         android:layout_marginHorizontal="@dimen/margin_horizontal"
-        android:text="@string/drawer_favorite_place_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/drawer_settings_btn" />
