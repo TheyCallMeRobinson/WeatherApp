@@ -13,15 +13,16 @@
 
         <include
             android:id="@id/hourly_temperature_list_container"
-            layout="@layout/hourly_temperature_list" />
+            layout="@layout/hourly_temperature_list"
+            android:layout_width="match_parent"
+            android:layout_height="180dp" />
 
         <include
             android:id="@id/daily_weather_list_container"
             layout="@layout/daily_weather_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            tools:layout_height="200dp" />
+            android:layout_height="360dp"
+            android:layout_marginTop="10dp" />
 
         <include
             android:id="@id/sunrise_sunset_holder_container"
