@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+//        binding.root.setScrimColor(resources.getColor(android.R.color.transparent))
+
         binding.root.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState()
 

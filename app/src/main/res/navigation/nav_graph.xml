@@ -22,22 +22,10 @@
         android:id="@+id/addNewLocation"
         android:name="cs.vsu.ru.application.view.fragment.AddNewLocationFragment"
         android:label="AddNewLocation"
-        tools:layout="@layout/fragment_add_new_location">
-        <action
-            android:id="@+id/action_addNewLocation_to_drawerFragment"
-            app:destination="@id/drawerFragment"
-            app:popUpTo="@id/drawerFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
+        tools:layout="@layout/fragment_add_new_location"/>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="cs.vsu.ru.application.view.fragment.AboutFragment"
         android:label="AboutFragment"
-        tools:layout="@layout/about_application" >
-        <action
-            android:id="@+id/action_aboutFragment_to_drawerFragment"
-            app:destination="@id/drawerFragment"
-            app:popUpTo="@id/drawerFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
+        tools:layout="@layout/about_application" />
 </navigation>

@@ -86,7 +86,7 @@ class AddNewLocationFragment : Fragment() {
     }
 
     private fun navigateBack() {
-        findNavController().navigate(R.id.action_addNewLocation_to_drawerFragment)
+        findNavController().navigateUp()
     }
 
     private fun hideKeyboard(view: View) {

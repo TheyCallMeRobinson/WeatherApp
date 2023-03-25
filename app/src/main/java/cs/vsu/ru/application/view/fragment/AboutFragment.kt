@@ -33,6 +33,6 @@ class AboutFragment : Fragment() {
     }
 
     private fun navigateBack() {
-        findNavController().navigate(R.id.action_aboutFragment_to_drawerFragment)
+        findNavController().navigateUp()
     }
 }
