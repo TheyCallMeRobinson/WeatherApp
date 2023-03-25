@@ -9,31 +9,34 @@
 
     <TextView
         android:id="@+id/item_location_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:textSize="10pt"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Воронеж" />
 
     <TextView
         android:id="@+id/item_admin_area_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="10dp"
         android:textSize="6pt"
+        app:layout_constraintEnd_toStartOf="@+id/item_latitude"
         app:layout_constraintStart_toStartOf="@+id/item_location_name"
         app:layout_constraintTop_toBottomOf="@+id/item_location_name"
         tools:text="Воронежская область" />
 
     <TextView
         android:id="@+id/item_country_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:textSize="6pt"
+        app:layout_constraintEnd_toEndOf="@+id/item_admin_area_name"
         app:layout_constraintStart_toStartOf="@+id/item_admin_area_name"
         app:layout_constraintTop_toBottomOf="@+id/item_admin_area_name"
         tools:text="Россия" />
@@ -45,9 +48,9 @@
         android:layout_marginEnd="10dp"
         android:text="@string/latitude"
         android:textSize="6pt"
-        app:layout_constraintBottom_toTopOf="@id/item_longitude"
+        app:layout_constraintBottom_toBottomOf="@+id/item_admin_area_name"
         app:layout_constraintEnd_toStartOf="@id/item_latitude_value"
-        app:layout_constraintTop_toTopOf="@+id/item_location_name" />
+        app:layout_constraintTop_toTopOf="@+id/item_admin_area_name" />
 
     <TextView
         android:id="@+id/item_longitude"
@@ -61,21 +64,22 @@
 
     <TextView
         android:id="@+id/item_latitude_value"
-        android:layout_width="80dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:textSize="8pt"
+        android:textSize="6pt"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/item_latitude"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/item_latitude"
-        tools:text="39.2000" />
+        tools:text="MMM.MMMM" />
 
     <TextView
         android:id="@+id/item_longitude_value"
-        android:layout_width="80dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:textSize="8pt"
+        android:textSize="6pt"
         android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/item_longitude"
         app:layout_constraintStart_toStartOf="@id/item_latitude_value"
         app:layout_constraintTop_toTopOf="@id/item_longitude"
