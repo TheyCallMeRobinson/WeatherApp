@@ -57,6 +57,8 @@ class AddNewLocationFragment : Fragment() {
             }
         })
 
+        binding.fragmentAddNewLocationInputEt.requestFocus()
+
         return binding.root
     }
 
