@@ -11,7 +11,6 @@
         android:id="@+id/day_of_week"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:text="понедельник"
         android:textColor="@color/white"
         android:textSize="8pt"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,40 +35,37 @@
         android:layout_marginStart="12dp"
         android:src="@drawable/ic_sunny"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/item_day_temperature"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toStartOf="@+id/item_night_temperature"
         app:layout_constraintStart_toEndOf="@+id/humidity_holder"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/item_day_temperature"
+        android:id="@+id/item_night_temperature"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:gravity="end"
-        android:text="10"
         android:textSize="9pt"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/item_night_temperature"
+        app:layout_constraintEnd_toStartOf="@+id/item_day_temperature"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/item_weather_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
-        android:id="@+id/item_night_temperature"
+        android:id="@+id/item_day_temperature"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:gravity="end"
-        android:text="3"
         android:textSize="9pt"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/item_day_temperature"
+        app:layout_constraintStart_toEndOf="@+id/item_night_temperature"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
