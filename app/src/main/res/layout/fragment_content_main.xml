@@ -12,7 +12,6 @@
         android:id="@+id/main_background_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="false"
         app:altSrc="@color/black"
         tools:src="@drawable/background_daytime" />
 
