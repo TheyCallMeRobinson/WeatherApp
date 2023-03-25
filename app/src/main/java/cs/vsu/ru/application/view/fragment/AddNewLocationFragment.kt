@@ -2,11 +2,13 @@ package cs.vsu.ru.application.view.fragment
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionInflater
@@ -17,6 +19,7 @@ import cs.vsu.ru.application.viewmodel.AddNewLocationViewModel
 import cs.vsu.ru.domain.model.location.Location
 import cs.vsu.ru.environment.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class AddNewLocationFragment : Fragment() {
 
@@ -40,8 +43,7 @@ class AddNewLocationFragment : Fragment() {
         }
 
         binding.fragmentFindLocationsBtn.setOnClickListener {
-            getLocationsByName(binding.fragmentAddNewLocationInputEt.text.toString())
-            hideKeyboard(it)
+            handleSearchAction(it)
         }
 
         return binding.root
@@ -83,6 +85,11 @@ class AddNewLocationFragment : Fragment() {
         newLocationsList.layoutManager = linearLayoutManager
         newLocationsList.adapter = newLocationsListAdapter
         newLocationsList.setHasFixedSize(true)
+    }
+
+    private fun handleSearchAction(view: View) {
+        getLocationsByName(binding.fragmentAddNewLocationInputEt.text.toString())
+        hideKeyboard(view)
     }
 
     private fun navigateBack() {
