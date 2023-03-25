@@ -71,7 +71,7 @@
         app:layout_constraintBottom_toBottomOf="@id/item_latitude"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/item_latitude"
-        tools:text="MMM.MMMM" />
+        tools:text="39.6000" />
 
     <TextView
         android:id="@+id/item_longitude_value"
