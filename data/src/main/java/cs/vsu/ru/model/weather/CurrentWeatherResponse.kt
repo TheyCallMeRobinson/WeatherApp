@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class CurrentWeatherResponse(
 
+    @SerializedName(value = "dt")
+    val currentTimeSeconds: Long,
+
     @SerializedName(value = "temp")
     val temperature: Float,
 

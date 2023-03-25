@@ -5,60 +5,11 @@ import cs.vsu.ru.model.weather.*
 
 class WeatherMapper {
 
-    fun toDto(entity: Weather): WeatherFullResponse {
-        return WeatherFullResponse(
-            timezoneOffset = entity.timezoneOffset,
-            current = CurrentWeatherResponse(
-                temperature = entity.currentWeather.temperature,
-                feelsLike = entity.currentWeather.feelsLike,
-                sunrise = entity.currentWeather.sunrise,
-                sunset = entity.currentWeather.sunset,
-                uvIndex = entity.currentWeather.uvIndex,
-                humidity = entity.currentWeather.humidity,
-                windSpeed = entity.currentWeather.windSpeed,
-                weather = listOf(
-                    WeatherDetailsElement(
-                        id = entity.currentWeather.detailsWeather.id,
-                        icon = entity.currentWeather.detailsWeather.icon
-                    )
-                )
-            ),
-            daily = entity.dailyWeather.map {
-                DailyWeatherResponse(
-                    date = it.date,
-                    humidity = it.humidity,
-                    temperature = DailyWeatherResponse.Temperature(
-                        minTemperature = it.temperature.minTemperature,
-                        maxTemperature = it.temperature.maxTemperature
-                    ),
-                    weather = listOf(
-                        WeatherDetailsElement(
-                            id = it.weather.id,
-                            icon = it.weather.icon
-                        )
-                    )
-                )
-            },
-            hourly = entity.hourlyWeather.map {
-                HourlyWeatherResponse(
-                    time = it.time,
-                    temperature = it.temperature,
-                    humidity = it.humidity,
-                    weather = listOf(
-                        WeatherDetailsElement(
-                            id = it.weather.id,
-                            icon = it.weather.icon
-                        )
-                    )
-                )
-            }
-        )
-    }
-
     fun toEntity(dto: WeatherFullResponse): Weather {
         return Weather(
-            timezoneOffset = dto.timezoneOffset,
+            timezoneOffsetSeconds = dto.timezoneOffsetSeconds,
             currentWeather = CurrentWeather(
+                currentTimeSeconds = dto.current.currentTimeSeconds,
                 temperature = dto.current.temperature,
                 feelsLike = dto.current.feelsLike,
                 sunrise = dto.current.sunrise,

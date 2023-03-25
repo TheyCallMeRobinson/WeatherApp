@@ -2,6 +2,7 @@ package cs.vsu.ru.domain.model.weather
 
 data class CurrentWeather(
 
+    val currentTimeSeconds: Long,
     val temperature: Float,
     val feelsLike: Float,
     val sunrise: Int,

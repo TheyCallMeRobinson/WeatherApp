@@ -20,6 +20,7 @@ data class CurrentWeather(
     val uvIndex: String,
     val humidity: String,
     val windSpeed: String,
+    val localDateTime: String
 )
 
 data class HourlyWeather(

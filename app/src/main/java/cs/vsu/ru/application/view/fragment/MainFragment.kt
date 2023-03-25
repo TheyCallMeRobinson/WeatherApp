@@ -76,6 +76,7 @@ class MainFragment : Fragment() {
     private fun setMainHeaderValues(layout: ContentMainHeaderBinding, weather: WeatherDataModel?) {
         layout.mainLocationNameTv.text = weather?.currentWeather?.location
         layout.currentWeatherIcon.setImageBitmap(weather?.currentWeather?.icon)
+        layout.mainDaytimeTv.text = weather?.currentWeather?.localDateTime
         layout.mainLocationToolbarNameTv.text = weather?.currentWeather?.location
         layout.mainTemperatureNowTv.text = weather?.currentWeather?.currentTemperature
         layout.mainTemperatureTodayTv.text = weather?.currentWeather?.dayNightTemperature
