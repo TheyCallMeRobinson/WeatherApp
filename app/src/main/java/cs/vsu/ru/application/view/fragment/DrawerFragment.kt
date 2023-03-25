@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.TransitionInflater
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.FragmentDrawerBinding
 import cs.vsu.ru.application.view.adapter.SavedLocationsListAdapter
@@ -32,6 +33,10 @@ class DrawerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDrawerBinding.inflate(inflater)
+
+        val transitionInflater = TransitionInflater.from(requireContext())
+        enterTransition = transitionInflater.inflateTransition(R.transition.slide_to_left)
+        exitTransition = transitionInflater.inflateTransition(R.transition.slide_to_right)
 
         setUpObservers()
         drawerViewModel.refreshData()

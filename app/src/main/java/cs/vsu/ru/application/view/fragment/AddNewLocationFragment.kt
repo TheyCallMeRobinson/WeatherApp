@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.TransitionInflater
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.FragmentAddNewLocationBinding
 import cs.vsu.ru.application.view.adapter.NewLocationsListAdapter
@@ -29,6 +30,10 @@ class AddNewLocationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAddNewLocationBinding.inflate(inflater, container, false)
+
+        val transitionInflater = TransitionInflater.from(requireContext())
+        enterTransition = transitionInflater.inflateTransition(R.transition.slide_to_left)
+        exitTransition = transitionInflater.inflateTransition(R.transition.slide_to_right)
 
         binding.fragmentBackBtn.setOnClickListener {
             navigateBack()

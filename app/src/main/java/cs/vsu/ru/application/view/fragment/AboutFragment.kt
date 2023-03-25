@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.transition.TransitionInflater
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.AboutApplicationBinding
 
@@ -19,6 +20,10 @@ class AboutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = AboutApplicationBinding.inflate(inflater)
+
+        val transitionInflater = TransitionInflater.from(requireContext())
+        enterTransition = transitionInflater.inflateTransition(R.transition.slide_to_left)
+        exitTransition = transitionInflater.inflateTransition(R.transition.slide_to_right)
 
         binding.fragmentBackBtn.setOnClickListener {
             navigateBack()
