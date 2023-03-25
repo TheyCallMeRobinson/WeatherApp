@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -54,7 +55,9 @@ class DrawerFragment : Fragment() {
                         setFavoriteLocation(resource.data!!)
                     }
                     Status.LOADING -> {}
-                    Status.ERROR -> {}
+                    Status.ERROR -> {
+                        Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         }
@@ -69,7 +72,9 @@ class DrawerFragment : Fragment() {
                     Status.LOADING -> {
                         binding.drawerSavedLocationsProgressBar.visibility = View.VISIBLE
                     }
-                    Status.ERROR -> {}
+                    Status.ERROR -> {
+                        Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         }
@@ -86,6 +91,7 @@ class DrawerFragment : Fragment() {
     private fun setSavedLocationsList(savedLocationsList: List<Location>) {
         if (savedLocationsList.isEmpty()) {
             binding.drawerNothingToShowTv.visibility = View.VISIBLE
+            return
         }
 
         binding.drawerNothingToShowTv.visibility = View.INVISIBLE

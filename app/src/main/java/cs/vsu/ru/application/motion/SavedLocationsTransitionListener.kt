@@ -22,11 +22,11 @@ class SavedLocationsTransitionListener(
                 .setDuration(100)
                 .scaleY(0f)
                 .translationY(-motionLayout.height / 2f)
-                .withEndAction(onCompleteAction)
+                .withStartAction(onCompleteAction)
+                .withEndAction {
+                    it.progress = 0.0F
+                }
 
-        }
-        motionLayout?.let {
-            it.transitionToStart()
         }
     }
 

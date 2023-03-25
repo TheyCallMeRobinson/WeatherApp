@@ -1,6 +1,7 @@
 package cs.vsu.ru.application.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,7 +48,11 @@ class MainFragment : Fragment() {
     private fun setupObservers() {
         viewModel.backgroundResourceLiveData.observe(viewLifecycleOwner) {
             binding.mainBackgroundImg.setBackgroundResource(it)
-            binding.mainBackgroundImg.setAltImageResource(R.color.dark_blue)
+            try {
+                binding.mainBackgroundImg.setAltImageResource(R.drawable.background_dark_theme)
+            } catch (exception: Exception) {
+                Log.e("Main Fragment", "Couldn't set alt image resource")
+            }
         }
         viewModel.weatherLiveData.observe(viewLifecycleOwner) {
             it?.let { resource ->
