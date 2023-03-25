@@ -1,10 +1,12 @@
 package cs.vsu.ru.application.view.fragment
 
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import cs.vsu.ru.application.R
@@ -34,6 +36,7 @@ class AddNewLocationFragment : Fragment() {
 
         binding.fragmentFindLocationsBtn.setOnClickListener {
             getLocationsByName(binding.fragmentAddNewLocationInputEt.text.toString())
+            hideKeyboard(it)
         }
 
         return binding.root
@@ -80,5 +83,10 @@ class AddNewLocationFragment : Fragment() {
 
     private fun navigateBack() {
         findNavController().navigate(R.id.action_addNewLocation_to_drawerFragment)
+    }
+
+    private fun hideKeyboard(view: View) {
+        val inputMethodManager = activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.applicationWindowToken, 0)
     }
 }
