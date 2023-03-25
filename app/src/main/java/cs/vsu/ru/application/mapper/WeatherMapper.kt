@@ -50,8 +50,6 @@ class WeatherMapper {
             )
         }
 
-        Log.e("kek", "${System.currentTimeMillis()}")
-
         return WeatherDataModel(
             currentWeather = CurrentWeather(
                 currentTemperature = TemperatureModel(entity.currentWeather.temperature).toString(),
