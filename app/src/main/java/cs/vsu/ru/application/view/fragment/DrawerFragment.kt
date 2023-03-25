@@ -86,17 +86,12 @@ class DrawerFragment : Fragment() {
     private fun setSavedLocationsList(savedLocationsList: List<Location>) {
         if (savedLocationsList.isEmpty()) {
             binding.drawerNothingToShowTv.visibility = View.VISIBLE
-            return
         }
 
         binding.drawerNothingToShowTv.visibility = View.INVISIBLE
 
         val savedLocationsListAdapter = SavedLocationsListAdapter(
-            savedLocationsList,
-            { location ->
-                setCurrentLocation(location)
-            },
-            drawerViewModel
+            savedLocationsList, { location -> setCurrentLocation(location) }, drawerViewModel
         )
         val linearLayoutManager = LinearLayoutManager(context)
         val savedLocations = binding.drawerFavoriteLocationsList

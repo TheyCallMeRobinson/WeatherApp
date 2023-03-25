@@ -45,7 +45,7 @@ class AddNewLocationFragment : Fragment() {
     private fun getLocationsByName(locationName: String) {
         viewModel.getLocationsByName(locationName).observe(viewLifecycleOwner) {
             it?.let {
-                when(it.status) {
+                when (it.status) {
                     Status.LOADING -> {
                         binding.fragmentAddNewLocationInputHolder.isErrorEnabled = false
                     }
@@ -62,12 +62,11 @@ class AddNewLocationFragment : Fragment() {
     }
 
     private fun setLocations(locations: List<Location>?) {
-        if (locations?.isEmpty() == true) {
-            binding.fragmentListIsEmptyTv.visibility = View.VISIBLE
-            return
+        binding.fragmentListIsEmptyTv.visibility = if (locations?.isEmpty() == true) {
+            View.VISIBLE
+        } else {
+            View.INVISIBLE
         }
-
-        binding.fragmentListIsEmptyTv.visibility = View.INVISIBLE
 
         val newLocationsListAdapter = NewLocationsListAdapter(locations) {
             viewModel.saveLocation(it)
@@ -86,7 +85,8 @@ class AddNewLocationFragment : Fragment() {
     }
 
     private fun hideKeyboard(view: View) {
-        val inputMethodManager = activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.applicationWindowToken, 0)
     }
 }
