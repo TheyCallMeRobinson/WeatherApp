@@ -17,7 +17,7 @@ class AddNewLocationViewModel(
 
     fun getLocationsByName(locationName: String) = liveData(Dispatchers.IO) {
         if (locationName.trim().isEmpty()) {
-            emit(Resource.error(data = null, message = "Location name is empty"))
+            emit(Resource.error(data = null, message = "Это поле не может быть пустым"))
             return@liveData
         }
 
@@ -25,7 +25,7 @@ class AddNewLocationViewModel(
         try {
             emit(Resource.success(data = findLocationsByNameUseCase.execute(locationName)))
         } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = "Failed while geocoding location"))
+            emit(Resource.error(data = null, message = "Неправильно введены данные"))
         }
     }
 

@@ -59,7 +59,7 @@ class AddNewLocationFragment : Fragment() {
                     }
                     Status.ERROR -> {
                         binding.fragmentAddNewLocationInputHolder.isErrorEnabled = true
-                        binding.fragmentAddNewLocationInputHolder.error = wrongInputErrorText
+                        binding.fragmentAddNewLocationInputHolder.error = it.message
                     }
                 }
             }
