@@ -31,7 +31,7 @@ class DrawerFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentDrawerBinding.inflate(inflater)
 
         val transitionInflater = TransitionInflater.from(requireContext())

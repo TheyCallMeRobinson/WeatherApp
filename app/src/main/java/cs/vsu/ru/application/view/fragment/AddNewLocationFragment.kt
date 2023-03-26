@@ -1,11 +1,10 @@
 package cs.vsu.ru.application.view.fragment
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,15 +41,9 @@ class AddNewLocationFragment : Fragment() {
             clearInputField()
         }
 
-        binding.fragmentAddNewLocationInputEt.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                getLocationsByName(binding.fragmentAddNewLocationInputEt.text.toString())
-            }
-        })
+        binding.fragmentAddNewLocationInputEt.doOnTextChanged { text, _, _, _ ->
+            getLocationsByName(text.toString())
+        }
 
         binding.fragmentAddNewLocationInputEt.requestFocus()
 
