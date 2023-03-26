@@ -65,15 +65,14 @@ open class LocationRepositoryImpl(
         val geocoder = Geocoder(context)
         val addresses = geocoder.getFromLocationName(locationName, 10) // TODO: maxResults should be getting from app settings
         val locations = addresses?.map {
-            // TODO(looks gross, needs overhaul)
-            val name = if (it.featureName != null) {
-                if (it.thoroughfare != null && it.featureName != it.thoroughfare) {
-                    "${it.thoroughfare}, ${it.featureName}"
-                } else {
-                    it.featureName
-                }
+            var name: String
+            if (it.featureName == null) {
+                name = it.locality
+            }
+            if (it.thoroughfare == null || it.featureName == it.thoroughfare) {
+                name = it.featureName
             } else {
-                it.locality
+                name = "${it.thoroughfare}, ${it.featureName}"
             }
 
             Location(
