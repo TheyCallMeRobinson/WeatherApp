@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_saved_location_holder"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="80dp"
     app:layoutDescription="@xml/drawer_saved_locations_animation"
     tools:showPaths="true">
 

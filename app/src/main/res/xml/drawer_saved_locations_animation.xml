@@ -78,7 +78,7 @@
             android:layout_marginTop="10dp"
             android:textSize="10pt"
             tools:text="Воронеж"
-            motion:layout_constraintEnd_toEndOf="@id/item_to_remove_trashcan"
+            motion:layout_constraintEnd_toStartOf="@id/item_remove_from_list"
             motion:layout_constraintStart_toEndOf="@+id/item_to_favorite_background"
             motion:layout_constraintTop_toTopOf="parent" />
 
@@ -88,10 +88,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:textSize="6pt"
+            android:layout_marginBottom="10dp"
             tools:text="Россия"
-            motion:layout_constraintEnd_toEndOf="@id/item_to_remove_trashcan"
+            motion:layout_constraintEnd_toStartOf="@id/item_remove_from_list"
             motion:layout_constraintStart_toStartOf="@+id/item_location_name"
-            motion:layout_constraintTop_toBottomOf="@+id/item_location_name"/>
+            motion:layout_constraintTop_toBottomOf="@+id/item_location_name"
+            motion:layout_constraintBottom_toBottomOf="parent"/>
 
         <Constraint
             android:id="@+id/item_remove_from_list"
@@ -167,6 +169,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:layout_marginBottom="10dp"
             android:textSize="6pt"
             tools:text="Россия"
             motion:layout_constraintStart_toStartOf="@+id/item_location_name"
@@ -248,6 +251,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:layout_marginBottom="10dp"
             android:textSize="6pt"
             tools:text="Россия"
             motion:layout_constraintStart_toStartOf="@+id/item_location_name"
