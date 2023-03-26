@@ -2,7 +2,7 @@ package cs.vsu.ru.application.model
 
 import android.graphics.Bitmap
 
-data class WeatherDataModel(
+data class WeatherUIModel(
     val currentWeather: CurrentWeather,
     val hourlyWeather: List<HourlyWeather>,
     val dailyWeather: List<DailyWeather>,
@@ -26,7 +26,7 @@ data class CurrentWeather(
 data class HourlyWeather(
     val time: String,
     val icon: Bitmap,
-    val temperature: String,
+    val temperature: Int,
     val humidity: String,
 )
 

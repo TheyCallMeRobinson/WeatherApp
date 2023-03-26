@@ -6,7 +6,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.mapper.WeatherMapper
-import cs.vsu.ru.application.model.WeatherDataModel
+import cs.vsu.ru.application.model.WeatherUIModel
 import cs.vsu.ru.domain.model.location.Location
 import cs.vsu.ru.domain.usecase.location.GetCurrentLocationUseCase
 import cs.vsu.ru.domain.usecase.location.SetCurrentLocationUseCase
@@ -30,8 +30,8 @@ class MainViewModel(
     }
     val backgroundResourceLiveData: LiveData<Int> = backgroundResource
 
-    private val weatherDataToDisplay = MutableLiveData<Resource<WeatherDataModel>>()
-    val weatherLiveData: LiveData<Resource<WeatherDataModel>> = weatherDataToDisplay
+    private val weatherDataToDisplay = MutableLiveData<Resource<WeatherUIModel>>()
+    val weatherLiveData: LiveData<Resource<WeatherUIModel>> = weatherDataToDisplay
 
     fun refreshData() {
         getWeatherData().observeForever {

@@ -19,6 +19,7 @@ import cs.vsu.ru.application.databinding.FragmentContentMainBinding
 import cs.vsu.ru.application.databinding.ItemDailyWeatherBinding
 import cs.vsu.ru.application.model.*
 import cs.vsu.ru.application.view.adapter.HourlyListAdapter
+import cs.vsu.ru.application.view.adapter.HourlyTemperatureGraphCurvyItemDecorator
 import cs.vsu.ru.application.viewmodel.MainViewModel
 import cs.vsu.ru.environment.Status
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
@@ -32,8 +33,10 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentContentMainBinding.inflate(inflater)
+
+        binding.fragmentContentMainProgressBar.visibility = View.VISIBLE
 
         viewModel.refreshData()
         setupObservers()
@@ -73,7 +76,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun setMainHeaderValues(layout: ContentMainHeaderBinding, weather: WeatherDataModel?) {
+    private fun setMainHeaderValues(layout: ContentMainHeaderBinding, weather: WeatherUIModel?) {
         layout.mainLocationNameTv.text = weather?.currentWeather?.location
         layout.currentWeatherIcon.setImageBitmap(weather?.currentWeather?.icon)
         layout.mainDaytimeTv.text = weather?.currentWeather?.localDateTime
@@ -83,7 +86,7 @@ class MainFragment : Fragment() {
         layout.mainFeelsLikeTemperatureTv.text = weather?.currentWeather?.feelsLikeTemperature
     }
 
-    private fun setMainBodyListValues(layout: ContentMainBodyListBinding, weather: WeatherDataModel?) {
+    private fun setMainBodyListValues(layout: ContentMainBodyListBinding, weather: WeatherUIModel?) {
         setHourlyTemperatureList(layout, weather)
         setDailyWeatherList(weather?.dailyWeather!!)
         setSunsetSunriseTime(layout, weather.currentWeather)
@@ -91,16 +94,22 @@ class MainFragment : Fragment() {
         setApiRefreshTime(layout, weather.apiCallTime)
     }
 
-    private fun setHourlyTemperatureList(layout: ContentMainBodyListBinding, weather: WeatherDataModel?) {
+    private fun setHourlyTemperatureList(layout: ContentMainBodyListBinding, weather: WeatherUIModel?) {
         val hourlyListAdapter = weather?.hourlyWeather?.let { hourlyWeatherList ->
             HourlyListAdapter(hourlyWeatherList, weather.hourlyWeather.map {it.icon})
         }
         val hourlyList: RecyclerView = layout.hourlyTemperatureListContainer.hourlyTemperatureList
         val linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        hourlyList.layoutManager = linearLayoutManager
-        hourlyList.adapter = hourlyListAdapter
-        hourlyList.setHasFixedSize(true)
+        hourlyList.apply {
+            if (hourlyList.itemDecorationCount > 0) {
+                removeItemDecorationAt(0)
+            }
+            addItemDecoration(HourlyTemperatureGraphCurvyItemDecorator(weather!!.hourlyWeather, requireContext()))
+            layoutManager = linearLayoutManager
+            adapter = hourlyListAdapter
+            setHasFixedSize(true)
+        }
     }
 
     private fun setDailyWeatherList(dailyWeatherList: List<DailyWeather>) {

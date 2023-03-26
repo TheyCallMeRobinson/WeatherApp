@@ -2,7 +2,6 @@ package cs.vsu.ru.application.mapper
 
 import android.graphics.Bitmap
 import android.text.format.DateFormat
-import android.util.Log
 import cs.vsu.ru.application.model.*
 import cs.vsu.ru.domain.model.location.Location
 import cs.vsu.ru.domain.model.weather.Weather
@@ -18,7 +17,7 @@ class WeatherMapper {
         hourlyWeatherIcons: List<Bitmap>,
         dailyWeatherIcons: List<Bitmap>,
         apiCallTime: Long
-    ): WeatherDataModel {
+    ): WeatherUIModel {
         val offsetFromUtc = TimeZone.getDefault().getOffset(Date().time) / 1000
         val dataResponseTimeOffset = entity.timezoneOffsetSeconds - offsetFromUtc
 
@@ -29,7 +28,7 @@ class WeatherMapper {
                     time = DateFormat.format("HH:mm", Date((dataResponseTimeOffset + entity.hourlyWeather[i].time) * 1000L))
                         .toString(),
                     icon = hourlyWeatherIcons[i],
-                    temperature = TemperatureModel(entity.hourlyWeather[i].temperature).toString(),
+                    temperature = entity.hourlyWeather[i].temperature.toInt(),
                     humidity = HumidityModel(entity.hourlyWeather[i].humidity).toString()
                 )
             )
@@ -50,7 +49,7 @@ class WeatherMapper {
             )
         }
 
-        return WeatherDataModel(
+        return WeatherUIModel(
             currentWeather = CurrentWeather(
                 currentTemperature = TemperatureModel(entity.currentWeather.temperature).toString(),
                 icon = currentWeatherIcon,

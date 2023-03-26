@@ -15,7 +15,7 @@
             android:id="@id/hourly_temperature_list_container"
             layout="@layout/hourly_temperature_list"
             android:layout_width="match_parent"
-            android:layout_height="180dp" />
+            android:layout_height="210dp" />
 
         <include
             android:id="@id/daily_weather_list_container"

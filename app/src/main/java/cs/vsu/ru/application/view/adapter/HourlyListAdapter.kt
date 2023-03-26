@@ -1,6 +1,7 @@
 package cs.vsu.ru.application.view.adapter
 
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cs.vsu.ru.application.R
 import android.widget.ImageView
+import androidx.core.graphics.drawable.toDrawable
 import cs.vsu.ru.application.model.HourlyWeather
+import cs.vsu.ru.application.model.TemperatureModel
 
 class HourlyListAdapter(
     private val hourlyList: List<HourlyWeather>,
@@ -27,8 +30,8 @@ class HourlyListAdapter(
 
         holder.hour.text = listElement.time
         holder.icon.setImageBitmap(iconList[position])
-        holder.temperature.text = listElement.temperature
-        holder.humidity.text = listElement.humidity
+        holder.temperature.text = TemperatureModel(listElement.temperature.toFloat()).toString()
+        holder.humidity.text = listElement.humidity.toString()
     }
 
     override fun getItemCount(): Int = hourlyList.size

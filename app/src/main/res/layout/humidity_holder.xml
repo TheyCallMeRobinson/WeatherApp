@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
+        android:id="@+id/item_humidity_water_drop"
         android:layout_height="16dp"
         android:layout_width="16dp"
         android:layout_gravity="center"
