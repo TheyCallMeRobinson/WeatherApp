@@ -1,14 +1,11 @@
 package cs.vsu.ru.application.view.fragment
 
-import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,8 +24,6 @@ class AddNewLocationFragment : Fragment() {
     private lateinit var binding: FragmentAddNewLocationBinding
     private val viewModel by viewModel<AddNewLocationViewModel>()
 
-    private val wrongInputErrorText = "Это поле не может быть пустым"
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,8 +38,8 @@ class AddNewLocationFragment : Fragment() {
             navigateBack()
         }
 
-        binding.fragmentFindLocationsBtn.setOnClickListener {
-            handleSearchAction(it)
+        binding.fragmentClearInputBtn.setOnClickListener {
+            clearInputField()
         }
 
         binding.fragmentAddNewLocationInputEt.addTextChangedListener(object : TextWatcher {
@@ -100,18 +95,12 @@ class AddNewLocationFragment : Fragment() {
         newLocationsList.setHasFixedSize(true)
     }
 
-    private fun handleSearchAction(view: View) {
-        getLocationsByName(binding.fragmentAddNewLocationInputEt.text.toString())
-        hideKeyboard(view)
+    private fun clearInputField() {
+        binding.fragmentAddNewLocationInputEt.text?.clear()
+        binding.fragmentAddNewLocationInputHolder.isErrorEnabled = false
     }
 
     private fun navigateBack() {
         findNavController().navigateUp()
-    }
-
-    private fun hideKeyboard(view: View) {
-        val inputMethodManager =
-            activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view.applicationWindowToken, 0)
     }
 }
