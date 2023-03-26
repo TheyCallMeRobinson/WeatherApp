@@ -72,22 +72,24 @@
 
         <Constraint
             android:id="@id/item_location_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
             android:layout_marginTop="10dp"
             android:textSize="10pt"
             tools:text="Воронеж"
+            motion:layout_constraintEnd_toEndOf="@id/item_to_remove_trashcan"
             motion:layout_constraintStart_toEndOf="@+id/item_to_favorite_background"
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
             android:id="@id/item_country_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:textSize="6pt"
             tools:text="Россия"
+            motion:layout_constraintEnd_toEndOf="@id/item_to_remove_trashcan"
             motion:layout_constraintStart_toStartOf="@+id/item_location_name"
             motion:layout_constraintTop_toBottomOf="@+id/item_location_name"/>
 
