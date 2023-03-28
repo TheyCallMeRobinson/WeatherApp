@@ -13,8 +13,8 @@ import cs.vsu.ru.application.model.HourlyWeather
 
 private const val STROKE_WIDTH = 10f
 private const val PATH_CORNER_RADIUS_IN_DP = 30
-private const val CHILD_HEADER_HEIGHT_IN_DP = 110
-private const val CHILD_FOOTER_HEIGHT_IN_DP = 40
+private const val CHILD_HEADER_HEIGHT_IN_DP = 130
+private const val CHILD_FOOTER_HEIGHT_IN_DP = 50
 
 internal class HourlyTemperatureGraphCurvyItemDecorator(dayStocksUIModels: List<HourlyWeather>, context: Context) :
     RecyclerView.ItemDecoration() {

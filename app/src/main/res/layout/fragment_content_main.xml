@@ -37,6 +37,6 @@
         android:id="@+id/fragment_content_main_progress_bar"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:visibility="invisible" />
+        android:visibility="visible" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
