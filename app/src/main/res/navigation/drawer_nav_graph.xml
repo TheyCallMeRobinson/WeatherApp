@@ -12,8 +12,7 @@
         tools:layout="@layout/fragment_drawer">
         <action
             android:id="@+id/action_drawerFragment_to_addNewLocation"
-            app:destination="@id/addNewLocation"
-            app:popUpToInclusive="false" />
+            app:destination="@id/addNewLocation" />
         <action
             android:id="@+id/action_drawerFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />

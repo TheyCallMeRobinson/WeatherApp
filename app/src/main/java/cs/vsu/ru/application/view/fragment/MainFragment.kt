@@ -10,8 +10,10 @@ import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionInflater
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.ContentMainBodyListBinding
 import cs.vsu.ru.application.databinding.ContentMainHeaderBinding
@@ -38,8 +40,16 @@ class MainFragment : Fragment() {
 
         binding.fragmentContentMainProgressBar.visibility = View.VISIBLE
 
+        val transitionInflater = TransitionInflater.from(requireContext())
+        enterTransition = transitionInflater.inflateTransition(R.transition.slide_to_bottom)
+        exitTransition = transitionInflater.inflateTransition(R.transition.slide_to_top)
+
         viewModel.refreshData()
         setupObservers()
+
+        binding.toFragmentMainBtn.setOnClickListener(
+            Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_routeFragment)
+        )
 
         binding.mainToolbarBurger.setOnClickListener {
             activity?.findViewById<DrawerLayout>(R.id.activity_main_layout)?.openDrawer(GravityCompat.START)

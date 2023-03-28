@@ -33,6 +33,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/to_fragment_main_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="@dimen/margin_horizontal"
+        android:layout_marginTop="@dimen/toolbar_top_margin"
+        android:background="@drawable/ic_car"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ProgressBar
         android:id="@+id/fragment_content_main_progress_bar"
         android:layout_width="100dp"
