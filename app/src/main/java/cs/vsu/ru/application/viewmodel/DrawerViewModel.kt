@@ -29,6 +29,8 @@ class DrawerViewModel(
     private val savedLocations = MutableLiveData<Resource<List<Location>>>()
     val savedLocationsLiveData: LiveData<Resource<List<Location>>> = savedLocations
 
+    // God forgive me for what am I about to do
+    // ToDo: Overhaul to data flow
     fun refreshData() {
         getSavedLocations().observeForever {
             savedLocations.value = it
@@ -78,6 +80,7 @@ class DrawerViewModel(
         refreshData()
     }
 
+    // ToDo: Return this to DrawerFragment
     fun onRemoveTransitionListener(location: Location): SavedLocationsTransitionListener =
         SavedLocationsTransitionListener { removeSavedLocation(location) }
 

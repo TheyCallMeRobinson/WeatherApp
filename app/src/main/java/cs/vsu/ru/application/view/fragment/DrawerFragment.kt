@@ -101,6 +101,7 @@ class DrawerFragment : Fragment() {
 
         binding.drawerNothingToShowTv.visibility = View.INVISIBLE
 
+        // ToDo: Do not send view model to this constructor, use prepared functions in VM instead
         val savedLocationsListAdapter = SavedLocationsListAdapter(
             savedLocationsList, { location -> setCurrentLocation(location) }, drawerViewModel
         )
