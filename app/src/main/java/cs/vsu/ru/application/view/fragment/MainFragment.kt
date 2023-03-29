@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TableRow
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -60,12 +61,8 @@ class MainFragment : Fragment() {
 
     private fun setupObservers() {
         viewModel.backgroundResourceLiveData.observe(viewLifecycleOwner) {
-            binding.mainBackgroundImg.setBackgroundResource(it)
-            try {
-                binding.mainBackgroundImg.setAltImageResource(R.drawable.background_dark_theme)
-            } catch (exception: Exception) {
-                Log.e("Main Fragment", "Couldn't set alt image resource")
-            }
+            binding.mainStartBackgroundImg.setBackgroundResource(it)
+            binding.mainEndBackgroundImg.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.dark_blue))
         }
         viewModel.weatherLiveData.observe(viewLifecycleOwner) {
             it?.let { resource ->

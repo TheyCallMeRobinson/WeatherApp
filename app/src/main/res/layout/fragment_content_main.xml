@@ -8,11 +8,16 @@
     android:layout_height="match_parent"
     app:layoutDescription="@xml/main_content_animation">
 
-    <androidx.constraintlayout.utils.widget.ImageFilterView
-        android:id="@+id/main_background_img"
+    <ImageView
+        android:id="@+id/main_end_background_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:altSrc="@color/black"
+        tools:src="@color/dark_blue"/>
+
+    <ImageView
+        android:id="@+id/main_start_background_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         tools:src="@drawable/background_daytime" />
 
     <include
