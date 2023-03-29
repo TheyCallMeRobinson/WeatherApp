@@ -19,7 +19,7 @@
         android:id="@+id/route_to_location"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background="@drawable/ic_arrow_to" />
+        android:background="@drawable/ic_arrow_right" />
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/end_route_location"

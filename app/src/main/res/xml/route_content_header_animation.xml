@@ -21,11 +21,13 @@
             android:id="@id/route_to_location"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@drawable/ic_arrow_to"
-            motion:layout_constraintBottom_toBottomOf="@id/start_route_location"
-            motion:layout_constraintEnd_toStartOf="@id/end_route_location"
-            motion:layout_constraintStart_toEndOf="@id/start_route_location"
-            motion:layout_constraintTop_toTopOf="@id/start_route_location"/>
+            android:background="@drawable/ic_arrow_right"
+            android:layout_marginTop="10dp"
+            android:rotation="90"
+            motion:layout_constraintBottom_toTopOf="@id/end_route_location"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/start_route_location"/>
 
         <Constraint
             android:id="@id/end_route_location"
@@ -37,7 +39,7 @@
             android:background="@drawable/shape_round_background"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/start_route_location"/>
+            motion:layout_constraintTop_toBottomOf="@id/route_to_location"/>
 
         <Constraint
             android:id="@id/get_route_button"
@@ -54,8 +56,7 @@
     </ConstraintSet>
 
     <ConstraintSet
-        android:id="@+id/half_animation"
-        motion:deriveConstraintsFrom="@id/start_animation">
+        android:id="@+id/half_animation">
 
         <Constraint
             android:id="@id/start_route_location"
@@ -72,11 +73,12 @@
             android:id="@id/route_to_location"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@drawable/ic_arrow_to"
+            android:background="@drawable/ic_arrow_right"
+            android:rotation="0.0"
             motion:layout_constraintBottom_toBottomOf="@id/start_route_location"
             motion:layout_constraintEnd_toStartOf="@id/end_route_location"
             motion:layout_constraintStart_toEndOf="@id/start_route_location"
-            motion:layout_constraintTop_toTopOf="@id/start_route_location"/>
+            motion:layout_constraintTop_toBottomOf="@id/start_route_location"/>
 
         <Constraint
             android:id="@id/end_route_location"
@@ -123,7 +125,8 @@
             android:id="@id/route_to_location"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@drawable/ic_arrow_to"
+            android:background="@drawable/ic_arrow_right"
+            android:rotation="1"
             motion:layout_constraintBottom_toBottomOf="@id/start_route_location"
             motion:layout_constraintEnd_toStartOf="@id/end_route_location"
             motion:layout_constraintStart_toEndOf="@id/start_route_location"
