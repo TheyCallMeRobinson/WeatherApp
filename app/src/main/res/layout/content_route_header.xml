@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/route_content_header_animation"
-    tools:background="@color/black">
+    tools:background="@drawable/background_daytime">
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/start_route_location"
@@ -33,7 +33,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/orange"
-        android:text="@string/get_route_info"
-        tools:layout_editor_absoluteY="90dp" />
+        android:text="@string/get_route_info" />
+
+    <include
+        android:id="@+id/route_body"
+        layout="@layout/content_route_body"/>
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
