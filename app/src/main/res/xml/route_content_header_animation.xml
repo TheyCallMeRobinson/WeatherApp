@@ -6,6 +6,16 @@
         android:id="@+id/start_animation">
 
         <Constraint
+            android:id="@id/start_background"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:src="@drawable/background_daytime">
+            <CustomAttribute
+                motion:attributeName="alpha"
+                motion:customFloatValue="1.0"/>
+        </Constraint>
+
+        <Constraint
             android:id="@id/start_route_location"
             android:layout_width="0dp"
             android:layout_height="70dp"
@@ -13,7 +23,7 @@
             android:layout_marginEnd="@dimen/margin_horizontal"
             android:layout_marginTop="75dp"
             android:background="@drawable/shape_round_background"
-            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/main_toolbar_burger"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"/>
 
@@ -75,9 +85,9 @@
             android:layout_width="0dp"
             android:layout_height="70dp"
             android:layout_marginStart="@dimen/margin_horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/shape_round_background"
-            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/main_toolbar_burger"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintEnd_toStartOf="@id/route_to_location"/>
 
@@ -123,13 +133,23 @@
         motion:deriveConstraintsFrom="@id/half_animation">
 
         <Constraint
+            android:id="@id/start_background"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:src="@drawable/background_daytime">
+            <CustomAttribute
+                motion:attributeName="alpha"
+                motion:customFloatValue="0.0"/>
+        </Constraint>
+
+        <Constraint
             android:id="@id/start_route_location"
             android:layout_width="0dp"
             android:layout_height="70dp"
             android:layout_marginStart="@dimen/margin_horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/shape_round_background"
-            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/main_toolbar_burger"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintEnd_toStartOf="@id/route_to_location"/>
 
