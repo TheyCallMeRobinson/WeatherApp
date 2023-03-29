@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/route_content_header_animation"
+    tools:background="@color/black">
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/start_route_location"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="@dimen/margin_horizontal"
+        android:background="@drawable/shape_round_background" />
+
+    <ImageView
+        android:id="@+id/route_to_location"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_arrow_to" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/end_route_location"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="@dimen/margin_horizontal"
+        android:background="@drawable/shape_round_background" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/get_route_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/orange"
+        android:text="@string/get_route_info"
+        tools:layout_editor_absoluteY="90dp" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

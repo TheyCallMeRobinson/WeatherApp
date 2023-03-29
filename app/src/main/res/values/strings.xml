@@ -15,4 +15,5 @@
     <string name="no_data_by_request_found">По запросу ничего не найдено</string>
     <string name="saved_locations_list_is_empty">Список сохраненных местоположений пуст</string>
     <string name="weather_api_name">OpenWeather One Call API 3.0</string>
+    <string name="get_route_info">В путь</string>
 </resources>

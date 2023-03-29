@@ -32,7 +32,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/toolbar_start_margin"
-        android:text="Воронеж"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar_burger"
         app:layout_constraintStart_toEndOf="@id/toolbar_burger"
         app:layout_constraintTop_toTopOf="@id/toolbar_burger" />
@@ -49,8 +48,7 @@
         android:id="@+id/main_temperature_today_tv"
         style="@style/Text.SmallInfo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/main_daytime_tv"
@@ -69,8 +67,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="2dp"
         app:layout_constraintStart_toEndOf="@+id/main_temperature_today_tv"
-        app:layout_constraintTop_toTopOf="@+id/main_temperature_today_tv"
-        android:text="" />
+        app:layout_constraintTop_toTopOf="@+id/main_temperature_today_tv" />
 
     <ImageView
         android:id="@+id/current_weather_icon"
