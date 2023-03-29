@@ -70,7 +70,7 @@ class WeatherMapper {
             ),
             hourlyWeather = hourlyWeatherList,
             dailyWeather = dailyWeatherList,
-            apiCallTime = "${DateFormat.format("dd.MM, HH:mm", Date(apiCallTime))} Обновл.",
+            apiCallTime = "${DateFormat.format("dd.MM, HH:mm", Date(apiCallTime))}",
         )
     }
 }
