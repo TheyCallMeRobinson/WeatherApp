@@ -43,7 +43,8 @@ val appModule = module {
     viewModel<RouteViewModel> {
         RouteViewModel(
             getSavedLocationsUseCase = get(),
-            getSavedLocationsExcludeUseCase = get()
+            getSavedLocationsExcludeUseCase = get(),
+            getWeatherDataHourlyUseCase = get()
         )
     }
 }

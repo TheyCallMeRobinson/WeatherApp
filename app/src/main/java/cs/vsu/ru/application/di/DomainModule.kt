@@ -1,6 +1,7 @@
 package cs.vsu.ru.application.di
 
 import cs.vsu.ru.domain.usecase.location.*
+import cs.vsu.ru.domain.usecase.weather.GetWeatherDataHourlyUseCase
 import cs.vsu.ru.domain.usecase.weather.GetWeatherDataUseCase
 import cs.vsu.ru.domain.usecase.weather.GetWeatherIconUseCase
 import org.koin.dsl.module
@@ -49,5 +50,9 @@ val domainModule = module {
 
     factory<GetSavedLocationsExcludeUseCase> {
         GetSavedLocationsExcludeUseCase(locationRepository = get())
+    }
+
+    factory<GetWeatherDataHourlyUseCase> {
+        GetWeatherDataHourlyUseCase(weatherRepository = get())
     }
 }
