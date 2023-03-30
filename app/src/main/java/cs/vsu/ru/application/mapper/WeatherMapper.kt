@@ -32,7 +32,7 @@ class WeatherMapper {
                     time = DateFormat.format("HH:mm", Date((dataResponseTimeOffset + hourlyWeather[i].time) * 1000L))
                         .toString(),
                     icon = hourlyWeatherIcons[i],
-                    temperature = hourlyWeather[i].temperature.toInt(),
+                    temperature = ceil(hourlyWeather[i].temperature).toInt(),
                     humidity = HumidityModel(hourlyWeather[i].humidity).toString()
                 )
             )
