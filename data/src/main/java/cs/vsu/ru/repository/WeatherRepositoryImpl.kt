@@ -18,7 +18,6 @@ class WeatherRepositoryImpl(
     private val weatherIconService: WeatherIconService,
     private val weatherIconDao: WeatherIconDao,
     private val mapper: WeatherMapper,
-    private val context: Context
 ) : WeatherRepository {
 
     override suspend fun getWeather(location: Location): Weather {
@@ -26,6 +25,17 @@ class WeatherRepositoryImpl(
             retrofitServiceProvider.weatherDataService.getForecast(
                 latitude = location.latitude,
                 longitude = location.longitude,
+                key = retrofitServiceProvider.openWeatherApiKey
+            )
+        )
+    }
+
+    override suspend fun getHourlyWeather(location: Location): Weather {
+        return mapper.toEntity(
+            retrofitServiceProvider.weatherDataService.getForecast(
+                latitude = location.latitude,
+                longitude = location.longitude,
+                exclude = "minutely,daily,current",
                 key = retrofitServiceProvider.openWeatherApiKey
             )
         )

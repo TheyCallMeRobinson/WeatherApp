@@ -21,15 +21,19 @@ class WeatherMapper {
         val offsetFromUtc = TimeZone.getDefault().getOffset(Date().time) / 1000
         val dataResponseTimeOffset = entity.timezoneOffsetSeconds - offsetFromUtc
 
+        val hourlyWeather = entity.hourlyWeather
+        val currentWeather = entity.currentWeather!!
+        val dailyWeather = entity.dailyWeather!!
+
         val hourlyWeatherList = mutableListOf<HourlyWeather>()
         for (i in hourlyWeatherIcons.indices) {
             hourlyWeatherList.add(
                 HourlyWeather(
-                    time = DateFormat.format("HH:mm", Date((dataResponseTimeOffset + entity.hourlyWeather[i].time) * 1000L))
+                    time = DateFormat.format("HH:mm", Date((dataResponseTimeOffset + hourlyWeather[i].time) * 1000L))
                         .toString(),
                     icon = hourlyWeatherIcons[i],
-                    temperature = entity.hourlyWeather[i].temperature.toInt(),
-                    humidity = HumidityModel(entity.hourlyWeather[i].humidity).toString()
+                    temperature = hourlyWeather[i].temperature.toInt(),
+                    humidity = HumidityModel(hourlyWeather[i].humidity).toString()
                 )
             )
         }
@@ -39,33 +43,33 @@ class WeatherMapper {
             dailyWeatherList.add(
                 DailyWeather(
                     dayOfWeek = if (i == 0) "Сегодня" else
-                        DateFormat.format("EEEE", Date((dataResponseTimeOffset + entity.dailyWeather[i].date) * 1000L))
+                        DateFormat.format("EEEE", Date((dataResponseTimeOffset + dailyWeather[i].date) * 1000L))
                             .toString(),
-                    humidity = HumidityModel(entity.dailyWeather[i].humidity).toString(),
+                    humidity = HumidityModel(dailyWeather[i].humidity).toString(),
                     icon = dailyWeatherIcons[i],
-                    dayTemperature = TemperatureModel(entity.dailyWeather[i].temperature.maxTemperature).toString(),
-                    nightTemperature = TemperatureModel(entity.dailyWeather[i].temperature.minTemperature).toString()
+                    dayTemperature = TemperatureModel(dailyWeather[i].temperature.maxTemperature).toString(),
+                    nightTemperature = TemperatureModel(dailyWeather[i].temperature.minTemperature).toString()
                 )
             )
         }
 
         return WeatherUIModel(
             currentWeather = CurrentWeather(
-                currentTemperature = TemperatureModel(entity.currentWeather.temperature).toString(),
+                currentTemperature = TemperatureModel(currentWeather.temperature).toString(),
                 icon = currentWeatherIcon,
                 dayNightTemperature =
-                    "${TemperatureModel(entity.dailyWeather[0].temperature.minTemperature)} / " +
-                    "${TemperatureModel(entity.dailyWeather[0].temperature.maxTemperature)}",
+                    "${TemperatureModel(dailyWeather[0].temperature.minTemperature)} / " +
+                    "${TemperatureModel(dailyWeather[0].temperature.maxTemperature)}",
                 location = location.name,
-                feelsLikeTemperature = "Ощущается как ${TemperatureModel(entity.currentWeather.feelsLike)}",
-                sunset = DateFormat.format("HH:mm", Date((dataResponseTimeOffset + entity.currentWeather.sunset) * 1000L))
+                feelsLikeTemperature = "Ощущается как ${TemperatureModel(currentWeather.feelsLike)}",
+                sunset = DateFormat.format("HH:mm", Date((dataResponseTimeOffset + currentWeather.sunset) * 1000L))
                     .toString(),
-                sunrise = DateFormat.format("HH:mm", Date((dataResponseTimeOffset + entity.currentWeather.sunrise) * 1000L))
+                sunrise = DateFormat.format("HH:mm", Date((dataResponseTimeOffset + currentWeather.sunrise) * 1000L))
                     .toString(),
-                uvIndex = ceil(entity.currentWeather.uvIndex).toInt().toString(),
-                humidity = HumidityModel(entity.currentWeather.humidity).toString(),
-                windSpeed = "${ceil(entity.currentWeather.windSpeed).toInt()} км/ч",
-                localDateTime = DateFormat.format("EE, HH:mm", Date((dataResponseTimeOffset + entity.currentWeather.currentTimeSeconds) * 1000L))
+                uvIndex = ceil(currentWeather.uvIndex).toInt().toString(),
+                humidity = HumidityModel(currentWeather.humidity).toString(),
+                windSpeed = "${ceil(currentWeather.windSpeed).toInt()} км/ч",
+                localDateTime = DateFormat.format("EE, HH:mm", Date((dataResponseTimeOffset + currentWeather.currentTimeSeconds) * 1000L))
                     .toString()
             ),
             hourlyWeather = hourlyWeatherList,

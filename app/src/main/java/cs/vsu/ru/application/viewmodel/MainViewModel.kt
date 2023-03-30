@@ -66,11 +66,11 @@ class MainViewModel(
             val weatherData = getWeatherDataUseCase.execute(location)
 
             val currentWeatherIcon =
-                getWeatherIcon(weatherData.currentWeather.detailsWeather.icon)
+                getWeatherIcon(weatherData.currentWeather!!.detailsWeather.icon)
             val hourlyWeatherIcons =
                 getWeatherIconList(weatherData.hourlyWeather.map { it.weather.icon })
             val dailyWeatherIcons =
-                getWeatherIconList(weatherData.dailyWeather.map { it.weather.icon })
+                getWeatherIconList(weatherData.dailyWeather!!.map { it.weather.icon })
 
             val weatherDataToDisplay = weatherMapper.fromEntity(
                 weatherData,

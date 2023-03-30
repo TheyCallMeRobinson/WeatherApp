@@ -6,9 +6,9 @@ import cs.vsu.ru.model.weather.*
 class WeatherMapper {
 
     fun toEntity(dto: WeatherFullResponse): Weather {
-        return Weather(
-            timezoneOffsetSeconds = dto.timezoneOffsetSeconds,
-            currentWeather = CurrentWeather(
+
+        val currentWeather = if (dto.current != null) {
+            CurrentWeather(
                 currentTimeSeconds = dto.current.currentTimeSeconds,
                 temperature = dto.current.temperature,
                 feelsLike = dto.current.feelsLike,
@@ -20,9 +20,16 @@ class WeatherMapper {
                 detailsWeather = DetailsWeather(
                     id = dto.current.weather[0].id,
                     icon = dto.current.weather[0].icon
-                ),
-            ),
-            dailyWeather = dto.daily.map {
+                )
+            )
+        } else {
+            null
+        }
+
+        return Weather(
+            timezoneOffsetSeconds = dto.timezoneOffsetSeconds,
+            currentWeather = currentWeather,
+            dailyWeather = dto.daily?.map {
                 DailyWeather(
                     date = it.date,
                     humidity = it.humidity,
