@@ -1,7 +1,6 @@
 package cs.vsu.ru.application.view.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -9,12 +8,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.widget.ConstraintSet.Motion
 import androidx.recyclerview.widget.RecyclerView
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.motion.SavedLocationsTransitionListener
 import cs.vsu.ru.application.viewmodel.DrawerViewModel
-import cs.vsu.ru.application.viewmodel.MainViewModel
 import cs.vsu.ru.domain.model.location.Location
 
 class SavedLocationsListAdapter(

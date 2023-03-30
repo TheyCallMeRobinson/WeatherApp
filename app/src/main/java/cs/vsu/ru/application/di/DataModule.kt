@@ -49,8 +49,7 @@ val dataModule = module {
             retrofitServiceProvider = WeatherServiceProvider,
             weatherIconService = get(),
             weatherIconDao = get(),
-            mapper = get(),
-            context = get()
+            mapper = get()
         )
     }
 

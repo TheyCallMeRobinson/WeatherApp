@@ -45,7 +45,9 @@
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginStart="@dimen/margin_horizontal"
-        android:background="@drawable/shape_round_background" />
+        android:dropDownVerticalOffset="70dp"
+        android:background="@drawable/shape_round_background"
+        android:popupBackground="@drawable/shape_round_background_opaque"/>
 
     <ImageView
         android:id="@+id/route_to_location"
