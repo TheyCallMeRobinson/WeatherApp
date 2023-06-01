@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import cs.vsu.ru.domain.model.location.Location
 import cs.vsu.ru.domain.usecase.location.GetSavedLocationsExcludeUseCase
+import cs.vsu.ru.domain.usecase.location.GetSavedLocationsExcludeFavoriteUseCase
 import cs.vsu.ru.domain.usecase.location.GetSavedLocationsUseCase
 import cs.vsu.ru.domain.usecase.weather.GetWeatherDataHourlyUseCase
 import cs.vsu.ru.environment.Resource

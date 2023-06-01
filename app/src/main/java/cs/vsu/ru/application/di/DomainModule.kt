@@ -55,4 +55,9 @@ val domainModule = module {
     factory<GetWeatherDataHourlyUseCase> {
         GetWeatherDataHourlyUseCase(weatherRepository = get())
     }
+
+    factory<GetSavedLocationsExcludeFavoriteUseCase> {
+        GetSavedLocationsExcludeFavoriteUseCase(locationRepository = get())
+    }
+
 }

@@ -26,7 +26,7 @@ val appModule = module {
 
     viewModel<DrawerViewModel> {
         DrawerViewModel(
-            getSavedLocationsUseCase = get(),
+            getSavedLocationsExcludeFavoriteUseCase = get(),
             getFavoriteLocationUseCase = get(),
             setFavoriteLocationUseCase = get(),
             removeSavedLocationUseCase = get()

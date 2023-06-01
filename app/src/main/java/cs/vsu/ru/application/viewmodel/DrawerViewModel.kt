@@ -5,17 +5,16 @@ import androidx.lifecycle.*
 import cs.vsu.ru.application.motion.SavedLocationsTransitionListener
 import cs.vsu.ru.domain.model.location.Location
 import cs.vsu.ru.domain.usecase.location.GetFavoriteLocationUseCase
-import cs.vsu.ru.domain.usecase.location.GetSavedLocationsUseCase
+import cs.vsu.ru.domain.usecase.location.GetSavedLocationsExcludeFavoriteUseCase
 import cs.vsu.ru.domain.usecase.location.RemoveSavedLocationUseCase
 import cs.vsu.ru.domain.usecase.location.SetFavoriteLocationUseCase
 import cs.vsu.ru.environment.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.koin.core.component.getScopeId
 
 class DrawerViewModel(
-    private val getSavedLocationsUseCase: GetSavedLocationsUseCase,
+    private val getSavedLocationsExcludeFavoriteUseCase: GetSavedLocationsExcludeFavoriteUseCase,
     private val getFavoriteLocationUseCase: GetFavoriteLocationUseCase,
     private val setFavoriteLocationUseCase: SetFavoriteLocationUseCase,
     private val removeSavedLocationUseCase: RemoveSavedLocationUseCase
@@ -52,7 +51,7 @@ class DrawerViewModel(
     private fun getSavedLocations() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = getSavedLocationsUseCase.execute()))
+            emit(Resource.success(data = getSavedLocationsExcludeFavoriteUseCase.execute()))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = "Не удалось загрузить сохраненные местоположения"))
         }
