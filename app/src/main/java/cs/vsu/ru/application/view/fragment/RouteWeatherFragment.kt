@@ -17,11 +17,16 @@ import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.FragmentRouteWeatherBinding
 
 
+private const val ZOOM_FACTOR = 1.5f
+private const val INITIAL_ZOOM_VALUE = 14.0f
+private const val INITIAL_AZIMUTH_VALUE = 0.0f
+private const val INITIAL_TILT_VALUE = 0.0f
+private const val MAP_MOVE_ANIMATION_DURATION = 0.5f
+
 class RouteWeatherFragment : Fragment() {
 
     private lateinit var binding: FragmentRouteWeatherBinding
     private lateinit var mapView: MapView
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +38,11 @@ class RouteWeatherFragment : Fragment() {
         MapKitFactory.initialize(requireContext())
         mapView = binding.fragmentRouteMapkit
         mapView.map.move(
-            CameraPosition(Point(59.945933, 30.320045), 14.0f, 0.0f, 0.0f),
+            CameraPosition(Point(59.945933, 30.320045),
+                INITIAL_ZOOM_VALUE,
+                INITIAL_AZIMUTH_VALUE,
+                INITIAL_TILT_VALUE
+            ),
         )
         mapView.map.isNightModeEnabled = true
 
@@ -44,6 +53,14 @@ class RouteWeatherFragment : Fragment() {
         binding.mainToolbarBurger.setOnClickListener {
             activity?.findViewById<DrawerLayout>(R.id.activity_main_layout)?.openDrawer(
                 GravityCompat.START)
+        }
+
+        binding.zoomInButton.setOnClickListener {
+            zoomIn()
+        }
+
+        binding.zoomOutButton.setOnClickListener {
+            zoomOut()
         }
 
         return binding.root
@@ -59,6 +76,45 @@ class RouteWeatherFragment : Fragment() {
         mapView.onStop()
         MapKitFactory.getInstance().onStop()
         super.onStop()
+    }
+
+    private fun centerAzimuth() {
+        mapView.map.move(
+            CameraPosition(
+                mapView.map.cameraPosition.target,
+                mapView.map.cameraPosition.zoom,
+                0.0f,
+                0.0f
+            ),
+            Animation(Animation.Type.SMOOTH, MAP_MOVE_ANIMATION_DURATION),
+            null
+        )
+    }
+
+    private fun zoomIn() {
+        mapView.map.move(
+            CameraPosition(
+                mapView.map.cameraPosition.target,
+                mapView.map.cameraPosition.zoom + ZOOM_FACTOR,
+                mapView.map.cameraPosition.azimuth,
+                mapView.map.cameraPosition.tilt
+            ),
+            Animation(Animation.Type.SMOOTH, MAP_MOVE_ANIMATION_DURATION),
+            null
+        )
+    }
+
+    private fun zoomOut() {
+        mapView.map.move(
+            CameraPosition(
+                mapView.map.cameraPosition.target,
+                mapView.map.cameraPosition.zoom - ZOOM_FACTOR,
+                mapView.map.cameraPosition.azimuth,
+                mapView.map.cameraPosition.tilt
+            ),
+            Animation(Animation.Type.SMOOTH, MAP_MOVE_ANIMATION_DURATION),
+            null
+        )
     }
 
     private fun navigateBack() {
