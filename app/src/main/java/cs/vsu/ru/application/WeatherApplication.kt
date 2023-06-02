@@ -1,6 +1,7 @@
 package cs.vsu.ru.application
 
 import android.app.Application
+import com.yandex.mapkit.MapKitFactory
 import cs.vsu.ru.application.di.appModule
 import cs.vsu.ru.application.di.dataModule
 import cs.vsu.ru.application.di.domainModule
@@ -12,6 +13,8 @@ import org.koin.core.logger.Level
 
 class WeatherApplication : Application() {
 
+    private val MAPKIT_API_KEY = "6e55d9ed-18b1-4138-a69a-9adf1f7347e0"
+
     override fun onCreate() {
         super.onCreate()
 
@@ -21,6 +24,8 @@ class WeatherApplication : Application() {
             fragmentFactory()
             modules(listOf(appModule, dataModule, domainModule))
         }
+
+        MapKitFactory.setApiKey(MAPKIT_API_KEY)
     }
 
 }

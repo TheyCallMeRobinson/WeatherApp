@@ -49,7 +49,7 @@ class MainFragment : Fragment() {
         setupObservers()
 
         binding.toFragmentMainBtn.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_routeFragment)
+            Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_routeWeatherFragment)
         )
 
         binding.mainToolbarBurger.setOnClickListener {

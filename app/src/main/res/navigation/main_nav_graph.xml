@@ -11,13 +11,12 @@
         android:label="MainFragment"
         tools:layout="@layout/fragment_content_main" >
         <action
-            android:id="@+id/action_mainFragment_to_routeFragment"
-            app:destination="@id/routeFragment" />
+            android:id="@+id/action_mainFragment_to_routeWeatherFragment"
+            app:destination="@id/routeWeatherFragment" />
     </fragment>
     <fragment
-        android:id="@+id/routeFragment"
-        android:name="cs.vsu.ru.application.view.fragment.RouteFragment"
-        android:label="RouteFragment"
-        tools:layout="@layout/fragment_route" />
+        android:id="@+id/routeWeatherFragment"
+        android:name="cs.vsu.ru.application.view.fragment.RouteWeatherFragment"
+        android:label="RouteWeatherFragment" />
 
 </navigation>
