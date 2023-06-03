@@ -1,9 +1,11 @@
 package cs.vsu.ru.application.view.fragment
 
 import android.os.Bundle
+import android.renderscript.ScriptGroup.Input
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -11,7 +13,11 @@ import androidx.navigation.fragment.findNavController
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
+import com.yandex.mapkit.layers.GeoObjectTapEvent
+import com.yandex.mapkit.layers.GeoObjectTapListener
 import com.yandex.mapkit.map.CameraPosition
+import com.yandex.mapkit.map.InputListener
+import com.yandex.mapkit.map.Map
 import com.yandex.mapkit.mapview.MapView
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.FragmentRouteWeatherBinding
@@ -28,6 +34,17 @@ class RouteWeatherFragment : Fragment() {
     private lateinit var binding: FragmentRouteWeatherBinding
     private lateinit var mapView: MapView
 
+    private val mapInputListener = object : InputListener {
+        override fun onMapTap(p0: Map, p1: Point) {
+            Toast.makeText(context, "${p1.latitude}, ${p1.longitude}", Toast.LENGTH_LONG).show()
+        }
+
+        override fun onMapLongTap(p0: Map, p1: Point) {}
+    }
+
+    private val startTravelPoint: Point? = null
+    private val endTravelPoint: Point? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,7 +55,8 @@ class RouteWeatherFragment : Fragment() {
         MapKitFactory.initialize(requireContext())
         mapView = binding.fragmentRouteMapkit
         mapView.map.move(
-            CameraPosition(Point(59.945933, 30.320045),
+            CameraPosition(
+                Point(59.945933, 30.320045),
                 INITIAL_ZOOM_VALUE,
                 INITIAL_AZIMUTH_VALUE,
                 INITIAL_TILT_VALUE
@@ -50,9 +68,12 @@ class RouteWeatherFragment : Fragment() {
             navigateBack()
         }
 
+        mapView.map.addInputListener(mapInputListener)
+
         binding.mainToolbarBurger.setOnClickListener {
             activity?.findViewById<DrawerLayout>(R.id.activity_main_layout)?.openDrawer(
-                GravityCompat.START)
+                GravityCompat.START
+            )
         }
 
         binding.zoomInButton.setOnClickListener {
@@ -61,6 +82,10 @@ class RouteWeatherFragment : Fragment() {
 
         binding.zoomOutButton.setOnClickListener {
             zoomOut()
+        }
+
+        binding.centerAzimuthButton.setOnClickListener {
+            centerAzimuth()
         }
 
         return binding.root

@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/start_route_location"
+        android:id="@+id/start_route_location_et"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginStart="@dimen/margin_horizontal"
@@ -56,7 +56,7 @@
         android:background="@drawable/ic_arrow_right" />
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/end_route_location"
+        android:id="@+id/end_route_location_et"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginEnd="@dimen/margin_horizontal"

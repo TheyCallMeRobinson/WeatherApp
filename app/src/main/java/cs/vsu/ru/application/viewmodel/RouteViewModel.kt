@@ -47,4 +47,15 @@ class RouteViewModel(
             emit(Resource.error(data = null, message = "Не удалось загрузить сохраненные местоположения"))
         }
     }
+
+    /*
+        getAccounts.enqueue(
+            onResponse() {
+                ...
+                getAccountsData.enqueue() {
+
+                }
+            }
+        )
+     */
 }
