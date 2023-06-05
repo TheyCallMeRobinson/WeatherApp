@@ -1,0 +1,11 @@
+package cs.vsu.ru.application.stateholder
+
+enum class RouteMapState {
+    OBSERVE_MAP,
+    OPEN_MENU,
+    CHOOSING_START_LOCATION,
+    OBSERVE_MAP_FOR_START_LOCATION,
+    CHOOSING_END_LOCATION,
+    OBSERVE_MAP_FOR_END_LOCATION,
+    OBSERVE_MAP_FOR_ROUTE
+}

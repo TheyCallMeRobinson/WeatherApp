@@ -4,25 +4,15 @@
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
-        motion:constraintSetStart="@id/collapsed_menu"
-        motion:constraintSetEnd="@id/expanded_menu"
-        motion:motionInterpolator="easeOut"
-        motion:duration="500">
-
-        <OnClick
-            motion:targetId="@id/toggle_location_manager_menu_btn"
-            motion:clickAction="transitionToEnd"/>
-    </Transition>
-
-    <Transition
+        android:id="@+id/route_weather_main_transition"
         motion:constraintSetStart="@id/collapsed_menu"
         motion:constraintSetEnd="@id/expanded_menu"
         motion:motionInterpolator="easeIn"
         motion:duration="500">
 
-        <OnClick
-            motion:targetId="@id/toggle_location_manager_menu_btn"
-            motion:clickAction="transitionToStart"/>
+<!--        <OnClick-->
+<!--            motion:targetId="@id/toggle_location_manager_menu_btn"-->
+<!--            motion:clickAction="toggle"/>-->
     </Transition>
 
     <ConstraintSet

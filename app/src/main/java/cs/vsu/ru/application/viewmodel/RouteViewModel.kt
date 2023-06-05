@@ -48,14 +48,4 @@ class RouteViewModel(
         }
     }
 
-    /*
-        getAccounts.enqueue(
-            onResponse() {
-                ...
-                getAccountsData.enqueue() {
-
-                }
-            }
-        )
-     */
 }

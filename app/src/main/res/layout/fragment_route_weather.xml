@@ -64,7 +64,8 @@
 
     <include
         android:id="@id/route_location_manager_container"
-        layout="@layout/fragment_route_location_manager" />
+        layout="@layout/fragment_route_location_manager"
+        tools:layout_editor_absoluteY="601dp" />
 
     <ImageView
         android:id="@+id/toggle_location_manager_menu_btn"

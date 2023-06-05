@@ -1,10 +1,7 @@
 package cs.vsu.ru.application.di
 
 import cs.vsu.ru.application.mapper.WeatherMapper
-import cs.vsu.ru.application.viewmodel.AddNewLocationViewModel
-import cs.vsu.ru.application.viewmodel.DrawerViewModel
-import cs.vsu.ru.application.viewmodel.MainViewModel
-import cs.vsu.ru.application.viewmodel.RouteViewModel
+import cs.vsu.ru.application.viewmodel.*
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -46,5 +43,9 @@ val appModule = module {
             getSavedLocationsExcludeUseCase = get(),
             getWeatherDataHourlyUseCase = get()
         )
+    }
+
+    viewModel<RouteWeatherViewModel> {
+        RouteWeatherViewModel()
     }
 }
