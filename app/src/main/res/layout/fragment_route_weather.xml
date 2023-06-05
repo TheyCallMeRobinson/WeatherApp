@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    app:layoutDescription="@xml/route_weather_main_animation">
 
     <com.yandex.mapkit.mapview.MapView
         android:id="@+id/fragment_route_mapkit"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:focusable="false"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:background="@color/gray"/>
 
     <androidx.appcompat.widget.AppCompatImageButton
@@ -66,6 +72,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/zoom_in_button"/>
 
+    <View
+        android:id="@+id/location_manager_holder"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_round_top"
+        android:backgroundTint="@color/slightly_dark_blue"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
+    <include
+        android:id="@id/route_location_manager_container"
+        layout="@layout/fragment_route_location_manager" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/toggle_location_manager_menu_btn"
+        android:layout_height="48dp"
+        android:layout_width="48dp"
+        android:src="@drawable/ic_arrow_up" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

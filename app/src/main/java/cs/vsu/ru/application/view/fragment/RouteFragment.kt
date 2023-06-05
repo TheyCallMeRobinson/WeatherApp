@@ -42,7 +42,7 @@ class RouteFragment : Fragment() {
         exitTransition = transitionInflater.inflateTransition(R.transition.slide_to_top)
 
         viewModel.refreshData()
-        setupObservers()
+//        setupObservers()
 
         binding.toFragmentMainBtn.setOnClickListener {
             navigateBack()
@@ -56,43 +56,43 @@ class RouteFragment : Fragment() {
         return binding.root
     }
 
-    private fun setupViews(locations: List<Location>) {
-        val spinnerAdapter = RouteLocationSpinnerAdapter(requireContext(), locations)
-        binding.startRouteLocation.adapter = spinnerAdapter
-
-        binding.startRouteLocation.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-//                motionLayout.setTransition(R.id.half_animation, R.id.end_animation)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
-
-        binding.startRouteLocation.setOnClickListener {
-            Toast.makeText(requireContext(), "Spinner on click", Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private fun setupObservers() {
-        viewModel.savedLocationsLiveData.observe(viewLifecycleOwner) {
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.LOADING -> {}
-                    Status.SUCCESS -> {
-                        setupViews(resource.data!!)
-                    }
-                    Status.ERROR -> {
-                        Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()
-                    }
-                }
-            }
-        }
-    }
+//    private fun setupViews(locations: List<Location>) {
+//        val spinnerAdapter = RouteLocationSpinnerAdapter(requireContext(), locations)
+//        binding.startRouteLocation.adapter = spinnerAdapter
+//
+//        binding.startRouteLocation.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?,
+//                view: View?,
+//                position: Int,
+//                id: Long
+//            ) {
+////                motionLayout.setTransition(R.id.half_animation, R.id.end_animation)
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>?) {}
+//        }
+//
+//        binding.startRouteLocation.setOnClickListener {
+//            Toast.makeText(requireContext(), "Spinner on click", Toast.LENGTH_LONG).show()
+//        }
+//    }
+//
+//    private fun setupObservers() {
+//        viewModel.savedLocationsLiveData.observe(viewLifecycleOwner) {
+//            it?.let { resource ->
+//                when (resource.status) {
+//                    Status.LOADING -> {}
+//                    Status.SUCCESS -> {
+//                        setupViews(resource.data!!)
+//                    }
+//                    Status.ERROR -> {
+//                        Toast.makeText(context, resource.message, Toast.LENGTH_LONG).show()
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     private fun navigateBack() {
         findNavController().navigateUp()

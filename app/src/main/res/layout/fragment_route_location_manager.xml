@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/route_location_manager_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/shape_round_top"
-    android:backgroundTint="@color/slightly_dark_blue">
+    android:layout_height="550dp"
+    tools:background="@color/slightly_dark_blue">
 
     <View
         android:id="@+id/pull_bar"
