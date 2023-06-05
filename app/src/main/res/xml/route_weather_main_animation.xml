@@ -29,19 +29,39 @@
         android:id="@+id/collapsed_menu">
 
         <Constraint
+            android:id="@id/map_control_panel_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="140dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Constraint
             android:id="@id/location_manager_holder"
             android:layout_width="match_parent"
-            android:layout_height="550dp"
+            android:layout_height="0dp"
             android:layout_marginTop="10dp"
-            motion:layout_constraintTop_toBottomOf="@id/zoom_out_button"
+            motion:layout_constraintTop_toBottomOf="@id/map_control_panel_container"
+            motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"/>
+
+        <Constraint
+            android:id="@id/location_edit_text_fake"
+            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:visibility="visible"
+            motion:layout_constraintTop_toTopOf="@id/location_manager_holder"
+            motion:layout_constraintStart_toStartOf="@id/location_manager_holder"
+            motion:layout_constraintEnd_toEndOf="@id/location_manager_holder"/>
 
         <Constraint
             android:id="@id/route_location_manager_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:visibility="invisible"
             motion:layout_constraintTop_toTopOf="@id/location_manager_holder"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -62,11 +82,20 @@
         android:id="@+id/expanded_menu">
 
         <Constraint
+            android:id="@id/map_control_panel_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="140dp"
+            motion:layout_constraintStart_toEndOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Constraint
             android:id="@id/location_manager_holder"
             android:layout_width="match_parent"
-            android:layout_height="550dp"
+            android:layout_height="0dp"
             android:layout_marginTop="10dp"
             android:visibility="visible"
+            motion:layout_constraintTop_toBottomOf="@id/to_fragment_main_btn"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"/>
@@ -75,11 +104,22 @@
             android:id="@id/route_location_manager_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             motion:layout_constraintTop_toTopOf="@id/location_manager_holder"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent">
         </Constraint>
+
+        <Constraint
+            android:id="@id/location_edit_text_fake"
+            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:visibility="invisible"
+            motion:layout_constraintTop_toTopOf="@id/location_manager_holder"
+            motion:layout_constraintStart_toStartOf="@id/location_manager_holder"
+            motion:layout_constraintEnd_toEndOf="@id/location_manager_holder" />
 
         <Constraint
             android:id="@+id/toggle_location_manager_menu_btn"

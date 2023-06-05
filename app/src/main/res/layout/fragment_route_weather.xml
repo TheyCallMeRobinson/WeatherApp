@@ -38,51 +38,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/zoom_in_button"
+    <include
+        android:id="@+id/map_control_panel_container"
+        layout="@layout/fragment_route_map_control_panel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_horizontal"
-        android:layout_marginBottom="10dp"
-        app:maxImageSize="32dp"
-        app:srcCompat="@drawable/ic_zoom_in"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/zoom_out_button"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/zoom_out_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_horizontal"
-        android:layout_marginBottom="120dp"
-        app:maxImageSize="32dp"
-        app:srcCompat="@drawable/ic_zoom_out"
+        android:layout_marginBottom="140dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/center_azimuth_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_horizontal"
-        android:layout_marginBottom="40dp"
-        app:maxImageSize="48dp"
-        app:srcCompat="@drawable/ic_compass_blue"
-        app:tint="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/zoom_in_button"/>
 
     <View
         android:id="@+id/location_manager_holder"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/shape_round_top"
-        android:backgroundTint="@color/slightly_dark_blue"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:backgroundTint="@color/slightly_dark_blue" />
+
+    <View
+        android:id="@+id/location_edit_text_fake"
+        android:layout_height="50dp"
+        android:layout_width="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/et_background"/>
 
     <include
         android:id="@id/route_location_manager_container"

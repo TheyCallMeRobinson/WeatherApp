@@ -1,7 +1,6 @@
 package cs.vsu.ru.application.view.fragment
 
 import android.os.Bundle
-import android.renderscript.ScriptGroup.Input
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -76,15 +75,15 @@ class RouteWeatherFragment : Fragment() {
             )
         }
 
-        binding.zoomInButton.setOnClickListener {
+        binding.mapControlPanelContainer.zoomInButton.setOnClickListener {
             zoomIn()
         }
 
-        binding.zoomOutButton.setOnClickListener {
+        binding.mapControlPanelContainer.zoomOutButton.setOnClickListener {
             zoomOut()
         }
 
-        binding.centerAzimuthButton.setOnClickListener {
+        binding.mapControlPanelContainer.centerAzimuthButton.setOnClickListener {
             centerAzimuth()
         }
 
