@@ -46,6 +46,11 @@ val appModule = module {
     }
 
     viewModel<RouteWeatherViewModel> {
-        RouteWeatherViewModel()
+        RouteWeatherViewModel(
+            findLocationByCoordinatesUseCase = get(),
+            findLocationsByNameUseCase = get(),
+            getSavedLocationsUseCase = get(),
+            getCurrentLocationUseCase = get()
+        )
     }
 }

@@ -60,4 +60,8 @@ val domainModule = module {
         GetSavedLocationsExcludeFavoriteUseCase(locationRepository = get())
     }
 
+    factory<FindLocationByCoordinatesUseCase> {
+        FindLocationByCoordinatesUseCase(locationRepository = get())
+    }
+
 }

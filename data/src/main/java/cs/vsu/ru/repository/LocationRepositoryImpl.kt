@@ -1,6 +1,7 @@
 package cs.vsu.ru.repository
 
 import android.content.Context
+import android.location.Address
 import android.location.Geocoder
 import cs.vsu.ru.database.dao.LocationDao
 import cs.vsu.ru.domain.model.location.Location
@@ -64,6 +65,18 @@ open class LocationRepositoryImpl(
     override suspend fun findLocationsByName(locationName: String): List<Location>? {
         val geocoder = Geocoder(context)
         val addresses = geocoder.getFromLocationName(locationName, 10) // TODO: maxResults should be getting from app settings
+
+        return parseAddresses(addresses)
+    }
+
+    override suspend fun findLocationByCoordinates(latitude: Double, longitude: Double): Location? {
+        val geocoder = Geocoder(context)
+        val addresses = geocoder.getFromLocation(latitude, longitude, 10)
+
+        return parseAddresses(addresses)?.get(0)
+    }
+
+    private fun parseAddresses(addresses: List<Address>?): List<Location>? {
         val locations = addresses?.map {
             var name: String
             if (it.featureName == null) {
@@ -83,7 +96,7 @@ open class LocationRepositoryImpl(
                 longitude = it.longitude
             )
         }
-
         return locations
     }
+
 }

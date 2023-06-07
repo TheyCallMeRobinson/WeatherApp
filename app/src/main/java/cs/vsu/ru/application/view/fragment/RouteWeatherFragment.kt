@@ -18,8 +18,12 @@ import com.yandex.mapkit.map.Map
 import com.yandex.mapkit.mapview.MapView
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.FragmentRouteWeatherBinding
-import cs.vsu.ru.application.stateholder.RouteMapState
+import cs.vsu.ru.application.view.stateholder.RouteMapState
+import cs.vsu.ru.application.view.stateholder.RouteMenuState
+import cs.vsu.ru.application.view.stateholder.RouteViewState
 import cs.vsu.ru.application.viewmodel.RouteWeatherViewModel
+import cs.vsu.ru.domain.model.location.Location
+import cs.vsu.ru.environment.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -35,9 +39,19 @@ class RouteWeatherFragment : Fragment() {
     private lateinit var binding: FragmentRouteWeatherBinding
     private lateinit var mapView: MapView
 
-    private val mapInputListener = object : InputListener {
+    private val mapStartLocationInputListener = object : InputListener {
         override fun onMapTap(p0: Map, p1: Point) {
-            Toast.makeText(context, "${p1.latitude}, ${p1.longitude}", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Start: ${p1.latitude}, ${p1.longitude}", Toast.LENGTH_LONG).show()
+            viewModel.setStartLocation(p1.latitude, p1.longitude)
+        }
+
+        override fun onMapLongTap(p0: Map, p1: Point) {}
+    }
+
+    private val mapEndLocationInputListener = object : InputListener {
+        override fun onMapTap(p0: Map, p1: Point) {
+            Toast.makeText(context, "End: ${p1.latitude}, ${p1.longitude}", Toast.LENGTH_LONG).show()
+            viewModel.setEndLocation(p1.latitude, p1.longitude)
         }
 
         override fun onMapLongTap(p0: Map, p1: Point) {}
@@ -49,8 +63,6 @@ class RouteWeatherFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRouteWeatherBinding.inflate(inflater)
-
-        viewModel.closeMenu()
 
         setupMap()
         setupButtons()
@@ -72,19 +84,56 @@ class RouteWeatherFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.currentStateLiveData.observe(viewLifecycleOwner) {
+        viewModel.currentViewState.observe(viewLifecycleOwner) {
             when(it) {
-                RouteMapState.OBSERVE_MAP -> {
+                RouteViewState.OPEN_MAP -> {
+                    binding.root.transitionToState(R.id.collapsed_menu)
                     mapView.setNoninteractive(false)
                 }
-                RouteMapState.OPEN_MENU -> {
+                else -> {
+                    binding.root.transitionToState(R.id.expanded_menu)
                     mapView.setNoninteractive(true)
                 }
-                RouteMapState.CHOOSING_START_LOCATION -> TODO()
-                RouteMapState.OBSERVE_MAP_FOR_START_LOCATION -> TODO()
-                RouteMapState.CHOOSING_END_LOCATION -> TODO()
-                RouteMapState.OBSERVE_MAP_FOR_END_LOCATION -> TODO()
-                RouteMapState.OBSERVE_MAP_FOR_ROUTE -> TODO()
+            }
+        }
+        viewModel.currentMapState.observe(viewLifecycleOwner) {
+            when(it) {
+                RouteMapState.OBSERVE_MAP -> {
+                    mapView.map.removeInputListener(mapStartLocationInputListener)
+                    mapView.map.removeInputListener(mapEndLocationInputListener)
+                }
+                RouteMapState.OBSERVE_MAP_FOR_END_LOCATION -> {
+                    mapView.map.removeInputListener(mapStartLocationInputListener)
+                    mapView.map.addInputListener(mapEndLocationInputListener)
+                }
+                RouteMapState.OBSERVE_MAP_FOR_START_LOCATION -> {
+                    mapView.map.addInputListener(mapStartLocationInputListener)
+                    mapView.map.removeInputListener(mapEndLocationInputListener)
+                }
+                RouteMapState.OBSERVE_MAP_FOR_ROUTE -> {}
+                else -> {}
+            }
+        }
+        viewModel.currentMenuState.observe(viewLifecycleOwner) {
+            when(it) {
+                RouteMenuState.IDLE -> {}
+                RouteMenuState.CHOOSING_START_LOCATION -> {}
+                RouteMenuState.CHOOSING_END_LOCATION -> {}
+                RouteMenuState.SHOWING_ROUTE_WEATHER_DATA -> {}
+            }
+        }
+        viewModel.getCurrentLocation().observe(viewLifecycleOwner) {
+            when(it.status) {
+                Status.LOADING -> {
+                    binding.mapProgressBar.visibility = View.VISIBLE
+                }
+                Status.SUCCESS -> {
+                    binding.mapProgressBar.visibility = View.INVISIBLE
+                    moveMapTo(it.data?.latitude!!, it.data?.longitude!!)
+                }
+                Status.ERROR -> {
+                    Toast.makeText(context, "Не удалось определить местоположение", Toast.LENGTH_LONG).show()
+                }
             }
         }
     }
@@ -105,35 +154,44 @@ class RouteWeatherFragment : Fragment() {
         binding.mapControlPanelContainer.centerAzimuthButton.setOnClickListener { centerAzimuth() }
 
         binding.toggleLocationManagerMenuBtn.setOnClickListener {
-            when(viewModel.currentStateLiveData.value) {
-                RouteMapState.OBSERVE_MAP,
-                RouteMapState.OBSERVE_MAP_FOR_ROUTE,
-                RouteMapState.OBSERVE_MAP_FOR_END_LOCATION,
-                RouteMapState.OBSERVE_MAP_FOR_START_LOCATION-> {
-                    binding.root.transitionToState(R.id.expanded_menu)
-                    viewModel.openMenu()
+            when(viewModel.currentViewState.value) {
+                RouteViewState.OPEN_MAP -> {
+                    viewModel.currentViewState.value = RouteViewState.OPEN_MENU
                 }
                 else -> {
-                    binding.root.transitionToState(R.id.collapsed_menu)
-                    viewModel.closeMenu()
+                    viewModel.currentViewState.value = RouteViewState.OPEN_MAP
                 }
             }
+        }
+
+        binding.routeLocationManagerContainer.startRoutePinImg.setOnClickListener {
+            viewModel.currentViewState.value = RouteViewState.OPEN_MAP
+            viewModel.currentMapState.value = RouteMapState.OBSERVE_MAP_FOR_START_LOCATION
+        }
+
+        binding.routeLocationManagerContainer.endRoutePinImg.setOnClickListener {
+            viewModel.currentViewState.value = RouteViewState.OPEN_MAP
+            viewModel.currentMapState.value = RouteMapState.OBSERVE_MAP_FOR_END_LOCATION
         }
     }
 
     private fun setupMap() {
         MapKitFactory.initialize(requireContext())
         mapView = binding.fragmentRouteMapkit
-        mapView.map.addInputListener(mapInputListener)
+        mapView.map.isNightModeEnabled = true
+    }
+
+    private fun moveMapTo(latitude: Double, longitude: Double) {
         mapView.map.move(
             CameraPosition(
-                Point(59.945933, 30.320045),
+                Point(latitude, longitude),
                 INITIAL_ZOOM_VALUE,
-                INITIAL_AZIMUTH_VALUE,
-                INITIAL_TILT_VALUE
+                0.0f,
+                0.0f
             ),
+            Animation(Animation.Type.SMOOTH, MAP_MOVE_ANIMATION_DURATION),
+            null
         )
-        mapView.map.isNightModeEnabled = true
     }
 
     private fun centerAzimuth() {

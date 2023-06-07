@@ -12,4 +12,5 @@ interface LocationRepository {
     suspend fun setCurrentLocation(location: Location)
     suspend fun removeSavedLocation(locationName: String)
     suspend fun findLocationsByName(locationName: String): List<Location>?
+    suspend fun findLocationByCoordinates(latitude: Double, longitude: Double): Location?
 }
