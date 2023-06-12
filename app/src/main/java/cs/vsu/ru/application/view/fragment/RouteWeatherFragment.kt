@@ -6,18 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.GravityCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.yandex.mapkit.Animation
-import com.yandex.mapkit.MapKitFactory
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.yandex.mapkit.geometry.Point
-import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.map.InputListener
 import com.yandex.mapkit.map.Map
-import com.yandex.mapkit.mapview.MapView
 import cs.vsu.ru.application.R
 import cs.vsu.ru.application.databinding.FragmentRouteWeatherBinding
+import cs.vsu.ru.application.view.adapter.NewLocationsListAdapter
+import cs.vsu.ru.application.view.controller.YandexMapController
 import cs.vsu.ru.application.view.stateholder.RouteMapState
 import cs.vsu.ru.application.view.stateholder.RouteMenuState
 import cs.vsu.ru.application.view.stateholder.RouteViewState
@@ -27,17 +27,11 @@ import cs.vsu.ru.environment.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-private const val ZOOM_FACTOR = 1.5f
-private const val INITIAL_ZOOM_VALUE = 14.0f
-private const val INITIAL_AZIMUTH_VALUE = 0.0f
-private const val INITIAL_TILT_VALUE = 0.0f
-private const val MAP_MOVE_ANIMATION_DURATION = 0.5f
-
 class RouteWeatherFragment : Fragment() {
 
     private val viewModel by viewModel<RouteWeatherViewModel>()
+    private lateinit var mapController: YandexMapController
     private lateinit var binding: FragmentRouteWeatherBinding
-    private lateinit var mapView: MapView
 
     private val mapStartLocationInputListener = object : InputListener {
         override fun onMapTap(p0: Map, p1: Point) {
@@ -65,6 +59,7 @@ class RouteWeatherFragment : Fragment() {
         binding = FragmentRouteWeatherBinding.inflate(inflater)
 
         setupMap()
+        setupViews()
         setupButtons()
         setupObservers()
 
@@ -73,14 +68,18 @@ class RouteWeatherFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        MapKitFactory.getInstance().onStart()
-        mapView.onStart()
+        mapController.mapOnStart()
     }
 
     override fun onStop() {
-        mapView.onStop()
-        MapKitFactory.getInstance().onStop()
+        mapController.mapOnStop()
         super.onStop()
+    }
+
+    private fun setupViews() {
+        binding.routeLocationManagerContainer.startRouteLocationEt.doOnTextChanged { text, _, _, _ ->
+            Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setupObservers() {
@@ -88,27 +87,27 @@ class RouteWeatherFragment : Fragment() {
             when(it) {
                 RouteViewState.OPEN_MAP -> {
                     binding.root.transitionToState(R.id.collapsed_menu)
-                    mapView.setNoninteractive(false)
+                    mapController.setNoninteractive(false)
                 }
                 else -> {
                     binding.root.transitionToState(R.id.expanded_menu)
-                    mapView.setNoninteractive(true)
+                    mapController.setNoninteractive(true)
                 }
             }
         }
         viewModel.currentMapState.observe(viewLifecycleOwner) {
             when(it) {
                 RouteMapState.OBSERVE_MAP -> {
-                    mapView.map.removeInputListener(mapStartLocationInputListener)
-                    mapView.map.removeInputListener(mapEndLocationInputListener)
+                    mapController.removeInputListener(mapStartLocationInputListener)
+                    mapController.removeInputListener(mapEndLocationInputListener)
                 }
                 RouteMapState.OBSERVE_MAP_FOR_END_LOCATION -> {
-                    mapView.map.removeInputListener(mapStartLocationInputListener)
-                    mapView.map.addInputListener(mapEndLocationInputListener)
+                    mapController.removeInputListener(mapStartLocationInputListener)
+                    mapController.addInputListener(mapEndLocationInputListener)
                 }
                 RouteMapState.OBSERVE_MAP_FOR_START_LOCATION -> {
-                    mapView.map.addInputListener(mapStartLocationInputListener)
-                    mapView.map.removeInputListener(mapEndLocationInputListener)
+                    mapController.addInputListener(mapStartLocationInputListener)
+                    mapController.removeInputListener(mapEndLocationInputListener)
                 }
                 RouteMapState.OBSERVE_MAP_FOR_ROUTE -> {}
                 else -> {}
@@ -129,11 +128,24 @@ class RouteWeatherFragment : Fragment() {
                 }
                 Status.SUCCESS -> {
                     binding.mapProgressBar.visibility = View.INVISIBLE
-                    moveMapTo(it.data?.latitude!!, it.data?.longitude!!)
+                    mapController.moveMapTo(it.data?.latitude!!, it.data?.longitude!!)
                 }
                 Status.ERROR -> {
                     Toast.makeText(context, "Не удалось определить местоположение", Toast.LENGTH_LONG).show()
                 }
+            }
+        }
+        viewModel.savedLocations.observe(viewLifecycleOwner) {
+            showSavedLocations(it)
+        }
+        viewModel.startLocation.observe(viewLifecycleOwner) {
+            it?.let {
+                binding.routeLocationManagerContainer.startRouteLocationEt.setText(it.name)
+            }
+        }
+        viewModel.endLocation.observe(viewLifecycleOwner) {
+            it?.let {
+                binding.routeLocationManagerContainer.endRouteLocationEt.setText(it.name)
             }
         }
     }
@@ -147,11 +159,11 @@ class RouteWeatherFragment : Fragment() {
 
         binding.toFragmentMainBtn.setOnClickListener { navigateBack() }
 
-        binding.mapControlPanelContainer.zoomInButton.setOnClickListener { zoomIn() }
+        binding.mapControlPanelContainer.zoomInButton.setOnClickListener { mapController.zoomIn() }
 
-        binding.mapControlPanelContainer.zoomOutButton.setOnClickListener { zoomOut() }
+        binding.mapControlPanelContainer.zoomOutButton.setOnClickListener { mapController.zoomOut() }
 
-        binding.mapControlPanelContainer.centerAzimuthButton.setOnClickListener { centerAzimuth() }
+        binding.mapControlPanelContainer.centerAzimuthButton.setOnClickListener { mapController.centerAzimuth() }
 
         binding.toggleLocationManagerMenuBtn.setOnClickListener {
             when(viewModel.currentViewState.value) {
@@ -173,64 +185,28 @@ class RouteWeatherFragment : Fragment() {
             viewModel.currentViewState.value = RouteViewState.OPEN_MAP
             viewModel.currentMapState.value = RouteMapState.OBSERVE_MAP_FOR_END_LOCATION
         }
+
+        binding.routeLocationManagerContainer.getRouteButton.setOnClickListener {
+            mapController.showRoute(viewModel.startLocation.value!!, viewModel.endLocation.value!!)
+        }
     }
 
     private fun setupMap() {
-        MapKitFactory.initialize(requireContext())
-        mapView = binding.fragmentRouteMapkit
-        mapView.map.isNightModeEnabled = true
+        mapController = YandexMapController(binding.fragmentRouteMapkit, requireContext())
     }
 
-    private fun moveMapTo(latitude: Double, longitude: Double) {
-        mapView.map.move(
-            CameraPosition(
-                Point(latitude, longitude),
-                INITIAL_ZOOM_VALUE,
-                0.0f,
-                0.0f
-            ),
-            Animation(Animation.Type.SMOOTH, MAP_MOVE_ANIMATION_DURATION),
-            null
-        )
-    }
+    private fun showSavedLocations(savedLocations: List<Location>) {
+        val linearLayoutManager = LinearLayoutManager(context)
+        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
 
-    private fun centerAzimuth() {
-        mapView.map.move(
-            CameraPosition(
-                mapView.map.cameraPosition.target,
-                mapView.map.cameraPosition.zoom,
-                0.0f,
-                0.0f
-            ),
-            Animation(Animation.Type.SMOOTH, MAP_MOVE_ANIMATION_DURATION),
-            null
-        )
-    }
-
-    private fun zoomIn() {
-        mapView.map.move(
-            CameraPosition(
-                mapView.map.cameraPosition.target,
-                mapView.map.cameraPosition.zoom + ZOOM_FACTOR,
-                mapView.map.cameraPosition.azimuth,
-                mapView.map.cameraPosition.tilt
-            ),
-            Animation(Animation.Type.SMOOTH, MAP_MOVE_ANIMATION_DURATION),
-            null
-        )
-    }
-
-    private fun zoomOut() {
-        mapView.map.move(
-            CameraPosition(
-                mapView.map.cameraPosition.target,
-                mapView.map.cameraPosition.zoom - ZOOM_FACTOR,
-                mapView.map.cameraPosition.azimuth,
-                mapView.map.cameraPosition.tilt
-            ),
-            Animation(Animation.Type.SMOOTH, MAP_MOVE_ANIMATION_DURATION),
-            null
-        )
+        val listAdapter = NewLocationsListAdapter(newLocations = savedLocations) {
+            viewModel.setLocationFromList(it)
+        }
+        binding.routeLocationManagerContainer.locationsDataManagerList.apply {
+            layoutManager = linearLayoutManager
+            adapter = listAdapter
+            setHasFixedSize(true)
+        }
     }
 
     private fun navigateBack() {

@@ -34,10 +34,14 @@ class RouteWeatherViewModel(
     private val endLocationMutable = MutableLiveData<Location?>()
     val endLocation: LiveData<Location?> = endLocationMutable
 
+    private val savedLocationsMutable = MutableLiveData<List<Location>>()
+    val savedLocations: LiveData<List<Location>> = savedLocationsMutable
+
     init {
         currentMapState.value = RouteMapState.OBSERVE_MAP
         currentMenuState.value = RouteMenuState.IDLE
         currentViewState.value = RouteViewState.OPEN_MAP
+        getSavedLocationsList()
     }
 
     fun getCurrentLocation() = liveData(Dispatchers.IO) {
@@ -49,12 +53,9 @@ class RouteWeatherViewModel(
         }
     }
 
-    fun getSavedLocations() = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
-        try {
-            emit(Resource.success(data = getSavedLocationsUseCase.execute()))
-        } catch(exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message!!))
+    fun getSavedLocationsList() {
+        viewModelScope.launch {
+            savedLocationsMutable.value = getSavedLocationsUseCase.execute()
         }
     }
 
@@ -75,6 +76,14 @@ class RouteWeatherViewModel(
         endLocationMutable.value = getLocationByCoordinates(latitude, longitude)
     }
 
+    fun setLocationFromList(location: Location) {
+        if (startLocationMutable.value == null) {
+            startLocationMutable.value = location
+        } else if (endLocationMutable.value == null) {
+            endLocationMutable.value = location
+        }
+    }
+
     private fun getLocationByCoordinates(latitude: Double, longitude: Double): Location? {
         var location: Location? = null
         viewModelScope.launch {
@@ -82,5 +91,6 @@ class RouteWeatherViewModel(
         }
         return location
     }
+
 
 }

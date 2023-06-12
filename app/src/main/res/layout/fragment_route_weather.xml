@@ -61,24 +61,24 @@
         android:layout_marginEnd="15dp"
         android:background="@drawable/et_background"/>
 
+    <ProgressBar
+        android:id="@+id/map_progress_bar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <include
         android:id="@id/route_location_manager_container"
-        layout="@layout/fragment_route_location_manager"
-        tools:layout_editor_absoluteY="601dp" />
+        layout="@layout/fragment_route_location_manager" />
 
     <ImageView
         android:id="@+id/toggle_location_manager_menu_btn"
         android:layout_height="48dp"
         android:layout_width="48dp"
         android:src="@drawable/ic_arrow_up" />
-
-    <ProgressBar
-        android:id="@+id/map_progress_bar"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

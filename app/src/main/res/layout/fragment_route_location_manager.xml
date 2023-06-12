@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/route_location_manager_container"
@@ -19,6 +20,7 @@
         android:paddingStart="10dp"
         android:paddingEnd="55dp"
         android:textColorHint="@color/slightly_light_blue"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,6 +37,7 @@
         android:paddingStart="10dp"
         android:paddingEnd="55dp"
         android:textColorHint="@color/slightly_light_blue"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/start_route_location_et" />
@@ -60,6 +63,7 @@
         app:layout_constraintTop_toTopOf="@id/end_route_location_et" />
 
     <ImageView
+        android:id="@+id/start_to_end_arrow_icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@color/slightly_dark_blue"
@@ -98,6 +102,7 @@
         android:id="@+id/menu_progress_bar"
         android:layout_width="75dp"
         android:layout_height="75dp"
+        android:visibility="invisible"
         app:layout_constraintTop_toTopOf="@id/locations_data_manager_list"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

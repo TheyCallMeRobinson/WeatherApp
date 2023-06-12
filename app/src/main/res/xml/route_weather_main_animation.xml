@@ -51,7 +51,7 @@
         <Constraint
             android:id="@id/route_location_manager_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:visibility="invisible"
             motion:layout_constraintTop_toTopOf="@id/location_manager_holder"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -93,8 +93,9 @@
         <Constraint
             android:id="@id/route_location_manager_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             motion:layout_constraintTop_toTopOf="@id/location_manager_holder"
+            motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent">
         </Constraint>
